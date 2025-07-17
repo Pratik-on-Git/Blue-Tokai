@@ -20,9 +20,9 @@ const AudioControl = ({ audioRef }) => {
   return (
     <div style={styles.container}>
       {isPlaying ? (
-        <button style={styles.button} onClick={handlePause}>PAUSE MUSIC</button>
+        <button style={styles.button} onClick={handlePause}>❚❚ PAUSE MUSIC</button>
       ) : (
-        <button style={styles.button} onClick={handlePlay}>PLAY MUSIC</button>
+        <button style={styles.button} onClick={handlePlay}>▶ PLAY MUSIC</button>
       )}
     </div>
   );
