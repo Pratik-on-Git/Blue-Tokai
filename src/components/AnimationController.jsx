@@ -14,8 +14,8 @@ const AnimationController = () => {
 
     // Fade in hero section (container)
     gsap.to(".hero", {
-      opacity: 1,
-      y: 0,
+        opacity: 1,
+        y: 0,
       duration: 1.8,
       delay: 0.2,
       ease: "cubic-bezier(0.22, 0.61, 0.36, 1)",
