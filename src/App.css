@@ -368,4 +368,19 @@ pointer-events: none;
   background: #555;    /* Scrollbar color on hover */
 }
 
+.header-slide {
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform, opacity;
+}
+.header-hide {
+  transform: translateY(-110%);
+  opacity: 0;
+  pointer-events: none;
+}
+.header-show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
