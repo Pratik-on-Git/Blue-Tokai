@@ -7,41 +7,43 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AnimationController = () => {
   useEffect(() => {
-    // Set initial state for .hero to prevent flicker
-    gsap.set(".hero", { opacity: 0, y: 100 });
-    // Unique fade-in from bottom for .hero section on every refresh
-    const randomDelay = 0.4; // 0.1s to 0.8s
-    const randomDuration = 0.8; // 0.8s to 1.5s
+    // Set initial state for .hero to prevent flicker and optimize for transform
+    gsap.set(".hero", { opacity: 0, y: 100, willChange: "opacity, transform" });
+    gsap.set(".hero-logo", { willChange: "opacity, transform, filter" });
+
+    // Smoother fade-in for .hero section
     gsap.to(
       ".hero",
       {
         opacity: 1,
         y: 0,
-        duration: randomDuration,
-        delay: randomDelay,
-        ease: "power3.out"
+        duration: 1.2, // slightly longer for smoothness
+        delay: 0.2,
+        ease: "power2.out",
+        force3D: true,
+        clearProps: "willChange"
       }
     );
 
-    // Complex logo animation on every refresh
-    const logoDelay = 0.8; // 0.2s to 0.7s
-    const logoDuration = 1.9; // 1.1s to 1.9s
+    // Smoother logo animation
     gsap.fromTo(
       ".hero-logo",
       {
-        scale: 0.6,
-        rotate: -40,
+        scale: 0.7,
+        rotate: -30,
         opacity: 0,
         filter: "blur(8px)",
+        willChange: "opacity, transform, filter"
       },
       {
         scale: 1,
         rotate: 0,
         opacity: 1,
         filter: "blur(0px)",
-        duration: logoDuration,
-        delay: logoDelay,
+        duration: 1.6,
+        delay: 0.7,
         ease: "expo.out",
+        force3D: true,
         clearProps: "all"
       }
     );
@@ -81,10 +83,10 @@ const AnimationController = () => {
 
     // Lenis smooth scroll
     const lenis = new Lenis({
-      duration: 1.4,
+      duration: 1.2,
       smooth: true,
       smoothTouch: true,
-      lerp: 0.08,
+      lerp: 0.09,
     });
     function raf(time) {
       lenis.raf(time);

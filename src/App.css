@@ -142,6 +142,10 @@ section.info{
   color:#fff;
 }
 
+.header-row h1{
+  font-weight: 700;
+}
+
 .header-row{
   width: 100%;
   height: 250px;
@@ -210,9 +214,9 @@ section.whitespace {
   position: absolute;
   transform: translate(-50%, 0%);
   left: 35%;
-  margin-top: 325px;
-  width: 120px;
-  height: 120px;
+  margin-top: 305px;
+  width: 150px;
+  height: 150px;
 }
 
 .revealer .revealer-1 {
