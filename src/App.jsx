@@ -5,6 +5,7 @@ import Header from './components/Header'
 import React, { useRef, useEffect } from 'react';
 import jazzCafeMusic from './assets/music/jazz-cafe-background-music-318776.mp3';
 import AudioControl from './components/AudioControl';
+import Loader from './components/Loader';
 
 function App() {
   const audioRef = useRef(null);
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <>
+      <Loader />
       <Header />
       <AnimationController />
       <MainPage/>

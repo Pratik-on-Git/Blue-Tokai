@@ -7,25 +7,32 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AnimationController = () => {
   useEffect(() => {
-    // Set initial state for .hero to prevent flicker and optimize for transform
+    // Set initial state for .hero, .hero-background-video, and .hero-logo
     gsap.set(".hero", { opacity: 0, y: 100, willChange: "opacity, transform" });
+    gsap.set(".hero-background-video", { opacity: 0, willChange: "opacity" });
     gsap.set(".hero-logo", { willChange: "opacity, transform, filter" });
 
-    // Smoother fade-in for .hero section
-    gsap.to(
-      ".hero",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.2, // slightly longer for smoothness
-        delay: 0.2,
-        ease: "power2.out",
-        force3D: true,
-        clearProps: "willChange"
-      }
-    );
+    // Fade in hero section (container)
+    gsap.to(".hero", {
+      opacity: 1,
+      y: 0,
+      duration: 1.8,
+      delay: 0.2,
+      ease: "cubic-bezier(0.22, 0.61, 0.36, 1)",
+      force3D: true,
+      clearProps: "willChange"
+    });
 
-    // Smoother logo animation
+    // Fade in video background first, then logo
+    gsap.to(".hero-background-video", {
+      opacity: 1,
+      duration: 1.5,
+      delay: 0.5,
+      ease: "power2.out",
+      clearProps: "willChange"
+    });
+
+    // Smoother, slower logo animation after video
     gsap.fromTo(
       ".hero-logo",
       {
@@ -40,9 +47,9 @@ const AnimationController = () => {
         rotate: 0,
         opacity: 1,
         filter: "blur(0px)",
-        duration: 1.6,
-        delay: 0.7,
-        ease: "expo.out",
+        duration: 2.2,
+        delay: 1.1, // after video fade
+        ease: "expo.inOut",
         force3D: true,
         clearProps: "all"
       }

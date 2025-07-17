@@ -8,12 +8,6 @@ import logo from "../assets/img/logo.png";
 const MainPage = () => {
   const videoRef = useRef(null);
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.9; // Play at half speed
-    }
-  }, []);
-
   return (
     <div className="container">
       <section className="hero">
