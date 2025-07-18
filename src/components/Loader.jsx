@@ -1,71 +1,127 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import "../App.css";
 
-const Loader = () => {
+const BAR_COUNT = 8;
+const BAR_HEIGHT = 50;
+const SVG_WIDTH = 600;
+const SVG_HEIGHT = 400;
+
+const Loader = ({ onDone }) => {
   const [visible, setVisible] = useState(true);
-  const [fade, setFade] = useState(false);
-  const dotsRef = useRef([]);
+  const svgRef = useRef();
+  const imageRef = useRef();
 
   useEffect(() => {
-    const hideLoader = () => setFade(true);
-    window.addEventListener("load", hideLoader);
-    const timeout = setTimeout(hideLoader, 3500);
-    return () => {
-      window.removeEventListener("load", hideLoader);
-      clearTimeout(timeout);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (fade) {
-      const t = setTimeout(() => setVisible(false), 1000);
-      return () => clearTimeout(t);
-    }
-  }, [fade]);
-
-  useEffect(() => {
-    if (dotsRef.current.length) {
-      gsap.set(dotsRef.current, { x: 0, backgroundColor: "#fff", opacity: 1, scale: 1 });
-      gsap.to(dotsRef.current, {
-        x: 60,
-        backgroundColor: "#ffe066",
-        repeat: -1,
-        yoyo: true,
-        ease: "slow(0.5,0.4,false)",
-        duration: 1.6,
-        stagger: 0.22,
-      });
-      gsap.fromTo(
-        dotsRef.current,
-        { opacity: 0, scale: 0.7 },
-        {
-          opacity: 1,
-          scale: 1,
-          repeat: -1,
-          yoyo: true,
-          ease: "slow(0.5,0.4,true)",
-          duration: 1.6,
-          stagger: 0.22,
-        }
-      );
-    }
-  }, []);
+    if (!svgRef.current || !imageRef.current) return;
+    const rects = svgRef.current.querySelectorAll("clipPath rect");
+    // Set initial state: height 0, y at bottom of each bar
+    rects.forEach((rect, i) => {
+      gsap.set(rect, { attr: { height: 0, y: (SVG_HEIGHT - (i + 1) * BAR_HEIGHT) + BAR_HEIGHT } });
+    });
+    gsap.set(svgRef.current, { opacity: 1 });
+    gsap.set(imageRef.current, { opacity: 1 });
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setVisible(false);
+        if (onDone) onDone();
+      }
+    });
+    // Animate bars growing from bottom to top
+    tl.to(rects, {
+      attr: (i) => ({
+        height: BAR_HEIGHT,
+        y: SVG_HEIGHT - (i + 1) * BAR_HEIGHT
+      }),
+      duration: 0.7,
+      stagger: {
+        each: 0.1,
+        from: "end"
+      },
+      ease: "power2.out"
+    })
+    // Animate bars shrinking to top (wipe out)
+    .to(rects, {
+      attr: (i) => ({
+        height: 0,
+        y: SVG_HEIGHT - (i + 1) * BAR_HEIGHT
+      }),
+      duration: 0.8,
+      stagger: {
+        each: 0.05,
+        from: "center"
+      },
+      ease: "sine.inOut"
+    })
+    // Fade out the image after wipe (no overlap)
+    .to(imageRef.current, {
+      opacity: 0,
+      duration: 0.5,
+      ease: "power1.inOut"
+    });
+    // Optional: restart animation on click
+    const restart = () => tl.restart();
+    document.addEventListener("click", restart);
+    return () => document.removeEventListener("click", restart);
+  }, [onDone]);
 
   if (!visible) return null;
 
   return (
-    <div className={`loader-overlay${fade ? " loader-fade" : ""}`}>
-      <div className="dots-container">
-        {[0, 1, 2, 3, 4].map((i) => (
-          <div
-            className="dots"
-            key={i}
-            ref={el => (dotsRef.current[i] = el)}
-          ></div>
-        ))}
-      </div>
-      <div className="loader-brand">BLUE TOKAI COFFEE ROASTERS</div>
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        width: "100vw",
+        height: "100vh",
+        zIndex: 9999,
+        background: "#000",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <svg
+        ref={svgRef}
+        viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+        width={SVG_WIDTH}
+        height={SVG_HEIGHT}
+        style={{ opacity: 1, maxWidth: "90vw", maxHeight: "90vh" }}
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+      >
+        <defs>
+          <clipPath id="clip-0">
+            {[...Array(BAR_COUNT)].map((_, i) => (
+              <rect
+                key={i}
+                width={SVG_WIDTH}
+                height={BAR_HEIGHT}
+                y={SVG_HEIGHT - (i + 1) * BAR_HEIGHT}
+                style={{ fill: "#372520", fillOpacity: 0.8 }}
+              />
+            ))}
+          </clipPath>
+        </defs>
+        <image
+          ref={imageRef}
+          width={SVG_WIDTH}
+          height={SVG_HEIGHT}
+          style={{ clipPath: "url(#clip-0)" }}
+          href="/src/assets/img/img-1.jpg"
+        />
+        <text
+          x="50%"
+          y="50%"
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fontSize="2.4rem"
+          fill="#fff"
+          fontWeight="bold"
+          style={{ pointerEvents: "none", letterSpacing: 2 }}
+        >
+          BLUE TOKAI COFFEE ROASTERS
+        </text>
+      </svg>
     </div>
   );
 };
