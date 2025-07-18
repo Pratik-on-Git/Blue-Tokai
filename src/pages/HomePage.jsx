@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import "../App.css";
-import skyharborVideo from "../assets/skyharbor_1550531353_1982322543534524164_367086061.mp4";
+import skyharborVideo from "../assets/vid/skyharbor_1550531353_1982322543534524164_367086061.mp4";
 import logo from "../assets/img/logo.png";
 import img1 from '../assets/img/img-1.jpg';
-import img2mp4 from '../assets/img/img-2.mp4';
-import img3mp4 from '../assets/img/img-3.mp4';
-import img4mp4 from '../assets/img/img-4.mp4';
-import img5 from '../assets/img/img-5.mp4';
-import InfiniteImageScroller from './InfiniteImageScroller';
+import img2mp4 from '../assets/vid/img-2.mp4';
+import img3mp4 from '../assets/vid/img-3.mp4';
+import img4mp4 from '../assets/vid/img-4.mp4';
+import img5 from '../assets/vid/img-5.mp4';
+import InfiniteImageScroller from '../components/InfiniteImageScroller';
 
 const scrollerItems = [
   { type: 'img', src: img1, alt: '' },
@@ -16,7 +16,7 @@ const scrollerItems = [
   { type: 'video', src: img4mp4 },
 ];
 
-const MainPage = () => {
+const HomePage = () => {
   const videoRef = useRef(null);
 
   return (
@@ -73,8 +73,7 @@ const MainPage = () => {
               <div className="mid-row-img-caption">portable drip bags</div>
             </div>
           </div>
-      </section>
-      
+        </section>
       <section className="header-info">
         <p>
         Our journey is a tale of passion for coffee, and at the heart of it all lie our core values:
@@ -103,4 +102,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default HomePage; 

@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import Loader from "./Loader";
-import Header from "./Header";
-import AnimationController from "./AnimationController";
-import AudioControl from "./AudioControl";
-import SearchButton from "./SearchButton";
+import Loader from "../common/Loader";
+import Header from "../common/Header";
+import MainPage from "../../pages/MainPage";
+import About from "../../pages/About";
+import Contact from "../../pages/Contact";
+import Shop from "../../pages/Shop";
+import AnimationController from "../AnimationController";
+import AudioControl from "../AudioControl";
+import SearchButton from "../common/SearchButton";
 import jazzCafeMusic from "../assets/music/jazz-cafe-background-music-318776.mp3";
-import HomePage from '../pages/HomePage';
-import AboutPage from '../pages/AboutPage';
-import ShopPage from '../pages/ShopPage';
-import ContactPage from '../pages/ContactPage';
 
 function ScrollRestorer() {
   const location = useLocation();
@@ -115,10 +115,10 @@ const AppRouter = () => {
           <AnimationController />
           <ScrollRestorer />
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/" element={<MainPage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/contact" element={<Contact />} />
             {/* Optionally add a fallback route here */}
           </Routes>
           <audio ref={audioRef} src={jazzCafeMusic} loop />

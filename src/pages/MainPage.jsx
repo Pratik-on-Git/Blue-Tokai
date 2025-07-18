@@ -7,7 +7,7 @@ import img2mp4 from '../assets/img/img-2.mp4';
 import img3mp4 from '../assets/img/img-3.mp4';
 import img4mp4 from '../assets/img/img-4.mp4';
 import img5 from '../assets/img/img-5.mp4';
-import InfiniteImageScroller from './InfiniteImageScroller';
+import InfiniteImageScroller from '../components/InfiniteImageScroller';
 
 const scrollerItems = [
   { type: 'img', src: img1, alt: '' },
