@@ -6,7 +6,7 @@ const BAR_HEIGHT = 50;
 const SVG_WIDTH = 600;
 const SVG_HEIGHT = 400;
 
-const Loader = ({ onDone }) => {
+const Loader = ({ onFinish }) => {
   const [visible, setVisible] = useState(true);
   const svgRef = useRef();
   const imageRef = useRef();
@@ -23,7 +23,7 @@ const Loader = ({ onDone }) => {
     const tl = gsap.timeline({
       onComplete: () => {
         setVisible(false);
-        if (onDone) onDone();
+        if (onFinish) onFinish();
       }
     });
     // Animate bars growing from bottom to top
@@ -62,7 +62,7 @@ const Loader = ({ onDone }) => {
     const restart = () => tl.restart();
     document.addEventListener("click", restart);
     return () => document.removeEventListener("click", restart);
-  }, [onDone]);
+  }, [onFinish]);
 
   if (!visible) return null;
 

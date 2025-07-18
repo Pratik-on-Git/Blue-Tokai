@@ -8,8 +8,36 @@ import AudioControl from './components/AudioControl';
 import Loader from './components/Loader';
 
 function App() {
+  const [showLoader, setShowLoader] = useState(true);
+  const [shouldRestoreScroll, setShouldRestoreScroll] = useState(false);
   const audioRef = useRef(null);
-  const [loaderDone, setLoaderDone] = useState(false);
+
+  // On mount, check if first visit
+  useEffect(() => {
+    const isFirstVisit = !localStorage.getItem('hasVisited');
+    setShouldRestoreScroll(!isFirstVisit);
+  }, []);
+
+  // Save scroll position on unload
+  useEffect(() => {
+    const saveScroll = () => {
+      localStorage.setItem('lastScrollY', window.scrollY);
+    };
+    window.addEventListener('beforeunload', saveScroll);
+    return () => window.removeEventListener('beforeunload', saveScroll);
+  }, []);
+
+  // Handler for when loader finishes
+  const handleLoaderFinish = () => {
+    // Mark as not first visit
+    localStorage.setItem('hasVisited', 'true');
+    setShowLoader(false);
+    // Restore scroll if not first visit
+    if (shouldRestoreScroll) {
+      const scrollY = parseInt(localStorage.getItem('lastScrollY') || '0', 10);
+      window.scrollTo(0, scrollY);
+    }
+  };
 
   useEffect(() => {
     if (audioRef.current) {
@@ -18,18 +46,18 @@ function App() {
     }
   }, []);
 
-  // Only render main app after loader is done
-  if (!loaderDone) {
-    return <Loader onDone={() => setLoaderDone(true)} />;
-  }
-
   return (
     <>
-      <Header />
-      <AnimationController />
-      <MainPage/>
-      <audio ref={audioRef} src={jazzCafeMusic} loop />
-      <AudioControl audioRef={audioRef} />
+      {showLoader && <Loader onFinish={handleLoaderFinish} />}
+      {!showLoader && (
+        <>
+          <Header />
+          <AnimationController />
+          <MainPage />
+          <audio ref={audioRef} src={jazzCafeMusic} loop />
+          <AudioControl audioRef={audioRef} />
+        </>
+      )}
     </>
   )
 }
