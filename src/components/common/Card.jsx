@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 
 const CARD_WIDTH = 260;
-const CARD_HEIGHT = 370;
+const CARD_HEIGHT = 380;
 
 const Card = ({
   images,
@@ -51,7 +51,7 @@ const Card = ({
     >
       {/* Image with overlays */}
       <div
-        style={{ position: "relative", width: "100%", height: 230, overflow: "hidden" }}
+        style={{ position: "relative", width: "100%", height: 280, overflow: "hidden" }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -108,7 +108,7 @@ const Card = ({
         )}
         {/* Top Rated badge overlay (below rating, top right) */}
         {topRated && (
-          <div style={{ position: "absolute", top: 197, right: 12, zIndex: 2 }}>
+          <div style={{ position: "absolute", top: 250, right: 10, zIndex: 2 }}>
             <span style={{
               background: "rgb(255 178 63)",
               color: "#000",

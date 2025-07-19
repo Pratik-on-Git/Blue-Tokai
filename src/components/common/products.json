@@ -53,12 +53,25 @@
         "description": "Pineapple, Grapefruit, Dried Fig",
         "price": 800,
         "roast": ["Light"],
-        "preference": ["With or Without Milk"],
+        "preference": ["Without Milk"],
         "flavour": ["Bold and Bitter","Delicate and Complex"],
         "equipment":["Aeropress","Pourover"],
-        "rating": 4.7,
+        "rating": 4.8,
         "tags": ["Fruity & Punchy"],
         "topRated": true
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/1.-Warsanlyngdoh-Coffee-Collective__Front.jpg?v=1751283592&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.WarsanlyngdohCoffeeCollective__Spider.jpg?v=1751283592&width=1800","https://bluetokaicoffee.com/cdn/shop/files/3.WarsanlyngdohCoffeeCollective__Back.jpg?v=1751283592&width=1800"],
+        "title": "Warsanlyngdoh Coffee Collective",
+        "description": "Blueberry, Black Tea, Khasi Mandarin",
+        "price": 750,
+        "roast": ["Medium"],
+        "preference": ["With or Without Milk"],
+        "flavour": ["Balanced","Bold and Bitter"],
+        "equipment":["Aeropress","Espresso","French Press","Moka Pot"],
+        "rating": 4.7,
+        "tags": ["Balanced"],
+        "topRated": false
       }
   ]
   
