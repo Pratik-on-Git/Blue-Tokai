@@ -33,6 +33,10 @@ function filterProducts(products, selected) {
         const productFlavours = Array.isArray(product.flavour) ? product.flavour : [product.flavour];
         if (!productFlavours.some(f => options.includes(f))) return false;
       }
+      if (group === "Equipment") {
+        const productEquip = Array.isArray(product.equipment) ? product.equipment : [product.equipment];
+        if (!productEquip.some(eq => options.includes(eq))) return false;
+      }
     }
     return true;
   });
@@ -45,8 +49,6 @@ const SORT_OPTIONS = [
   { value: "za", label: "Alphabetically, Z-A" },
   { value: "priceLow", label: "Price, low to high" },
   { value: "priceHigh", label: "Price, high to low" },
-  { value: "dateOld", label: "Date, old to new" },
-  { value: "dateNew", label: "Date, new to old" },
 ];
 
 function sortProducts(products, sort) {
@@ -60,10 +62,6 @@ function sortProducts(products, sort) {
       return arr.sort((a, b) => a.price - b.price);
     case "priceHigh":
       return arr.sort((a, b) => b.price - a.price);
-    case "dateOld":
-      return arr; // No date field in mock data
-    case "dateNew":
-      return arr; // No date field in mock data
     case "best":
       return arr.sort((a, b) => b.rating - a.rating);
     case "featured":
@@ -100,7 +98,7 @@ const ShopPage = () => {
         features={featureList}
       />
       {/* Sorting Filter Dropdown */}
-      <div style={{ fontFamily: "DM Sans", width: "100%", background: "#181818", padding: "1rem", display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+      <div style={{ borderBottom: "1.5px solid rgb(35, 35, 35)", fontFamily: "DM Sans", width: "100%", background: "#000", padding: "1rem", display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
         <label htmlFor="sort-select" style={{ marginRight: 8, fontWeight: 500, fontSize: 15 }}>Sort by:</label>
         <select
           id="sort-select"
@@ -108,10 +106,11 @@ const ShopPage = () => {
           onChange={e => { setSort(e.target.value); setCurrentPage(1); }}
           style={{
             background: "#222",
+            fontFamily: "DM Sans",
             color: "#fff",
             border: "1px solid #333",
             borderRadius: 4,
-            padding: "6px 16px",
+            padding: "6px 10px",
             fontSize: 15,
             fontWeight: 500,
             outline: "none",
@@ -124,10 +123,10 @@ const ShopPage = () => {
         </select>
       </div>
       <div style={{ display: "flex" }}>
-        <aside style={{ width: 260, padding: "2.5rem 1.5rem 2.5rem 2.5rem", background: "#181818", minHeight: "100vh", borderRight: "1.5px solid #232323" }}>
+        <aside style={{ width: 260, padding: "1.6rem", background: "#000", minHeight: "100vh", borderRight: "1.5px solid #232323" }}>
           <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
         </aside>
-        <main style={{ flex: 1, padding: "2.5rem 2.5rem 2.5rem 2rem", minHeight: "100vh" }}>
+        <main style={{ flex: 1, padding: "2.5rem 2.5rem 2.5rem 2rem", minHeight: "100vh", background: "#000"}}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
             {paginatedProducts.map((product, i) => (
               <Card

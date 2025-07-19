@@ -110,13 +110,13 @@ const Card = ({
         {topRated && (
           <div style={{ position: "absolute", top: 197, right: 12, zIndex: 2 }}>
             <span style={{
-              background: "#fff",
-              color: "#181818",
-              fontWeight: 700,
+              background: "rgb(255 178 63)",
+              color: "#000",
+              fontWeight: 600,
               fontSize: 11,
               padding: "2px 12px",
               borderRadius: 12,
-              letterSpacing: 1.1,
+              letterSpacing: 0.5,
               textTransform: "uppercase",
               boxShadow: "0 1px 4px rgba(0,0,0,0.06)"
             }}>
@@ -140,7 +140,7 @@ const Card = ({
               color: "#fff",
               border: "none",
               borderRadius: 4,
-              fontWeight: 700,
+              fontWeight: 400,
               fontSize: 15,
               padding: "10px 20px",
               cursor: "pointer",

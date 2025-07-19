@@ -48,7 +48,7 @@ const Filters = ({ filters, selected, onChange }) => {
   return (
     <div style={{ color: '#fff', fontSize: 15, minWidth: 180 }}>
       {Object.entries(filters).map(([group, options], groupIdx) => (
-        <div key={group} style={{ marginBottom: 18, borderBottom: '1px solid #232323', paddingBottom: 8 }}>
+        <div key={group} style={{ marginBottom: 18, borderBottom: '1px solid rgba(255, 255, 255, 0.3)', paddingBottom: 8 }}>
           <div
             ref={el => (groupRefs.current[group] = el)}
             style={{
@@ -102,7 +102,7 @@ const Filters = ({ filters, selected, onChange }) => {
                         height: 16,
                         borderRadius: '50%',
                         border: '2px solid #fff',
-                        background: selected[group]?.includes(option) ? '#372520' : 'transparent',
+                        background: selected[group]?.includes(option) ? '#fff' : 'transparent',
                         transition: 'background 0.18s, border 0.18s',
                         position: 'absolute',
                         left: 0,
@@ -112,13 +112,13 @@ const Filters = ({ filters, selected, onChange }) => {
                       }}
                     >
                       {selected[group]?.includes(option) && (
-                        <svg width="12" height="12" viewBox="0 0 12 12" style={{ position: 'absolute', top: 0, left: 1 }}>
-                          <polyline points="2,7 5,10 10,3" style={{ fill: 'none', stroke: '#fff', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }} />
+                        <svg width="12" height="12" viewBox="0 0 12 12" style={{ position: 'absolute', top: 0, left: 0.5 }}>
+                          <polyline points="2,7 5,10 10,3" style={{ fill: 'none', stroke: '#000', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }} />
                         </svg>
                       )}
                     </span>
                   </span>
-                  <span style={{ color: '#fff', fontWeight: 500 }}>{option}</span>
+                  <span style={{ color: '#fff', fontWeight: 400 }}>{option}</span>
                 </label>
               ))}
             </div>
