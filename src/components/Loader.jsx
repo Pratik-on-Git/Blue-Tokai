@@ -107,7 +107,7 @@ const Loader = ({ onFinish }) => {
           width={SVG_WIDTH}
           height={SVG_HEIGHT}
           style={{ clipPath: "url(#clip-0)" }}
-          href="/public/img-1.jpg"
+          href="/img-1.jpg"
         />
         <text
           x="50%"
