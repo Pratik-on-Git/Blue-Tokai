@@ -275,7 +275,7 @@ section.pinned {
 section.whitespace {
   position: relative;
   width: 100%;
-  height: 300vh;
+  height: 55vh;
   background-color: ☐ #000;
   z-index: -1;
 }
@@ -285,8 +285,8 @@ section.whitespace {
   transform: translate(-50%, 0%);
   left: 35%;
   margin-top: 305px;
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
 }
 
 .revealer .revealer-1 {
@@ -335,7 +335,7 @@ section.whitespace {
 section.website-content {
   position: relative;
   width: 100%;
-  height: 150vh;
+  height: 100vh;
   background-color: I#fff;
   z-index: 10;
 }

@@ -228,6 +228,40 @@ function filterProducts(products, selected) {
   });
 }
 
+const SORT_OPTIONS = [
+  { value: "featured", label: "Featured" },
+  { value: "best", label: "Best selling" },
+  { value: "az", label: "Alphabetically, A-Z" },
+  { value: "za", label: "Alphabetically, Z-A" },
+  { value: "priceLow", label: "Price, low to high" },
+  { value: "priceHigh", label: "Price, high to low" },
+  { value: "dateOld", label: "Date, old to new" },
+  { value: "dateNew", label: "Date, new to old" },
+];
+
+function sortProducts(products, sort) {
+  const arr = [...products];
+  switch (sort) {
+    case "az":
+      return arr.sort((a, b) => a.title.localeCompare(b.title));
+    case "za":
+      return arr.sort((a, b) => b.title.localeCompare(a.title));
+    case "priceLow":
+      return arr.sort((a, b) => a.price - b.price);
+    case "priceHigh":
+      return arr.sort((a, b) => b.price - a.price);
+    case "dateOld":
+      return arr; // No date field in mock data
+    case "dateNew":
+      return arr; // No date field in mock data
+    case "best":
+      return arr.sort((a, b) => b.rating - a.rating);
+    case "featured":
+    default:
+      return arr;
+  }
+}
+
 const featureList = [
   { icon: beanconqueror, label: "Diverse Roast Profiles" },
   { icon: coffee, label: "13 Grind Sizes" },
@@ -241,10 +275,12 @@ const ShopPage = () => {
     "Flavour Profile": []
   });
   const [currentPage, setCurrentPage] = useState(1);
+  const [sort, setSort] = useState("featured");
   const perPage = 12;
   const filteredProducts = filterProducts(PRODUCTS, selectedFilters);
-  const totalPages = Math.ceil(filteredProducts.length / perPage);
-  const paginatedProducts = filteredProducts.slice((currentPage-1)*perPage, currentPage*perPage);
+  const sortedProducts = sortProducts(filteredProducts, sort);
+  const totalPages = Math.ceil(sortedProducts.length / perPage);
+  const paginatedProducts = sortedProducts.slice((currentPage-1)*perPage, currentPage*perPage);
 
   return (
     <div style={{ background: "#111", minHeight: "100vh", color: "#fff" }}>
@@ -253,6 +289,30 @@ const ShopPage = () => {
         headline="Carefully sourced from India's finest farms"
         features={featureList}
       />
+      {/* Sorting Filter Dropdown */}
+      <div style={{ fontFamily: "DM Sans", width: "100%", background: "#181818", padding: "1rem", display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+        <label htmlFor="sort-select" style={{ marginRight: 8, fontWeight: 500, fontSize: 15 }}>Sort by:</label>
+        <select
+          id="sort-select"
+          value={sort}
+          onChange={e => { setSort(e.target.value); setCurrentPage(1); }}
+          style={{
+            background: "#222",
+            color: "#fff",
+            border: "1px solid #333",
+            borderRadius: 4,
+            padding: "6px 16px",
+            fontSize: 15,
+            fontWeight: 500,
+            outline: "none",
+            cursor: "pointer"
+          }}
+        >
+          {SORT_OPTIONS.map(opt => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+      </div>
       <div style={{ display: "flex" }}>
         <aside style={{ width: 260, padding: "2.5rem 1.5rem 2.5rem 2.5rem", background: "#181818", minHeight: "100vh", borderRight: "1.5px solid #232323" }}>
           <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
