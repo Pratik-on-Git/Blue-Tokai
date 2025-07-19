@@ -120,7 +120,7 @@ const AppRouter = () => {
             <Route path="/contact" element={<ContactPage />} />
             {/* Optionally add a fallback route here */}
           </Routes>
-          <audio ref={audioRef} src="https://cdn.pixabay.com/audio/2022/03/15/audio_12b5fae5c7.mp3" loop />
+          <audio ref={audioRef} src="https://pixabay.com/music/traditional-jazz-jazz-cafe-background-music-318776/" loop />
           <AudioControl audioRef={audioRef} />
           <SearchButton />
         </>
