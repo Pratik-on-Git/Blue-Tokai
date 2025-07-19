@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import "../App.css";
-import skyharborVideo from "../assets/vid/skyharbor_1550531353_1982322543534524164_367086061.mp4";
 import logo from "../assets/img/logo.png";
 import img1 from '../assets/img/img-1.jpg';
 import img2mp4 from '../assets/vid/img-2.mp4';
@@ -8,6 +7,8 @@ import img3mp4 from '../assets/vid/img-3.mp4';
 import img4mp4 from '../assets/vid/img-4.mp4';
 import img5 from '../assets/vid/img-5.mp4';
 import InfiniteImageScroller from '../components/InfiniteImageScroller';
+
+const heroVideo = "https://videos.pexels.com/video-files/4081317/4081317-uhd_2560_1440_24fps.mp4";
 
 const scrollerItems = [
   { type: 'img', src: img1, alt: '' },
@@ -25,7 +26,7 @@ const HomePage = () => {
         <video
           ref={videoRef}
           className="hero-background-video"
-          src={skyharborVideo}
+          src={heroVideo}
           autoPlay
           loop
           muted
