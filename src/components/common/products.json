@@ -1,0 +1,51 @@
+[
+    {
+      "images": ["https://bluetokaicoffee.com/cdn/shop/files/1SamplerPack__Front.jpg?v=1707393228&width=1080"],
+      "title": "Curated Sample Selection",
+      "description": "Attikan Estate, Silver Oak, Vienna Roast",
+      "price": 700,
+      "roast": ["Medium", "Light"],
+      "preference": ["With or Without Milk"],
+      "flavour": ["Balanced", "Delicate and Complex"],
+      "rating": 4.9,
+      "tags": ["Sampler"],
+      "topRated": true
+    },
+    {
+      "images": ["https://bluetokaicoffee.com/cdn/shop/files/Sampler_201224.jpg?v=1750764829&width=1800"],
+      "title": "Rich & Bold Trio Pack",
+      "description": "Vienna Roast, French Roast, Silver Oak",
+      "price": 700,
+      "roast": ["Medium", "Dark"],
+      "preference": ["Without Milk"],
+      "flavour": ["Balanced", "Bold and Bitter"],
+      "rating": 4.6,
+      "tags": ["Custom"],
+      "topRated": false
+    },
+    {
+      "images": ["https://bluetokaicoffee.com/cdn/shop/files/Sampler_240625.jpg?v=1750762835&width=1800"],
+      "title": "5-in-1 Explorer Pack",
+      "description": "Blue Tokai Coffee Roasters",
+      "price": 1170,
+      "roast": ["Medium Dark", "Dark", "Light"],
+      "preference": ["With or Without Milk"],
+      "flavour": ["Chocolatey and Nutty","Delicate and Complex"],
+      "rating": 4.7,
+      "tags": ["Explorer Pack"],
+      "topRated": false
+    },
+    {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/Card_01_1.jpg?v=1752480806&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Card_02_3.jpg?v=1752480806&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Card_03_1.jpg?v=1752480813&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Card_04_1.jpg?v=1752480813&width=1800"],
+        "title": "The Monsoon Trio",
+        "description": "Monsoon Malabar, St. Joseph Estate, Kolli Berri Estate",
+        "price": 700,
+        "roast": ["Medium Dark", "Dark", "Light"],
+        "preference": ["With or Without Milk"],
+        "flavour": ["Chocolatey and Nutty","Producer Series"],
+        "rating": 4.8,
+        "tags": ["Explorer Pack"],
+        "topRated": true
+      }
+  ]
+  

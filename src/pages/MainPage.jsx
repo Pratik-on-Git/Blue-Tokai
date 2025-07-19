@@ -77,8 +77,6 @@ const MainPage = () => {
         </div>
           <div className="mid-row"><h2>Our journey is a tale of passion for coffee, <br/> and at the heart of it all lie our core values:<br/>
           transparency, traceability, and <br/> <span className="mid-row-big">uncompromising quality.</span></h2></div>
-          {/* New Arrivals text above image boxes */}
-          <div className="new-row" style={{ fontWeight: 700, fontSize: '1.5rem', margin: '32px 0 12px 0', letterSpacing: '0.04em', textAlign: 'center' }}>New Arrivals</div>
           {/* Image boxes under mid-row */}
           <div className="mid-row-img-boxes">
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>

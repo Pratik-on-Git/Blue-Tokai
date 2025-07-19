@@ -76,14 +76,48 @@ const Filters = ({ filters, selected, onChange }) => {
                     if (!optionRefs.current[group]) optionRefs.current[group] = [];
                     optionRefs.current[group][i] = el;
                   }}
-                  style={{ display: 'block', marginBottom: 4, cursor: 'pointer', userSelect: 'none', opacity: 0 }}
+                  style={{ display: 'flex', alignItems: 'center', marginBottom: 4, cursor: 'pointer', userSelect: 'none', opacity: 0 }}
                 >
-                  <input
-                    type="checkbox"
-                    checked={selected[group]?.includes(option) || false}
-                    onChange={() => handleToggle(group, option)}
-                    style={{ marginRight: 8 }}
-                  />
+                  <span style={{ position: 'relative', display: 'inline-block', width: 20, height: 16, marginRight: 4 }}>
+                    <input
+                      type="checkbox"
+                      checked={selected[group]?.includes(option) || false}
+                      onChange={() => handleToggle(group, option)}
+                      style={{
+                        opacity: 0,
+                        width: 20,
+                        height: 20,
+                        margin: 0,
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        cursor: 'pointer',
+                        zIndex: 2
+                      }}
+                    />
+                    <span
+                      style={{
+                        display: 'block',
+                        width: 16,
+                        height: 16,
+                        borderRadius: '50%',
+                        border: '2px solid #fff',
+                        background: selected[group]?.includes(option) ? '#372520' : 'transparent',
+                        transition: 'background 0.18s, border 0.18s',
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        boxSizing: 'border-box',
+                        zIndex: 1
+                      }}
+                    >
+                      {selected[group]?.includes(option) && (
+                        <svg width="12" height="12" viewBox="0 0 12 12" style={{ position: 'absolute', top: 0, left: 1 }}>
+                          <polyline points="2,7 5,10 10,3" style={{ fill: 'none', stroke: '#fff', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }} />
+                        </svg>
+                      )}
+                    </span>
+                  </span>
                   <span style={{ color: '#fff', fontWeight: 500 }}>{option}</span>
                 </label>
               ))}
