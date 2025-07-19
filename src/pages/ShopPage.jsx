@@ -6,6 +6,8 @@ import Pagination from "../components/common/Pagination";
 import img1 from '../assets/img/img-1.jpg';
 import logo from '../assets/img/logo.png';
 import beanconqueror from '../assets/img/beanconqueror-svgrepo-com.svg';
+import coffeeroaster from '../assets/img/coffee-roaster-svgrepo-com.svg';
+import coffee from '../assets/img/coffee-to-go-svgrepo-com.svg';
 
 // Example filter options
 const FILTERS = {
@@ -20,8 +22,8 @@ const FILTERS = {
 const PRODUCTS = [
   {
     image: "https://bluetokaicoffee.com/cdn/shop/files/1SamplerPack__Front.jpg?v=1707393228&width=1080",
-    title: "Customised Sampler",
-    description: "Attikan Estate, Silver Oak",
+    title: "Curated Sample Selection",
+    description: "Attikan Estate, Silver Oak, Vienna Roast",
     price: 700,
     roast: "Medium",
     preference: "Without Milk",
@@ -54,6 +56,162 @@ const PRODUCTS = [
     tags: ["Explorer", "Pack"],
     topRated: true
   },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/2_Coffee_Cans.jpg?v=1732175621",
+    title: "5-in-1 Explorer Pack",
+    description: "Blue Tokai Coffee Roasters",
+    price: 1170,
+    roast: "Medium Dark",
+    preference: "With or Without Milk",
+    flavour: "Chocolaty and Nutty",
+    rating: 4.8,
+    tags: ["Explorer", "Pack"],
+    topRated: true
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/1SamplerPack__Front.jpg?v=1707393228&width=1080",
+    title: "Curated Sample Selection",
+    description: "Attikan Estate, Silver Oak, Vienna Roast",
+    price: 700,
+    roast: "Medium",
+    preference: "Without Milk",
+    flavour: "Balanced",
+    rating: 4.9,
+    tags: ["Sampler", "Custom"],
+    topRated: true
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/Sampler_201224.jpg?v=1750764829&width=1800",
+    title: "Sampler Pack",
+    description: "Vienna Roast, French Roast, Silver Oak",
+    price: 700,
+    roast: "Dark",
+    preference: "With Milk",
+    flavour: "Bold and Bitter",
+    rating: 4.7,
+    tags: ["Sampler"],
+    topRated: false
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/2_Coffee_Cans.jpg?v=1732175621",
+    title: "5-in-1 Explorer Pack",
+    description: "Blue Tokai Coffee Roasters",
+    price: 1170,
+    roast: "Medium Dark",
+    preference: "With or Without Milk",
+    flavour: "Chocolaty and Nutty",
+    rating: 4.8,
+    tags: ["Explorer", "Pack"],
+    topRated: true
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/2_Coffee_Cans.jpg?v=1732175621",
+    title: "5-in-1 Explorer Pack",
+    description: "Blue Tokai Coffee Roasters",
+    price: 1170,
+    roast: "Medium Dark",
+    preference: "With or Without Milk",
+    flavour: "Chocolaty and Nutty",
+    rating: 4.8,
+    tags: ["Explorer", "Pack"],
+    topRated: true
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/1SamplerPack__Front.jpg?v=1707393228&width=1080",
+    title: "Curated Sample Selection",
+    description: "Attikan Estate, Silver Oak, Vienna Roast",
+    price: 700,
+    roast: "Medium",
+    preference: "Without Milk",
+    flavour: "Balanced",
+    rating: 4.9,
+    tags: ["Sampler", "Custom"],
+    topRated: true
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/Sampler_201224.jpg?v=1750764829&width=1800",
+    title: "Sampler Pack",
+    description: "Vienna Roast, French Roast, Silver Oak",
+    price: 700,
+    roast: "Dark",
+    preference: "With Milk",
+    flavour: "Bold and Bitter",
+    rating: 4.7,
+    tags: ["Sampler"],
+    topRated: false
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/2_Coffee_Cans.jpg?v=1732175621",
+    title: "5-in-1 Explorer Pack",
+    description: "Blue Tokai Coffee Roasters",
+    price: 1170,
+    roast: "Medium Dark",
+    preference: "With or Without Milk",
+    flavour: "Chocolaty and Nutty",
+    rating: 4.8,
+    tags: ["Explorer", "Pack"],
+    topRated: true
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/2_Coffee_Cans.jpg?v=1732175621",
+    title: "5-in-1 Explorer Pack",
+    description: "Blue Tokai Coffee Roasters",
+    price: 1170,
+    roast: "Medium Dark",
+    preference: "With or Without Milk",
+    flavour: "Chocolaty and Nutty",
+    rating: 4.8,
+    tags: ["Explorer", "Pack"],
+    topRated: true
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/1SamplerPack__Front.jpg?v=1707393228&width=1080",
+    title: "Curated Sample Selection",
+    description: "Attikan Estate, Silver Oak, Vienna Roast",
+    price: 700,
+    roast: "Medium",
+    preference: "Without Milk",
+    flavour: "Balanced",
+    rating: 4.9,
+    tags: ["Sampler", "Custom"],
+    topRated: true
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/Sampler_201224.jpg?v=1750764829&width=1800",
+    title: "Sampler Pack",
+    description: "Vienna Roast, French Roast, Silver Oak",
+    price: 700,
+    roast: "Dark",
+    preference: "With Milk",
+    flavour: "Bold and Bitter",
+    rating: 4.7,
+    tags: ["Sampler"],
+    topRated: false
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/2_Coffee_Cans.jpg?v=1732175621",
+    title: "5-in-1 Explorer Pack",
+    description: "Blue Tokai Coffee Roasters",
+    price: 1170,
+    roast: "Medium Dark",
+    preference: "With or Without Milk",
+    flavour: "Chocolaty and Nutty",
+    rating: 4.8,
+    tags: ["Explorer", "Pack"],
+    topRated: true
+  },
+  {
+    image: "https://bluetokaicoffee.com/cdn/shop/files/2_Coffee_Cans.jpg?v=1732175621",
+    title: "5-in-1 Explorer Pack",
+    description: "Blue Tokai Coffee Roasters",
+    price: 1170,
+    roast: "Medium Dark",
+    preference: "With or Without Milk",
+    flavour: "Chocolaty and Nutty",
+    rating: 4.8,
+    tags: ["Explorer", "Pack"],
+    topRated: true
+  }
   // ...add more products as needed
 ];
 
@@ -72,8 +230,8 @@ function filterProducts(products, selected) {
 
 const featureList = [
   { icon: beanconqueror, label: "Diverse Roast Profiles" },
-  { icon: logo, label: "13 Grind Sizes" },
-  { icon: logo, label: "Roasted in Small Batches" }
+  { icon: coffee, label: "13 Grind Sizes" },
+  { icon: coffeeroaster, label: "Roasted in Small Batches" }
 ];
 
 const ShopPage = () => {
@@ -91,7 +249,7 @@ const ShopPage = () => {
   return (
     <div style={{ background: "#111", minHeight: "100vh", color: "#fff" }}>
       <Banner
-        video="https://cdn.shopify.com/videos/c/o/v/e2b557a3730f49969da2ad109ec44e63.mp4"
+        video="http://cdn.pixabay.com/video/2022/08/05/126803-737028141_large.mp4"
         headline="Carefully sourced from India's finest farms"
         features={featureList}
       />
@@ -100,7 +258,7 @@ const ShopPage = () => {
           <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
         </aside>
         <main style={{ flex: 1, padding: "2.5rem 2.5rem 2.5rem 2rem", minHeight: "100vh" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(330px, 1fr))", gap: "2.5rem", width: "100%" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
             {paginatedProducts.map((product, i) => (
               <Card
                 key={i}
