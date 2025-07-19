@@ -1,7 +1,7 @@
 import React from "react";
 
 const CARD_WIDTH = 260;
-const CARD_HEIGHT = 220 * 2 / 3 + 220; // 220px image, rest for content
+const CARD_HEIGHT = 370;
 
 const Card = ({
   image,
@@ -17,87 +17,108 @@ const Card = ({
   <div
     style={{
       background: "#fff",
+      border: "3px solid #181818",
       borderRadius: 18,
-      boxShadow: "0 4px 32px rgba(0,0,0,0.10)",
       width: CARD_WIDTH,
       minHeight: CARD_HEIGHT,
-      aspectRatio: "3/2",
       padding: 0,
       margin: "0 auto",
       overflow: "hidden",
       display: "flex",
       flexDirection: "column",
       alignItems: "stretch",
-      position: "relative"
+      position: "relative",
+      boxShadow: "0 4px 24px rgba(0,0,0,0.10)"
     }}
   >
-    {/* Image with tags and rating */}
-    <div style={{ position: "relative", width: "100%", height: 220, overflow: "hidden" }}>
+    {/* Tags and rating row */}
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 16px 0 16px", gap: 8 }}>
+      <div style={{ display: "flex", gap: 8 }}>
+        {tags.map((tag, i) => (
+          <span key={i} style={{
+            background: "#F5F5F5",
+            color: "#181818",
+            fontWeight: 700,
+            fontSize: 13,
+            borderRadius: 16,
+            padding: "3px 13px",
+            marginRight: 0,
+            letterSpacing: 0.2
+          }}>{tag}</span>
+        ))}
+      </div>
+      {rating && (
+        <span style={{
+          background: "#181818",
+          color: "#FFD700",
+          fontWeight: 700,
+          fontSize: 15,
+          borderRadius: 16,
+          padding: "3px 13px",
+          display: "flex",
+          alignItems: "center",
+          gap: 5
+        }}>
+          <span style={{ fontSize: 16, marginRight: 2 }}>★</span>
+          <span style={{ color: "#fff", fontWeight: 700 }}>{rating}</span>
+        </span>
+      )}
+    </div>
+    {/* Image */}
+    <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0 0 0" }}>
       <img
         src={image}
         alt={title}
         style={{
-          width: "100%",
-          height: 220,
-          objectFit: "cover",
-          borderTopLeftRadius: 18,
-          borderTopRightRadius: 18,
-          display: "block"
+          width: "90%",
+          height: 120,
+          objectFit: "contain",
+          borderRadius: 10,
+          background: "#fff"
         }}
       />
-      {/* Tags */}
-      {tags.length > 0 && (
-        <div style={{ position: "absolute", top: 16, left: 16, display: "flex", gap: 8 }}>
-          {tags.map((tag, i) => (
-            <span key={i} style={{
-              background: "rgba(255,255,255,0.85)",
-              color: "#222",
-              fontWeight: 600,
-              fontSize: 12,
-              borderRadius: 16,
-              padding: "3px 13px",
-              marginRight: 2
-            }}>{tag}</span>
-          ))}
-        </div>
-      )}
-      {/* Star rating */}
-      {rating && (
-        <div style={{ position: "absolute", top: 16, right: 16, display: "flex", alignItems: "center", gap: 4 }}>
-          <span style={{ color: "#fff", background: "rgba(34,34,34,0.85)", borderRadius: 12, fontWeight: 700, fontSize: 14, padding: "2px 10px" }}>
-            <span style={{ marginRight: 4, color: "#FFD700" }}>★</span>{rating}
-          </span>
-        </div>
-      )}
     </div>
-    {/* Top Rated tag below image */}
+    {/* Top Rated pill */}
     {topRated && (
       <div style={{
-        display: 'flex', justifyContent: 'flex-start', alignItems: 'center', padding: '8px 0 0 14px', minHeight: 24
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 10,
+        marginBottom: 0
       }}>
-        <span style={{ border: "1.5px solid #222", borderRadius: 16, fontSize: 10, padding: "2px 13px", color: "#222", fontWeight: 600 }}>Top Rated</span>
+        <span style={{
+          background: "rgba(34,34,34,0.08)",
+          color: "#181818",
+          fontWeight: 700,
+          fontSize: 12,
+          padding: "3px 18px",
+          borderRadius: 16,
+          letterSpacing: 1.2,
+          textTransform: "uppercase"
+        }}>
+          Top Rated
+        </span>
       </div>
     )}
     {/* Card content */}
-    <div style={{ padding: "14px", display: "flex", flexDirection: "column", flex: 1 }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
-        <div style={{ fontWeight: 700, fontSize: 20, color: "#222" }}>{title}</div>
-      </div>
-      <div style={{ fontSize: 15, color: "#444", marginBottom: 18, minHeight: 36 }}>{description}</div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div style={{ fontWeight: 700, fontSize: 18, color: "#222" }}>
-          ${price} <span style={{ fontWeight: 400, fontSize: 15, color: "#888" }}>/ night</span>
+    <div style={{ padding: "0 18px 0 18px", display: "flex", flexDirection: "column", flex: 1, marginTop: 10 }}>
+      <div style={{ fontWeight: 700, fontSize: 20, color: "#181818", marginBottom: 2 }}>{title}</div>
+      <div style={{ fontSize: 15, color: "#888", marginBottom: 18, minHeight: 24 }}>{description}</div>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto", marginBottom: 18 }}>
+        <div style={{ fontWeight: 700, fontSize: 20, color: "#181818" }}>
+          ₹{price} <span style={{ fontWeight: 400, fontSize: 15, color: "#888" }}>/ night</span>
         </div>
         <button
           onClick={onButtonClick}
           style={{
-            background: "#222",
+            background: "#181818",
             color: "#fff",
             border: "none",
             borderRadius: 22,
             fontWeight: 700,
-            fontSize: 15,
-            padding: "8px 22px 8px 22px",
+            fontSize: 16,
+            padding: "12px 28px 12px 28px",
             cursor: "pointer",
             display: "flex",
             alignItems: "center",
@@ -106,7 +127,7 @@ const Card = ({
             transition: "background 0.18s, color 0.18s"
           }}
         >
-          Book Now <span style={{ fontSize: 18, marginLeft: 2 }}>→</span>
+          Book Now <span style={{ fontSize: 20, marginLeft: 2 }}>→</span>
         </button>
       </div>
     </div>

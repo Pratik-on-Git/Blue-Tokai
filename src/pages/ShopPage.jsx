@@ -5,6 +5,7 @@ import Banner from "../components/common/Banner";
 import Pagination from "../components/common/Pagination";
 import img1 from '../assets/img/img-1.jpg';
 import logo from '../assets/img/logo.png';
+import beanconqueror from '../assets/img/beanconqueror-svgrepo-com.svg';
 
 // Example filter options
 const FILTERS = {
@@ -70,7 +71,7 @@ function filterProducts(products, selected) {
 }
 
 const featureList = [
-  { icon: logo, label: "Diverse Roast Profiles" },
+  { icon: beanconqueror, label: "Diverse Roast Profiles" },
   { icon: logo, label: "13 Grind Sizes" },
   { icon: logo, label: "Roasted in Small Batches" }
 ];
@@ -89,7 +90,11 @@ const ShopPage = () => {
 
   return (
     <div style={{ background: "#111", minHeight: "100vh", color: "#fff" }}>
-      <Banner image={img1} headline="Carefully sourced from India's finest farms" features={featureList} />
+      <Banner
+        video="https://cdn.shopify.com/videos/c/o/v/e2b557a3730f49969da2ad109ec44e63.mp4"
+        headline="Carefully sourced from India's finest farms"
+        features={featureList}
+      />
       <div style={{ display: "flex" }}>
         <aside style={{ width: 260, padding: "2.5rem 1.5rem 2.5rem 2.5rem", background: "#181818", minHeight: "100vh", borderRight: "1.5px solid #232323" }}>
           <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
