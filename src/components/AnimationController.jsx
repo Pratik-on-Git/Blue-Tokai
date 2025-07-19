@@ -88,12 +88,12 @@ const AnimationController = () => {
       }
     );
 
-    // Lenis smooth scroll
+    // Lenis smooth scroll (slower, more pronounced for all pages)
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 3, // Slower
       smooth: true,
       smoothTouch: true,
-      lerp: 0.09,
+      lerp: 0.04, // Smoother
     });
     function raf(time) {
       lenis.raf(time);

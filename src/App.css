@@ -275,7 +275,7 @@ section.pinned {
 section.whitespace {
   position: relative;
   width: 100%;
-  height: 55vh;
+  height: 65vh;
   background-color: ☐ #000;
   z-index: -1;
 }
