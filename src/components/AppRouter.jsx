@@ -5,6 +5,7 @@ import Header from "./Header";
 import AnimationController from "./AnimationController";
 import AudioControl from "./AudioControl";
 import SearchButton from "./SearchButton";
+import jazzCafeMusic from "../assets/music/jazz-cafe-background-music-318776.mp3";
 import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
 import ShopPage from '../pages/ShopPage';
@@ -120,7 +121,7 @@ const AppRouter = () => {
             <Route path="/contact" element={<ContactPage />} />
             {/* Optionally add a fallback route here */}
           </Routes>
-          <audio ref={audioRef} src="https://pixabay.com/music/traditional-jazz-jazz-cafe-background-music-318776/" loop />
+          <audio ref={audioRef} src={jazzCafeMusic} loop />
           <AudioControl audioRef={audioRef} />
           <SearchButton />
         </>
