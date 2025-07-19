@@ -88,6 +88,43 @@ const AnimationController = () => {
       }
     );
 
+    gsap.fromTo(
+      ".mid-row h2",
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".mid-row",
+          start: "top 85%",
+          end: "top 60%",
+          scrub: true,
+        },
+        clearProps: "all"
+      }
+    );
+    gsap.fromTo(
+      ".mid-row-img-boxes > div",
+      { opacity: 0, y: 50, scale: 0.92 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.9,
+        stagger: 0.5,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: ".mid-row-img-boxes",
+          start: "top 90%",
+          end: "top 60%",
+          scrub: true,
+        },
+        clearProps: "all"
+      }
+    );
+
     // Lenis smooth scroll (slower, more pronounced for all pages)
     const lenis = new Lenis({
       duration: 3, // Slower
