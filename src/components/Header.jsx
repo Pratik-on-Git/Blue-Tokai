@@ -81,7 +81,7 @@ const Header = () => {
           <span style={{ width: 24, height: 2, background: "#fff", borderRadius: 0, margin: "3px 0", transition: "all 0.2s", display: "block" }} />
           <span style={{ width: 24, height: 2, background: "#fff", borderRadius: 0, margin: "3px 0", transition: "all 0.2s", display: "block" }} />
         </button>
-        <span className="blend-text" style={{ fontWeight: 700, fontSize: 17, letterSpacing: 1.5}}>BLUE TOKAI COFFEE ROASTERIES</span>
+        <span className="blend-text" style={{ fontWeight: 700, fontSize: 16, letterSpacing: 1.5}}>BLUE TOKAI COFFEE ROASTERIES</span>
       </div>
       {/* Desktop nav */}
       <div className="header-content desktop-nav" style={{ display: "flex" }}>

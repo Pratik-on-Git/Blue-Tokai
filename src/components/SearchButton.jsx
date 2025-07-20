@@ -66,7 +66,7 @@ const SearchButton = () => {
             className="search-input-popover"
             style={{
               position: "absolute",
-              bottom: -48,
+              bottom: 48,
               left: "50%",
               transform: "translateX(-50%)",
               background: "#fff",
@@ -103,9 +103,11 @@ const SearchButton = () => {
       <style>{`
         @media (max-width: 600px) {
           .search-btn-wrapper {
-            left: 320px !important;
-            top: 60px !important;
-            width: 100vw !important;
+            position: fixed !important;
+            right: 8px !important;
+            bottom: 80px !important;
+            left: auto !important;
+            width: auto !important;
             z-index: 2001 !important;
           }
           .search-btn-wrapper button {
@@ -113,10 +115,10 @@ const SearchButton = () => {
           }
           .search-input-popover {
             position: absolute !important;
-            left: -40% !important;
+            left: 50% !important;
             right: auto !important;
-            top: 0px !important;
-            bottom: auto !important;
+            bottom: 48px !important;
+            top: auto !important;
             transform: translateX(-50%) !important;
             min-width: 70vw !important;
             max-width: 90vw !important;
