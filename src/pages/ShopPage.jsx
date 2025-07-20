@@ -9,6 +9,7 @@ import coffee from '../assets/img/coffee-to-go-svgrepo-com.svg';
 import PRODUCTS from '../components/common/products.json';
 import Footer from "../components/common/footer";
 import { useRef, useEffect } from "react";
+import FiltersMobile from "../components/FiltersMobile";
 
 // Example filter options
 const FILTERS = {
@@ -115,7 +116,7 @@ const ShopPage = () => {
   }, [hasMore, sortedProducts.length]);
 
   return (
-    <div style={{ background: "#111", minHeight: "100vh", color: "#fff", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <div className="shop-page" style={{ background: "#111", minHeight: "100vh", color: "#fff", display: "flex", flexDirection: "column" }}>
       <Banner
         video="http://cdn.pixabay.com/video/2022/08/05/126803-737028141_large.mp4"
         headline="Carefully sourced from India's finest farms"
@@ -146,57 +147,55 @@ const ShopPage = () => {
           ))}
         </select>
       </div>
-      <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
-        {/* Sticky, independently scrollable sidebar */}
-        <aside
-          data-lenis-prevent
-          style={{ width: 260, background: "#000", borderRight: "1.5px solid #232323", position: "sticky", top: 0, height: "calc(100vh - 0px)", maxHeight: "calc(100vh - 0px)", overflowY: "auto", zIndex: 2, overscrollBehavior: "contain", touchAction: "auto" }}
-        >
-          <div style={{ padding: "1.6rem 1.6rem 2rem 1.6rem" }}>
-            <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
-          </div>
-        </aside>
-        {/* Main product grid with infinite scroll */}
-        <main style={{ flex: 1, padding: "2.5rem 2.5rem 2.5rem 2rem", background: "#000", minHeight: 0, display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
-            {productsToShow.map((product, i) => (
-              <Card
-                key={i}
-                images={product.images}
-                title={product.title}
-                description={product.description}
-                price={product.price}
-                rating={product.rating}
-                tags={product.tags}
-                topRated={product.topRated}
-                buttonText="BUY NOW"
-              />
-            ))}
-          </div>
-          {/* Infinite scroll loader */}
-          <div ref={loaderRef} style={{ height: 32, margin: "2rem 0", display: hasMore ? "block" : "none" }} />
-          {/* Load More button as fallback */}
-          {hasMore && (
-            <button
-              onClick={() => setVisibleCount((prev) => Math.min(prev + perPage, sortedProducts.length))}
-              style={{
-                margin: "2rem auto 0 auto",
-                display: "block",
-                background: "#232323",
-                color: "#fff",
-                border: "none",
-                borderRadius: 4,
-                padding: "12px 32px",
-                fontSize: 16,
-                fontWeight: 600,
-                cursor: "pointer"
-              }}
-            >
-              Load More
-            </button>
-          )}
-        </main>
+      {/* Filters: mobile modal, desktop sidebar */}
+      <div className="filters-mobile" style={{ display: "none" }}>
+        <FiltersMobile filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
       </div>
+      <div className="filters-desktop" style={{ display: "flex" }}>
+        <aside style={{ width: 260, background: "#000", borderRight: "1.5px solid #232323", minHeight: "100vh", padding: "1.6rem 1.6rem 2rem 1.6rem" }}>
+          <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
+        </aside>
+      </div>
+      {/* Main product grid with infinite scroll */}
+      <main style={{ flex: 1, padding: "2.5rem 2.5rem 2.5rem 2rem", background: "#000", minHeight: 0, display: "flex", flexDirection: "column" }}>
+        <div className="product-list" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
+          {productsToShow.map((product, i) => (
+            <Card
+              key={i}
+              images={product.images}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+              rating={product.rating}
+              tags={product.tags}
+              topRated={product.topRated}
+              buttonText="BUY NOW"
+            />
+          ))}
+        </div>
+        {/* Infinite scroll loader */}
+        <div ref={loaderRef} style={{ height: 32, margin: "2rem 0", display: hasMore ? "block" : "none" }} />
+        {/* Load More button as fallback */}
+        {hasMore && (
+          <button
+            onClick={() => setVisibleCount((prev) => Math.min(prev + perPage, sortedProducts.length))}
+            style={{
+              margin: "2rem auto 0 auto",
+              display: "block",
+              background: "#232323",
+              color: "#fff",
+              border: "none",
+              borderRadius: 4,
+              padding: "12px 32px",
+              fontSize: 16,
+              fontWeight: 600,
+              cursor: "pointer"
+            }}
+          >
+            Load More
+          </button>
+        )}
+      </main>
       <Footer />
     </div>
   );
