@@ -18,37 +18,13 @@ const AudioControl = ({ audioRef }) => {
   };
 
   return (
-    <>
-      <div className="audio-control-container" style={styles.container}>
-        {isPlaying ? (
-          <button style={styles.button} onClick={handlePause}>❚❚ PAUSE MUSIC</button>
-        ) : (
-          <button style={styles.button} onClick={handlePlay}>▶ PLAY MUSIC</button>
-        )}
-      </div>
-      <style>{`
-        @media (max-width: 600px) {
-          .audio-control-container {
-            position: fixed !important;
-            right: 8px !important;
-            bottom: 16px !important;
-            left: auto !important;
-            width: 90px !important;
-            border-radius: 8px !important;
-            text-align: center !important;
-            z-index: 1999 !important;
-            transform: none !important;
-            padding: 0 !important;
-            background: rgba(0,0,0,0.85) !important;
-          }
-          .audio-control-container button {
-            font-size: 0.6rem !important;
-            width: 100% !important;
-            padding: 10px 0 !important;
-          }
-        }
-      `}</style>
-    </>
+    <div style={styles.container}>
+      {isPlaying ? (
+        <button style={styles.button} onClick={handlePause}>❚❚ PAUSE MUSIC</button>
+      ) : (
+        <button style={styles.button} onClick={handlePlay}>▶ PLAY MUSIC</button>
+      )}
+    </div>
   );
 };
 
@@ -72,7 +48,6 @@ const styles = {
     fontWeight: 400,
     outline: 'none',
     fontFamily: 'inherit',
-    width: '100%'
   }
 };
 

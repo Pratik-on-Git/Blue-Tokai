@@ -630,6 +630,9 @@ pointer-events: none;
 }
 
 @media (max-width: 600px){
+  body {
+    overflow-x: hidden;
+  }
 
   #root{
     overflow-x: hidden;
@@ -697,4 +700,3 @@ pointer-events: none;
   }
 
 }
-
