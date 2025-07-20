@@ -630,7 +630,10 @@ pointer-events: none;
 }
 
 @media (max-width: 600px){
-
+  body{
+  overflow-x: none;
+  }
+  
   .sticky-header .header-content {
     padding: 0;
     margin: 0;
