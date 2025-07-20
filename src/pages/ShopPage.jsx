@@ -7,6 +7,8 @@ import beanconqueror from '../assets/img/beanconqueror-svgrepo-com.svg';
 import coffeeroaster from '../assets/img/coffee-roaster-svgrepo-com.svg';
 import coffee from '../assets/img/coffee-to-go-svgrepo-com.svg';
 import PRODUCTS from '../components/common/products.json';
+import Footer from "../components/common/footer";
+import { useRef, useEffect } from "react";
 
 // Example filter options
 const FILTERS = {
@@ -82,16 +84,38 @@ const ShopPage = () => {
     "Drinking Preference": [],
     "Flavour Profile": []
   });
-  const [currentPage, setCurrentPage] = useState(1);
   const [sort, setSort] = useState("featured");
+  const [visibleCount, setVisibleCount] = useState(12);
   const perPage = 12;
   const filteredProducts = filterProducts(PRODUCTS, selectedFilters);
   const sortedProducts = sortProducts(filteredProducts, sort);
-  const totalPages = Math.ceil(sortedProducts.length / perPage);
-  const paginatedProducts = sortedProducts.slice((currentPage-1)*perPage, currentPage*perPage);
+  const hasMore = visibleCount < sortedProducts.length;
+  const productsToShow = sortedProducts.slice(0, visibleCount);
+
+  const loaderRef = useRef(null);
+
+  useEffect(() => {
+    setVisibleCount(perPage); // Reset on filter/sort change
+  }, [selectedFilters, sort]);
+
+  useEffect(() => {
+    if (!hasMore) return;
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleCount((prev) => Math.min(prev + perPage, sortedProducts.length));
+        }
+      },
+      { threshold: 1 }
+    );
+    if (loaderRef.current) observer.observe(loaderRef.current);
+    return () => {
+      if (loaderRef.current) observer.unobserve(loaderRef.current);
+    };
+  }, [hasMore, sortedProducts.length]);
 
   return (
-    <div style={{ background: "#111", minHeight: "100vh", color: "#fff" }}>
+    <div style={{ background: "#111", minHeight: "100vh", color: "#fff", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Banner
         video="http://cdn.pixabay.com/video/2022/08/05/126803-737028141_large.mp4"
         headline="Carefully sourced from India's finest farms"
@@ -103,7 +127,7 @@ const ShopPage = () => {
         <select
           id="sort-select"
           value={sort}
-          onChange={e => { setSort(e.target.value); setCurrentPage(1); }}
+          onChange={e => { setSort(e.target.value); }}
           style={{
             background: "#222",
             fontFamily: "DM Sans",
@@ -122,13 +146,20 @@ const ShopPage = () => {
           ))}
         </select>
       </div>
-      <div style={{ display: "flex" }}>
-        <aside style={{ width: 260, padding: "1.6rem", background: "#000", minHeight: "100vh", borderRight: "1.5px solid #232323" }}>
-          <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
+      <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
+        {/* Sticky, independently scrollable sidebar */}
+        <aside
+          data-lenis-prevent
+          style={{ width: 260, background: "#000", borderRight: "1.5px solid #232323", position: "sticky", top: 0, height: "calc(100vh - 0px)", maxHeight: "calc(100vh - 0px)", overflowY: "auto", zIndex: 2, overscrollBehavior: "contain", touchAction: "auto" }}
+        >
+          <div style={{ padding: "1.6rem 1.6rem 2rem 1.6rem" }}>
+            <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
+          </div>
         </aside>
-        <main style={{ flex: 1, padding: "2.5rem 2.5rem 2.5rem 2rem", minHeight: "100vh", background: "#000"}}>
+        {/* Main product grid with infinite scroll */}
+        <main style={{ flex: 1, padding: "2.5rem 2.5rem 2.5rem 2rem", background: "#000", minHeight: 0, display: "flex", flexDirection: "column" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
-            {paginatedProducts.map((product, i) => (
+            {productsToShow.map((product, i) => (
               <Card
                 key={i}
                 images={product.images}
@@ -142,9 +173,31 @@ const ShopPage = () => {
               />
             ))}
           </div>
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+          {/* Infinite scroll loader */}
+          <div ref={loaderRef} style={{ height: 32, margin: "2rem 0", display: hasMore ? "block" : "none" }} />
+          {/* Load More button as fallback */}
+          {hasMore && (
+            <button
+              onClick={() => setVisibleCount((prev) => Math.min(prev + perPage, sortedProducts.length))}
+              style={{
+                margin: "2rem auto 0 auto",
+                display: "block",
+                background: "#232323",
+                color: "#fff",
+                border: "none",
+                borderRadius: 4,
+                padding: "12px 32px",
+                fontSize: 16,
+                fontWeight: 600,
+                cursor: "pointer"
+              }}
+            >
+              Load More
+            </button>
+          )}
         </main>
       </div>
+      <Footer />
     </div>
   );
 };
