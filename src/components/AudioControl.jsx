@@ -18,13 +18,37 @@ const AudioControl = ({ audioRef }) => {
   };
 
   return (
-    <div style={styles.container}>
-      {isPlaying ? (
-        <button style={styles.button} onClick={handlePause}>❚❚ PAUSE MUSIC</button>
-      ) : (
-        <button style={styles.button} onClick={handlePlay}>▶ PLAY MUSIC</button>
-      )}
-    </div>
+    <>
+      <div className="audio-control-container" style={styles.container}>
+        {isPlaying ? (
+          <button style={styles.button} onClick={handlePause}>❚❚ PAUSE MUSIC</button>
+        ) : (
+          <button style={styles.button} onClick={handlePlay}>▶ PLAY MUSIC</button>
+        )}
+      </div>
+      <style>{`
+        @media (max-width: 700px) {
+          .audio-control-container {
+            left: 50% !important;
+            right: auto !important;
+            transform: translateX(-50%) !important;
+            bottom: 16px !important;
+            width: 90vw !important;
+            max-width: 340px !important;
+            min-width: 160px !important;
+            padding: 6px 0 !important;
+            border-radius: 8px !important;
+            text-align: center !important;
+            z-index: 9999 !important;
+          }
+          .audio-control-container button {
+            font-size: 1.1rem !important;
+            width: 100% !important;
+            padding: 10px 0 !important;
+          }
+        }
+      `}</style>
+    </>
   );
 };
 
@@ -48,6 +72,7 @@ const styles = {
     fontWeight: 400,
     outline: 'none',
     fontFamily: 'inherit',
+    width: '100%'
   }
 };
 

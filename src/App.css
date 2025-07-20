@@ -629,4 +629,14 @@ pointer-events: none;
   box-shadow: 0 6px 18px rgba(0,0,0,0.16);
 }
 
+@media (max-width: 600px){
 
+  .sticky-header .header-content {
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-btn::after {
+    left: 11%;
+  }
+}
