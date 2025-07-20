@@ -643,7 +643,7 @@ pointer-events: none;
     max-width: 100vw !important;
   }
   .hero {
-    height: 45vw;
+    height: 100vh;
     min-height: 180px;
     max-height: 260px;
     padding: 0;
