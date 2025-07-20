@@ -644,8 +644,6 @@ pointer-events: none;
   }
   .hero {
     height: 100vh;
-    min-height: 180px;
-    max-height: 260px;
     padding: 0;
   }
   .hero-background-video {
