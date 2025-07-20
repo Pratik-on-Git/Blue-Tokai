@@ -633,7 +633,11 @@ pointer-events: none;
   body {
     overflow-x: hidden;
   }
-  
+
+  #root{
+    overflow-x: hidden;
+  }
+
   .sticky-header{
     width: 100vw;
   }
