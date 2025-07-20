@@ -700,3 +700,16 @@ pointer-events: none;
   }
 
 }
+
+@media (max-width: 600px) {
+  /* Hide scrollbar for mobile view */
+  html, body, * {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE 10+ */
+  }
+  html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar {
+    width: 0 !important;
+    background: transparent !important;
+    display: none !important;
+  }
+}
