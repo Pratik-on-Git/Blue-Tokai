@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Card from "../components/common/Card";
 import Filters from "../components/common/Filters";
 import Banner from "../components/common/Banner";
@@ -8,7 +8,6 @@ import coffeeroaster from '../assets/img/coffee-roaster-svgrepo-com.svg';
 import coffee from '../assets/img/coffee-to-go-svgrepo-com.svg';
 import PRODUCTS from '../components/common/products.json';
 import Footer from "../components/common/footer";
-import { useRef, useEffect } from "react";
 
 // Example filter options
 const FILTERS = {
@@ -93,6 +92,25 @@ const ShopPage = () => {
   const productsToShow = sortedProducts.slice(0, visibleCount);
 
   const loaderRef = useRef(null);
+  const sidebarRef = useRef(null);
+
+  // Fix: Manually handle wheel events to force scroll on sidebar
+  const handleSidebarWheel = useCallback((e) => {
+    const el = sidebarRef.current;
+    if (!el) return;
+    // Only scroll if sidebar is scrollable
+    if (el.scrollHeight > el.clientHeight) {
+      const atTop = el.scrollTop === 0;
+      const atBottom = el.scrollTop + el.clientHeight === el.scrollHeight;
+      if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) {
+        // Let parent scroll
+        return;
+      }
+      e.stopPropagation();
+      el.scrollTop += e.deltaY;
+      e.preventDefault();
+    }
+  }, []);
 
   useEffect(() => {
     setVisibleCount(perPage); // Reset on filter/sort change
@@ -113,6 +131,13 @@ const ShopPage = () => {
       if (loaderRef.current) observer.unobserve(loaderRef.current);
     };
   }, [hasMore, sortedProducts.length]);
+
+  useEffect(() => {
+    const el = sidebarRef.current;
+    if (!el) return;
+    el.addEventListener("wheel", handleSidebarWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleSidebarWheel);
+  }, [handleSidebarWheel]);
 
   return (
     <div style={{ background: "#111", minHeight: "100vh", color: "#fff", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
@@ -148,10 +173,7 @@ const ShopPage = () => {
       </div>
       <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
         {/* Sticky, independently scrollable sidebar */}
-        <aside
-          data-lenis-prevent
-          style={{ width: 260, background: "#000", borderRight: "1.5px solid #232323", position: "sticky", top: 0, height: "calc(100vh - 0px)", maxHeight: "calc(100vh - 0px)", overflowY: "auto", zIndex: 2, overscrollBehavior: "contain", touchAction: "auto" }}
-        >
+        <aside ref={sidebarRef} style={{ width: 260, background: "#000", borderRight: "1.5px solid #232323", position: "sticky", top: 0, height: "calc(100vh - 0px)", maxHeight: "calc(100vh - 0px)", overflowY: "auto", zIndex: 2, overscrollBehavior: "contain", touchAction: "auto" }}>
           <div style={{ padding: "1.6rem 1.6rem 2rem 1.6rem" }}>
             <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
           </div>
