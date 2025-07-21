@@ -7,6 +7,7 @@ import beanconqueror from '../assets/img/beanconqueror-svgrepo-com.svg';
 import coffeeroaster from '../assets/img/coffee-roaster-svgrepo-com.svg';
 import coffee from '../assets/img/coffee-to-go-svgrepo-com.svg';
 import Footer from "../components/common/footer";
+import Loader from "../components/common/Loader";
 
 const FILTERS = {
   "Roast Level": ["Dark", "Light", "Medium", "Medium Dark"],
@@ -77,6 +78,7 @@ const featureList = [
 
 const ShopPage = () => {
   const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedFilters, setSelectedFilters] = useState({
     "Roast Level": [],
     "Drinking Preference": [],
@@ -88,9 +90,13 @@ const ShopPage = () => {
   const sidebarRef = useRef(null);
 
   useEffect(() => {
+    setLoading(true);
     fetch('/products.json')
       .then(res => res.json())
-      .then(data => setAllProducts(data));
+      .then(data => {
+        setAllProducts(data);
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -167,27 +173,42 @@ const ShopPage = () => {
         </aside>
         {/* Main product grid with pagination */}
         <main style={{ flex: 1, padding: "2.5rem 2.5rem 2.5rem 2rem", background: "#000", minHeight: 0, display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
-            {productsToShow.map((product, i) => (
-              <Card
-                key={i}
-                images={product.images}
-                title={product.title}
-                description={product.description}
-                price={product.price}
-                rating={product.rating}
-                tags={product.tags}
-                topRated={product.topRated}
-                buttonText="BUY NOW"
+          {loading ? (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div key={i} style={{ background: "#232326", borderRadius: "0.5vw", minHeight: 320, padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', opacity: 0.5 }}>
+                  <div style={{ width: '100%', height: 180, background: '#333', borderRadius: 8, marginBottom: 16 }} />
+                  <div style={{ width: '70%', height: 24, background: '#444', borderRadius: 4, marginBottom: 8 }} />
+                  <div style={{ width: '50%', height: 18, background: '#444', borderRadius: 4, marginBottom: 8 }} />
+                  <div style={{ width: '40%', height: 18, background: '#444', borderRadius: 4 }} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
+                {productsToShow.map((product, i) => (
+                  <Card
+                    key={i}
+                    images={product.images}
+                    title={product.title}
+                    description={product.description}
+                    price={product.price}
+                    rating={product.rating}
+                    tags={product.tags}
+                    topRated={product.topRated}
+                    buttonText="BUY NOW"
+                  />
+                ))}
+              </div>
+              {/* Pagination controls */}
+              <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={setPage}
               />
-            ))}
-          </div>
-          {/* Pagination controls */}
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={setPage}
-          />
+            </>
+          )}
         </main>
       </div>
       <Footer />
