@@ -9,7 +9,21 @@
       "flavour": ["Balanced", "Delicate and Complex"],
       "rating": 4.9,
       "tags": ["Sampler"],
-      "topRated": true
+      "topRated": true,
+      "category": "Single Origin & Blends"
+    },
+    {
+      "images": ["https://bluetokaicoffee.com/cdn/shop/files/img5.jpg?v=1747993563&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.-Mocha-Cold-_Double.jpg?v=1723805313&width=1800", "https://bluetokaicoffee.com/cdn/shop/files/img2_14d272b2-f65d-446b-9d63-416386f230c2.jpg?v=1747390198&width=1800"],
+      "title": "Mocha Cold Coffee",
+      "description": "Blue Tokai Specials",
+      "price": 400,
+      "roast": ["Medium"],
+      "preference": ["With Milk"],
+      "flavour": ["Balanced"],
+      "rating": 4.9,
+      "tags": ["Pack Of 2"],
+      "topRated": true,
+      "category": "Cold Brew Coffee Cans"
     },
     {
       "images": ["https://bluetokaicoffee.com/cdn/shop/files/Sampler_201224.jpg?v=1750764829&width=1800"],
@@ -21,7 +35,35 @@
       "flavour": ["Balanced", "Bold and Bitter"],
       "rating": 4.6,
       "tags": ["Custom"],
-      "topRated": false
+      "topRated": false,
+      "category": "Single Origin & Blends"
+    },
+    {
+      "images": ["https://bluetokaicoffee.com/cdn/shop/files/1_AssortedColdbrewcans_boxof6.jpg?v=1705470011&width=1800"],
+      "title": "Assorted 6-Pack",
+      "description": "Blue Tokai Specials",
+      "price": 999,
+      "roast": ["Medium Dark", "Dark", "Light"],
+      "preference": ["With or Without Milk"],
+      "flavour": ["Balanced"],
+      "rating": 4.8,
+      "tags": ["6 Pack", "New Arrival"],
+      "topRated": true,
+      "category": "Cold Brew Coffee Cans"
+    },
+    {
+      "images": ["https://bluetokaicoffee.com/cdn/shop/files/Lifestyle_4_bcc19eef-90f6-43ba-8ca2-c5571d31a385.jpg?v=1717566552&width=1800","https://bluetokaicoffee.com/cdn/shop/files/MixedBag__Front_c9b610f1-ce4a-4b53-8b30-f6ca758eb6bb.jpg?v=1717566490&width=1800","https://bluetokaicoffee.com/cdn/shop/files/MixedBag__Back_9faae511-869f-4a39-be4a-e582942c8bc7.jpg?v=1717566489&width=1800"],
+      "title": "Mixed | Light to Dark Roasts - Easy Pour",
+      "description": "Quickly Brew Great Coffee",
+      "price": 300,
+      "roast": ["Dark","Light"],
+      "preference": ["Without Milk"],
+      "flavour": ["Balanced"],
+      "equipment":[],
+      "rating": 4.6,
+      "tags": ["Pack Of 5"],
+      "topRated": false,
+      "category": "Easy Pour"
     },
     {
       "images": ["https://bluetokaicoffee.com/cdn/shop/files/Sampler_240625.jpg?v=1750762835&width=1800"],
@@ -32,8 +74,9 @@
       "preference": ["With or Without Milk"],
       "flavour": ["Chocolatey and Nutty","Delicate and Complex"],
       "rating": 4.7,
-      "tags": ["Explorer Pack"],
-      "topRated": false
+      "tags": ["Explorer Pack", "New Arrival"],
+      "topRated": false,
+      "category": "Single Origin & Blends"
     },
     {
         "images": ["https://bluetokaicoffee.com/cdn/shop/files/Card_01_1.jpg?v=1752480806&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Card_02_3.jpg?v=1752480806&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Card_03_1.jpg?v=1752480813&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Card_04_1.jpg?v=1752480813&width=1800"],
@@ -44,8 +87,23 @@
         "preference": ["With or Without Milk"],
         "flavour": ["Chocolatey and Nutty","Producer Series"],
         "rating": 4.8,
-        "tags": ["Explorer Pack", "New Arrival"],
-        "topRated": true
+        "tags": ["Explorer Pack"],
+        "topRated": true,
+        "category": "Single Origin & Blends"
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/ViennaRoast__Front_1_a175faba-8e5f-40b8-aaa1-0efc3a525321.jpg?v=1717565466&width=1080","https://bluetokaicoffee.com/cdn/shop/files/ViennaRoast__Back_aeb2f5bd-68ef-48d3-9311-74ac41a25e4e.jpg?v=1717565466&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Lifestyle_7_b7dc46ed-2696-441a-b3a0-3863ed0a96b1.jpg?v=1717566279&width=1800"],
+        "title": "Vienna | Dark Roast - Easy Pour",
+        "description": "Quickly Brew Great Coffee",
+        "price": 300,
+        "roast": ["Dark"],
+        "preference": ["Without Milk"],
+        "flavour": ["Bold and Bitter"],
+        "equipment":[],
+        "rating": 4.7,
+        "tags": ["Pack Of 5"],
+        "topRated": false,
+        "category": "Easy Pour"
       },
       {
         "images": ["https://bluetokaicoffee.com/cdn/shop/files/1.RiverdaleN72__Front.jpg?v=1751867770&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.-Riverdale-N72__Spider.jpg?v=1751867770&width=1800","https://bluetokaicoffee.com/cdn/shop/files/3.RiverdaleN72__Back.jpg?v=1751867770&width=1800"],
@@ -58,11 +116,39 @@
         "equipment":["Aeropress","Pourover"],
         "rating": 4.8,
         "tags": ["Fruity & Punchy"],
-        "topRated": true
+        "topRated": true,
+        "category": "Single Origin & Blends"
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/2.-Drip-Bag-_Lifestyle.jpg?v=1717649659&width=1800","https://bluetokaicoffee.com/cdn/shop/files/1.-Drip-Bag-_Front.jpg?v=1723200155&width=1800", "https://bluetokaicoffee.com/cdn/shop/files/3.-Drip-Bag-_Back.jpg?v=1723200155&width=1800"],
+        "title": "Portable Drip Bags",
+        "description": "Quickly Brew Great Coffee",
+        "price": 300,
+        "roast": ["Dark", "Light"],
+        "preference": ["With or Without Milk"],
+        "flavour": ["Balanced"],
+        "equipment":[],
+        "rating": 4.9,
+        "tags": ["20 Filters", "New Arrival"],
+        "topRated": true,
+        "category": "Easy Pour"
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/2.-Classic-Cold-_Double.jpg?v=1723010507&width=1800","https://bluetokaicoffee.com/cdn/shop/files/classi-cold-coffee.jpg?v=1747993563&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.-Classic-Cold-_Double.jpg?v=1723010507&width=1800"],
+        "title": "Classic Cold Coffee",
+        "description": "Blue Tokai Specials",
+        "price": 400,
+        "roast": ["Medium"],
+        "preference": ["With Milk"],
+        "flavour": ["Balanced"],
+        "rating": 4.9,
+        "tags": ["Pack Of 2", "New Arrival"],
+        "topRated": true,
+        "category": "Cold Brew Coffee Cans"
       },
       {
         "images": ["https://bluetokaicoffee.com/cdn/shop/files/1.-Warsanlyngdoh-Coffee-Collective__Front.jpg?v=1751283592&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.WarsanlyngdohCoffeeCollective__Spider.jpg?v=1751283592&width=1800","https://bluetokaicoffee.com/cdn/shop/files/3.WarsanlyngdohCoffeeCollective__Back.jpg?v=1751283592&width=1800"],
-        "title": "Warsanlyngdoh Coffee Collective",
+        "title": "Warsanlyngdoh Coffee",
         "description": "Blueberry, Black Tea, Khasi Mandarin",
         "price": 750,
         "roast": ["Medium"],
@@ -70,8 +156,9 @@
         "flavour": ["Balanced","Bold and Bitter"],
         "equipment":["Aeropress","Espresso","French Press","Moka Pot"],
         "rating": 4.7,
-        "tags": ["New Arrival"],
-        "topRated": false
+        "tags": [],
+        "topRated": false,
+        "category": "Single Origin & Blends"
       },
       {
         "images": ["https://bluetokaicoffee.com/cdn/shop/files/1.KrishnagiriEstate__Front.jpg?v=1750769967&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.KrishnagiriEstate__Spider.jpg?v=1750769967&width=1800","https://bluetokaicoffee.com/cdn/shop/files/3.KrishnagiriEstate__Back.jpg?v=1750769968&width=1800"],
@@ -84,8 +171,120 @@
         "equipment":["Espresso","French Press","Moka Pot"],
         "rating": 4.4,
         "tags": ["New Arrival"],
-        "topRated": false
+        "topRated": false,
+        "category": "Single Origin & Blends"
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/5_Classicorangemint_lifestyle.jpg?v=1747993588&width=1800","https://bluetokaicoffee.com/cdn/shop/files/3_Classicorangemint_double.jpg?v=1717674271&width=1800","https://bluetokaicoffee.com/cdn/shop/files/4_Classicorangemint_boxof6.jpg?v=1747993588&width=1800"],
+        "title": "Orange Mint",
+        "description": "Blue Tokai Specials",
+        "price": 380,
+        "roast": ["Dark"],
+        "preference": ["Without Milk"],
+        "flavour": ["Balanced"],
+        "rating": 4.8,
+        "tags": ["Pack Of 2", "New Arrival"],
+        "topRated": true,
+        "category": "Cold Brew Coffee Cans"
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/MS-Estate-Front.jpg?v=1734940696&width=1800","https://bluetokaicoffee.com/cdn/shop/files/MS-Estate-spiderweb.jpg?v=1734940722&width=1800","hhttps://bluetokaicoffee.com/cdn/shop/files/3MSEstate_Back.jpg?v=1706002938&width=1800"],
+        "title": "M.S. Estate",
+        "description": "Orange Marmalade, Dried Date & Earl Grey Tea",
+        "price": 700,
+        "roast": ["Medium"],
+        "preference": ["With or Without Milk"],
+        "flavour": ["Balanced","Delicate and Complex"],
+        "equipment":["Espresso","Aeropress","Pourover"],
+        "rating": 4.6,
+        "tags": [],
+        "topRated": false,
+        "category": "Single Origin & Blends"
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/1.-St.Joseph-Estate__Front_2.jpg?v=1748516245&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.St.Joseph-Estate__Spider_1.jpg?v=1748516245&width=1800","https://bluetokaicoffee.com/cdn/shop/files/3.-St.Joseph-Estate__Back.jpg?v=1748516245&width=1800"],
+        "title": "St. Joseph Estate",
+        "description": "Grapefruit, Clove, Toffee ",
+        "price": 700,
+        "roast": ["Medium Dark"],
+        "preference": ["With or Without Milk"],
+        "flavour": ["Chocolatey and Nutty"],
+        "equipment":["Espresso","Aeropress","Pourover"],
+        "rating": 4.8,
+        "tags": ["New Arrival"],
+        "topRated": true,
+        "category": "Single Origin & Blends"
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/1.MonsoonMalabar-HoysalaEstate__Front.jpg?v=1747054624&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.MonsoonMalabar-HoysalaEstate__Spider.jpg?v=1747054624&width=1800","https://bluetokaicoffee.com/cdn/shop/files/3.MonsoonMalabar-HoysalaEstate__Back.jpg?v=1747054624&width=1800"],
+        "title": "Monsoon Malabar AA- Hoysala Estate",
+        "description": "Cocoa Nibs, Nutty, Raisins",
+        "price": 700,
+        "roast": ["Medium Dark"],
+        "preference": ["With or Without Milk"],
+        "flavour": ["Chocolatey and Nutty"],
+        "equipment":["French Press","Moka Pot","Espresso"],
+        "rating": 4.5,
+        "tags": [],
+        "topRated": false,
+        "category": "Single Origin & Blends"
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/1.SeethargunduEstate__Front.jpg?v=1746421837&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.SeethargunduEstate__Spider.jpg?v=1746421837&width=1800","https://bluetokaicoffee.com/cdn/shop/files/3.SeethargunduEstate__Back.jpg?v=1746421837&width=1800"],
+        "title": "Seethargundu Estate",
+        "description": "Sweet Lime, Apricot, Black Tea",
+        "price": 700,
+        "roast": ["Light"],
+        "preference": ["Without Milk"],
+        "flavour": ["Delicate and Complex", "Producer Series"],
+        "equipment":["Aeropress","Pourover"],
+        "rating": 4.7,
+        "tags": ["Light"],
+        "topRated": false,
+        "category": "Single Origin & Blends"
+      },{
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/Kalledevarapura-Front.jpg?v=1734946862&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Kalledevarapura-spider-Web.jpg?v=1734946879&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Kalledevarapura-Back.jpg?v=1734946890&width=1800"],
+        "title": "Kalledevarapura Estate - Pulp Sun Dried",
+        "description": "Sweet Lime, Apricot, Black Tea",
+        "price": 700,
+        "roast": ["Medium"],
+        "preference": ["With or Without Milk"],
+        "flavour": ["Balanced"],
+        "equipment":["Espresso","Moka Pot","Pourover"],
+        "rating": 4.6,
+        "tags": ["Balanced"],
+        "topRated": false,
+        "category": "Single Origin & Blends"
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/1._Kerehaklu_Estate__Front.jpg?v=1749537393&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2._Kerehaklu_Estate__Spider.jpg?v=1749537392&width=1800","https://bluetokaicoffee.com/cdn/shop/files/3._Kerehaklu_Estate__Back.jpg?v=1749537393&width=1800"],
+        "title": "Kerehaklu Estate",
+        "description": "Mosambi, Cane Sugar, Peach",
+        "price": 800,
+        "roast": ["Light"],
+        "preference": ["Without Milk"],
+        "flavour": ["Delicate and Complex"],
+        "equipment":["Aeropress","Pourover"],
+        "rating": 4.9,
+        "tags": ["New Arrival"],
+        "topRated": true,
+        "category": "Single Origin & Blends"
+      },
+      {
+        "images": ["https://bluetokaicoffee.com/cdn/shop/files/Untitled-3-01.jpg?v=1750077372&width=1800","https://bluetokaicoffee.com/cdn/shop/files/4_19.jpg?v=1750244587&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Untitled-3-02.jpg?v=1750244587&width=1800","https://bluetokaicoffee.com/cdn/shop/files/Untitled-3-03.jpg?v=1750244587&width=1800"],
+        "title": "Riverdale Estate – Fruit Punch",
+        "description": "Peach, Strawberry, Red Grape",
+        "price": 875,
+        "roast": ["Light"],
+        "preference": ["Without Milk"],
+        "flavour": ["Delicate and Complex", "Producer Series"],
+        "equipment":["Aeropress","Pourover"],
+        "rating": 4.9,
+        "tags": ["Producer Pack"],
+        "topRated": true,
+        "category": "Single Origin & Blends"
       }
+
 
     ]
   

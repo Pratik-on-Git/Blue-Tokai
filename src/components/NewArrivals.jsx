@@ -112,8 +112,11 @@ const NewArrivals = () => {
                 <img src={product.images[0]} alt={product.title} style={{width:'100%',height:'18vw',objectFit:'cover',minHeight:'180px'}} />
                 <div style={{padding:'1vw 1vw 0.5vw 1vw',fontSize:'1.1vw',fontWeight:600}}>{product.title}</div>
                 <div style={{padding:'0 1vw 0.5vw 1vw',fontSize:'0.95vw',opacity:0.85}}>{product.description}</div>
-                <div style={{padding:'0 1vw 0.5vw 1vw',fontSize:'1vw',fontWeight:500}}>${product.price}</div>
-                <div style={{padding:'0 1vw 1vw 1vw',fontSize:'0.95vw',color:'#ffd700',fontWeight:500}}>&#9733; {product.rating}</div>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:'1vw',padding:'0 1vw 0.5vw 1vw'}}>
+                  <div style={{fontSize:'1vw',fontWeight:500}}>${product.price}</div>
+                  <div style={{fontSize:'0.95vw',color:'#ffd700',fontWeight:500}}>&#9733; {product.rating}</div>
+                </div>
+                <button style={{margin:'0 1vw 1vw 1vw',padding:'0.5em 1.2em',background:'#000',color:'#FFF',border:'none',borderRadius:'4px',fontWeight:600,cursor:'pointer'}}>VIEW PRODUCT</button>
               </div>
             ))}
           </div>

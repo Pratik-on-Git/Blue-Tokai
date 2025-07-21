@@ -10,17 +10,28 @@ import Footer from "../components/common/footer";
 import Loader from "../components/common/Loader";
 
 const FILTERS = {
+  "Category": [
+    "Single Origin & Blends",
+    "Cold Brew Coffee Cans",
+    "Capsules",
+    "Easy Pour",
+    "Value Pack"
+  ],
   "Roast Level": ["Dark", "Light", "Medium", "Medium Dark"],
   "Drinking Preference": ["With Milk", "With or Without Milk", "Without Milk"],
   "Flavour Profile": ["Balanced", "Bold and Bitter", "Chocolatey and Nutty", "Delicate and Complex", "Producer Series"],
-  "Equipment": ["Aeropress", "Channi", "Cold Brew", "Espresso", "French Press", "Inverted Aeropress", "Moka Pot", "Pourover", "South Indian Filter"],
-  "Availability": ["In stock (22)", "Out of stock (2)"]
+  "Equipment": ["Aeropress", "Channi", "Cold Brew", "Espresso", "French Press", "Inverted Aeropress", "Moka Pot", "Pourover", "South Indian Filter"]
 };
 
 function filterProducts(products, selected) {
   return products.filter(product => {
     for (const [group, options] of Object.entries(selected)) {
       if (options.length === 0) continue;
+      if (group === "Category") {
+        // Assume product.category is a string or array
+        const productCats = Array.isArray(product.category) ? product.category : [product.category];
+        if (!productCats.some(c => options.includes(c))) return false;
+      }
       if (group === "Roast Level") {
         const productRoasts = Array.isArray(product.roast) ? product.roast : [product.roast];
         if (!productRoasts.some(r => options.includes(r))) return false;
@@ -80,6 +91,7 @@ const ShopPage = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedFilters, setSelectedFilters] = useState({
+    "Category": [],
     "Roast Level": [],
     "Drinking Preference": [],
     "Flavour Profile": []
@@ -167,7 +179,7 @@ const ShopPage = () => {
       <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
         {/* Sticky, independently scrollable sidebar */}
         <aside ref={sidebarRef} style={{ width: 260, background: "#000", borderRight: "1.5px solid #232323", position: "sticky", top: 0, height: "calc(100vh - 0px)", maxHeight: "calc(100vh - 0px)", overflowY: "auto", zIndex: 2, overscrollBehavior: "contain", touchAction: "auto" }}>
-          <div style={{ padding: "1.6rem 1.6rem 2rem 1.6rem" }}>
+          <div style={{ padding: "2rem 1.4rem" }}>
             <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
           </div>
         </aside>

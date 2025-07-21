@@ -48,7 +48,7 @@ const Filters = ({ filters, selected, onChange }) => {
   return (
     <div style={{ color: '#fff', fontSize: 15, minWidth: 180 }}>
       {Object.entries(filters).map(([group, options], groupIdx) => (
-        <div key={group} style={{ marginBottom: 18, borderBottom: '1px solid rgba(255, 255, 255, 0.3)', paddingBottom: 8 }}>
+        <div key={group} style={{ marginBottom: 10, borderBottom: '0px', paddingBottom: 8 }}>
           <div
             ref={el => (groupRefs.current[group] = el)}
             style={{
@@ -61,14 +61,25 @@ const Filters = ({ filters, selected, onChange }) => {
               alignItems: 'center',
               justifyContent: 'space-between',
               userSelect: 'none',
+              ...(group === 'Category' ? {
+                border: '2px solid #fff',
+                borderRadius: 4,
+                padding: '0.20rem 0.4rem',
+                background: '#fff',
+                color: '#000',
+                fontWeight: 700,
+                marginBottom: 10,
+                marginTop: 4,
+                transition: 'background 0.18s, color 0.18s',
+              } : {})
             }}
             onClick={() => toggleGroup(group)}
           >
-            <span>{group.replace(/_/g, ' ')}</span>
-            <span style={{ fontSize: 18, marginLeft: 8, transition: 'transform 0.18s', transform: openGroups[group] ? 'rotate(90deg)' : 'rotate(0deg)' }}>&#9654;</span>
+            <span style={group === 'Category' ? { color: '#000' } : {}}>{group.replace(/_/g, ' ')}</span>
+            <span style={{ fontSize: 18, marginLeft: 8, transition: 'transform 0.18s', transform: openGroups[group] ? 'rotate(90deg)' : 'rotate(0deg)', color: group === 'Category' ? '#000' : '#fff' }}>&#9654;</span>
           </div>
           {openGroups[group] && (
-            <div style={{ marginLeft: 2, marginTop: 2 }}>
+            <div style={{ marginLeft: 2, marginTop: 12 }}>
               {options.map((option, i) => (
                 <label
                   key={option}
