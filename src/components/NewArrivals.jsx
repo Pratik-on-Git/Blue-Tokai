@@ -11,7 +11,7 @@ const NewArrivals = () => {
   const touchStartX = useRef(null);
 
   useEffect(() => {
-    fetch('/src/components/common/products.json')
+    fetch('/products.json')
       .then(res => res.json())
       .then(data => {
         const filtered = data.filter(p => Array.isArray(p.tags) && p.tags.includes('New Arrival'));
