@@ -38,7 +38,15 @@ const Header = () => {
         <button className="nav-btn"><span className="blend-text">SHOP</span></button>
         <button className="nav-btn"><span className="blend-text">FRESH STOCKS</span></button>
         <button className="nav-btn"><span className="blend-text">CONTACT</span></button>
-        <button className="nav-btn"><span className="blend-text">SIGNUP/LOGIN</span></button>
+        <button className="nav-btn">
+          <span className="blend-text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'middle',marginRight:'0.4em'}}>
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-2.5 3.5-4 8-4s8 1.5 8 4" />
+            </svg>
+            SIGNUP/LOGIN
+          </span>
+        </button>
       </div>
     </header>
   );
