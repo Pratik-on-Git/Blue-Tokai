@@ -6,7 +6,7 @@ import Pagination from "../components/common/Pagination";
 import beanconqueror from '../assets/img/beanconqueror-svgrepo-com.svg';
 import coffeeroaster from '../assets/img/coffee-roaster-svgrepo-com.svg';
 import coffee from '../assets/img/coffee-to-go-svgrepo-com.svg';
-import PRODUCTS from '../components/common/products.json';
+import PRODUCTS from '/products.json';
 import Footer from "../components/common/footer";
 
 // Example filter options
