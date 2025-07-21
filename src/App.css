@@ -629,6 +629,10 @@ pointer-events: none;
   box-shadow: 0 6px 18px rgba(0,0,0,0.16);
 }
 
+.website-content h1{
+  font-size: 1rem;
+}
+
 @media (max-width: 600px){
   #root{
     overflow-x: hidden;
