@@ -6,10 +6,8 @@ import Pagination from "../components/common/Pagination";
 import beanconqueror from '../assets/img/beanconqueror-svgrepo-com.svg';
 import coffeeroaster from '../assets/img/coffee-roaster-svgrepo-com.svg';
 import coffee from '../assets/img/coffee-to-go-svgrepo-com.svg';
-import PRODUCTS from '../public/products.json';
 import Footer from "../components/common/footer";
 
-// Example filter options
 const FILTERS = {
   "Roast Level": ["Dark", "Light", "Medium", "Medium Dark"],
   "Drinking Preference": ["With Milk", "With or Without Milk", "Without Milk"],
@@ -78,6 +76,7 @@ const featureList = [
 ];
 
 const ShopPage = () => {
+  const [allProducts, setAllProducts] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({
     "Roast Level": [],
     "Drinking Preference": [],
@@ -86,22 +85,32 @@ const ShopPage = () => {
   const [sort, setSort] = useState("featured");
   const [page, setPage] = useState(1);
   const perPage = 12;
-  const filteredProducts = filterProducts(PRODUCTS, selectedFilters);
+  const sidebarRef = useRef(null);
+
+  useEffect(() => {
+    fetch('/products.json')
+      .then(res => res.json())
+      .then(data => setAllProducts(data));
+  }, []);
+
+  useEffect(() => {
+    setPage(1); // Reset to first page on filter/sort change
+  }, [selectedFilters, sort]);
+
+  // Filtering and sorting
+  const filteredProducts = filterProducts(allProducts, selectedFilters);
   const sortedProducts = sortProducts(filteredProducts, sort);
   const totalPages = Math.ceil(sortedProducts.length / perPage);
   const productsToShow = sortedProducts.slice((page - 1) * perPage, page * perPage);
-  const sidebarRef = useRef(null);
 
-  // Fix: Manually handle wheel events to force scroll on sidebar
+  // Sidebar scroll handler (unchanged)
   const handleSidebarWheel = useCallback((e) => {
     const el = sidebarRef.current;
     if (!el) return;
-    // Only scroll if sidebar is scrollable
     if (el.scrollHeight > el.clientHeight) {
       const atTop = el.scrollTop === 0;
       const atBottom = el.scrollTop + el.clientHeight === el.scrollHeight;
       if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) {
-        // Let parent scroll
         return;
       }
       e.stopPropagation();
@@ -109,10 +118,6 @@ const ShopPage = () => {
       e.preventDefault();
     }
   }, []);
-
-  useEffect(() => {
-    setPage(1); // Reset to first page on filter/sort change
-  }, [selectedFilters, sort]);
 
   useEffect(() => {
     const el = sidebarRef.current;
