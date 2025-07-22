@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const VISIBLE_COUNT = 4;
 
@@ -9,6 +10,7 @@ const NewArrivals = () => {
   const [animating, setAnimating] = useState(false);
   const carouselRef = useRef(null);
   const touchStartX = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('/products.json')
@@ -116,7 +118,10 @@ const NewArrivals = () => {
                   <div style={{fontSize:'1vw',fontWeight:500}}>${product.price}</div>
                   <div style={{fontSize:'0.95vw',color:'#ffd700',fontWeight:500}}>&#9733; {product.rating}</div>
                 </div>
-                <button style={{margin:'0 1vw 1vw 1vw',padding:'0.5em 1.2em',background:'#000',color:'#FFF',border:'none',borderRadius:'4px',fontWeight:600,cursor:'pointer'}}>VIEW PRODUCT</button>
+                <button 
+                  style={{margin:'0 1vw 1vw 1vw',padding:'0.5em 1.2em',background:'#000',color:'#FFF',border:'none',borderRadius:'4px',fontWeight:600,cursor:'pointer'}}
+                  onClick={() => navigate(`/product/${product.id}`)}
+                >VIEW PRODUCT</button>
               </div>
             ))}
           </div>
