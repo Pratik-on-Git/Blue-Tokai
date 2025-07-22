@@ -10,6 +10,7 @@ import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
 import ShopPage from '../pages/ShopPage';
 import ContactPage from '../pages/ContactPage';
+import ProductDetail from '../pages/ProductDetail';
 
 function ScrollRestorer() {
   const location = useLocation();
@@ -110,6 +111,7 @@ const AppRouter = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/shop" element={<ShopPage />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/contact" element={<ContactPage />} />
             {/* Optionally add a fallback route here */}
           </Routes>
