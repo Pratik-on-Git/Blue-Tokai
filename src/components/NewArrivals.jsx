@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const VISIBLE_COUNT = 3;
+const VISIBLE_COUNT = 4;
 
 const NewArrivals = () => {
   const [products, setProducts] = useState([]);

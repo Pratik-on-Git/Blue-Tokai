@@ -70,7 +70,6 @@ function patchHeaderNav(navigate, location) {
 
 const AppRouter = () => {
   const [showLoader, setShowLoader] = useState(true);
-  const [shouldRestoreScroll, setShouldRestoreScroll] = useState(false);
   const audioRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -87,13 +86,6 @@ const AppRouter = () => {
     observer.observe(header, { childList: true, subtree: true });
     return () => observer.disconnect();
   }, [navigate, location]);
-
-  useEffect(() => {
-    setShowLoader(true);
-    // On every route change, check if first visit
-    const isFirstVisit = !localStorage.getItem("hasVisited");
-    setShouldRestoreScroll(!isFirstVisit);
-  }, [location]);
 
   const handleLoaderFinish = () => {
     localStorage.setItem("hasVisited", "true");
@@ -136,4 +128,4 @@ const AppRouterWrapper = () => (
   </BrowserRouter>
 );
 
-export default AppRouterWrapper; 
+export default AppRouterWrapper;

@@ -10,13 +10,7 @@ import Footer from "../components/common/footer";
 import Loader from "../components/common/Loader";
 
 const FILTERS = {
-  "Category": [
-    "Single Origin & Blends",
-    "Cold Brew Coffee Cans",
-    "Capsules",
-    "Easy Pour",
-    "Value Pack"
-  ],
+  "Category": ["Single Origin & Blends","Cold Brew Coffee Cans","Capsules","Easy Pour","Value Pack","Cold Brew Bag"],
   "Roast Level": ["Dark", "Light", "Medium", "Medium Dark"],
   "Drinking Preference": ["With Milk", "With or Without Milk", "Without Milk"],
   "Flavour Profile": ["Balanced", "Bold and Bitter", "Chocolatey and Nutty", "Delicate and Complex", "Producer Series"],
@@ -145,7 +139,7 @@ const ShopPage = () => {
   }, [handleSidebarWheel]);
 
   return (
-    <div style={{ background: "#111", minHeight: "100vh", color: "#fff", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <div style={{ background: "#111", minHeight: "100vh", color: "#fff", display: "flex", flexDirection: "column"}}>
       <Banner
         video="http://cdn.pixabay.com/video/2022/08/05/126803-737028141_large.mp4"
         headline="Carefully sourced from India's finest farms"
@@ -202,6 +196,7 @@ const ShopPage = () => {
                 {productsToShow.map((product, i) => (
                   <Card
                     key={i}
+                    id={allProducts.indexOf(product)} // Pass index as id
                     images={product.images}
                     title={product.title}
                     description={product.description}
@@ -228,4 +223,4 @@ const ShopPage = () => {
   );
 };
 
-export default ShopPage; 
+export default ShopPage;

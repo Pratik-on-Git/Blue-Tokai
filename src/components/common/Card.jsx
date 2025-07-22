@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CARD_WIDTH = 260;
 const CARD_HEIGHT = 380;
@@ -10,14 +11,15 @@ const Card = ({
   description,
   price,
   buttonText,
-  onButtonClick,
   tags = [],
   rating,
-  topRated
+  topRated,
+  id // <-- add id prop
 }) => {
   const imgs = Array.isArray(images) && images.length > 0 ? images : (image ? [image] : []);
   const [imgIdx, setImgIdx] = useState(0);
   const intervalRef = useRef();
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     if (imgs.length <= 1) return;
@@ -134,7 +136,7 @@ const Card = ({
             ₹{price}
           </div>
           <button
-            onClick={onButtonClick}
+            onClick={() => navigate(`/product/${id}`)}
             style={{
               background: "#fff",
               color: "#000",
@@ -159,4 +161,4 @@ const Card = ({
   );
 };
 
-export default Card; 
+export default Card;
