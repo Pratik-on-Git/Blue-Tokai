@@ -2,25 +2,25 @@
   {
     "method": "Pour Over",
     "displayName": "POUROVER",
+    "image": "https://bluetokaicoffee.com/cdn/shop/files/PO_1_800x.gif?v=1705900389",
     "params": [
       { "label": "BREW TIME", "value": "3:30 MINS" },
       { "label": "COFFEE AMOUNT", "value": "17G" },
       { "label": "WATER VOLUME", "value": "240ML" },
       { "label": "WATER TEMPERATURE", "value": "93°C" },
       { "label": "GRIND SIZE", "value": "POUR OVER GRIND" }
-    ],
-    "recommended": ["Pour Over", "AeroPress"]
+    ]
   },
   {
     "method": "Aeropress",
     "displayName": "AEROPRESS",
+    "image": "https://bluetokaicoffee.com/cdn/shop/files/PO_1_800x.gif?v=1705900389",
     "params": [
       { "label": "BREW TIME", "value": "2:30 MINS" },
       { "label": "COFFEE AMOUNT", "value": "17G" },
       { "label": "WATER VOLUME", "value": "210ML" },
       { "label": "WATER TEMPERATURE", "value": "88°C" },
       { "label": "GRIND SIZE", "value": "AEROPRESS GRIND" }
-    ],
-    "recommended": ["Pour Over", "AeroPress"]
+    ]
   }
 ] 

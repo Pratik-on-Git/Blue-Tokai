@@ -26,11 +26,11 @@ const pillStyle = {
 
 const brewIcons = [
   // SVGs for hourglass, bean, water drop, thermometer, grind
-  <svg width="28" height="28" viewBox="0 0 28 28" key="hourglass"><circle cx="14" cy="14" r="13" fill="#eaf3f6" /><path d="M8 6h12M8 22h12M10 6c0 4 4 4 4 8s-4 4-4 8m8-16c0 4-4 4-4 8s4 4 4 8" stroke="#a3c8d6" strokeWidth="2" fill="none"/></svg>,
-  <svg width="28" height="28" viewBox="0 0 28 28" key="bean"><circle cx="14" cy="14" r="13" fill="#eaf3f6" /><ellipse cx="14" cy="14" rx="6" ry="10" stroke="#a3c8d6" strokeWidth="2" fill="none"/><path d="M14 4c2 4 2 12 0 16" stroke="#a3c8d6" strokeWidth="2" fill="none"/></svg>,
-  <svg width="28" height="28" viewBox="0 0 28 28" key="water"><circle cx="14" cy="14" r="13" fill="#eaf3f6" /><path d="M14 6c4 6 6 8 6 12a6 6 0 1 1-12 0c0-4 2-6 6-12z" stroke="#a3c8d6" strokeWidth="2" fill="none"/></svg>,
-  <svg width="28" height="28" viewBox="0 0 28 28" key="thermo"><circle cx="14" cy="14" r="13" fill="#eaf3f6" /><rect x="12" y="7" width="4" height="10" rx="2" stroke="#a3c8d6" strokeWidth="2" fill="none"/><circle cx="14" cy="20" r="3" stroke="#a3c8d6" strokeWidth="2" fill="none"/></svg>,
-  <svg width="28" height="28" viewBox="0 0 28 28" key="grind"><circle cx="14" cy="14" r="13" fill="#eaf3f6" /><circle cx="14" cy="14" r="6" stroke="#a3c8d6" strokeWidth="2" fill="none"/><circle cx="14" cy="14" r="2" fill="#a3c8d6"/></svg>
+  <svg width="28" height="28" viewBox="0 0 28 28" key="hourglass"><circle cx="14" cy="14" r="13" fill="transparent" /><path d="M8 6h12M8 22h12M10 6c0 4 4 4 4 8s-4 4-4 8m8-16c0 4-4 4-4 8s4 4 4 8" stroke="#f7f7f7" strokeWidth="2" fill="none"/></svg>,
+  <svg width="28" height="28" viewBox="0 0 28 28" key="bean"><circle cx="14" cy="14" r="13" fill="transparent" /><ellipse cx="14" cy="14" rx="6" ry="10" stroke="#f7f7f7" strokeWidth="2" fill="none"/><path d="M14 4c2 4 2 12 0 16" stroke="#f7f7f7" strokeWidth="2" fill="none"/></svg>,
+  <svg width="28" height="28" viewBox="0 0 28 28" key="water"><circle cx="14" cy="14" r="13" fill="transparent" /><path d="M14 6c4 6 6 8 6 12a6 6 0 1 1-12 0c0-4 2-6 6-12z" stroke="#f7f7f7" strokeWidth="2" fill="none"/></svg>,
+  <svg width="28" height="28" viewBox="0 0 28 28" key="thermo"><circle cx="14" cy="14" r="13" fill="transparent" /><rect x="12" y="7" width="4" height="10" rx="2" stroke="#f7f7f7" strokeWidth="2" fill="none"/><circle cx="14" cy="20" r="3" stroke="#f7f7f7" strokeWidth="2" fill="none"/></svg>,
+    <svg width="28" height="28" viewBox="0 0 28 28" key="grind"><circle cx="14" cy="14" r="13" fill="transparent" /><circle cx="14" cy="14" r="6" stroke="#f7f7f7" strokeWidth="2" fill="none"/><circle cx="14" cy="14" r="2" fill="#f7f7f7"/></svg>
 ];
 
 // Placeholder for brew data (to be replaced by dynamic fetch from brew.json)
@@ -69,58 +69,64 @@ const BrewSection = ({ brewList, brewData }) => {
   const activeBrew = selectedBrew;
   const brew = brewData.find(b => b.method.toLowerCase() === (activeBrew || '').toLowerCase());
   return (
-    <div style={{ background: '#f9f7f2', borderRadius: 8, margin: '32px 0 0 0', padding: '36px 32px', color: '#181818', fontFamily: 'DM Sans, sans-serif', maxWidth: 420 }}>
-      {/* Brew method buttons */}
-      {brewList.length > 1 && (
-        <div style={{ display: 'flex', gap: 12, marginBottom: 18 }}>
-          {brewList.map((b, i) => (
-            <button
-              key={b}
-              onClick={() => setSelectedBrew(b)}
-              style={{
-                background: activeBrew === b ? '#FFB22C' : '#fff',
-                color: activeBrew === b ? '#181818' : '#888',
-                border: '1.5px solid #FFB22C',
-                borderRadius: 18,
-                fontWeight: 700,
-                fontSize: 16,
-                padding: '8px 22px',
-                cursor: 'pointer',
-                outline: 'none',
-                transition: 'background 0.18s, color 0.18s, border 0.18s',
-              }}
-            >
-              {b}
-            </button>
-          ))}
-        </div>
-      )}
-      {/* Brew details */}
-      {brew ? (
-        <>
-          <div style={{ color: '#a3c8d6', fontWeight: 700, fontSize: 18, letterSpacing: 1, marginBottom: 8 }}>{brew.displayName}</div>
-          <div style={{ fontSize: 36, fontWeight: 400, fontFamily: 'serif', marginBottom: 18 }}>
-            How to <span style={{ fontStyle: 'italic' }}>Brew</span>
-          </div>
-          <div>
-            {brew.params.map((p, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
-                {brewIcons[i]}
-                <span style={{ fontWeight: 700, fontSize: 18, marginLeft: 12, marginRight: 4 }}>{p.value}</span>
-                <span style={{ color: '#888', fontWeight: 400, fontSize: 16, marginRight: 4 }}>/</span>
-                <span style={{ color: '#181818', fontWeight: 400, fontSize: 16 }}>{p.label}</span>
-              </div>
+    <div style={{ paddingTop: '10vh', display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: 32, height: '80vh',  }}>
+      <div style={{ background: 'transparent', borderRadius: 8, padding: '36px 32px', color: '#181818', fontFamily: 'DM Sans, sans-serif', Width: '50%', flex: '1 1 0%' }}>
+        {/* Brew method buttons */}
+        {brewList.length > 1 && (
+          <div style={{ display: 'flex', gap: 12, marginBottom: 18 }}>
+            {brewList.map((b, i) => (
+              <button
+                key={b}
+                onClick={() => setSelectedBrew(b)}
+                style={{
+                  background: activeBrew === b ? '#FFB22C' : 'transparent',
+                  color: activeBrew === b ? '#181818' : '#FFB22C',
+                  border: '1.5px solid #FFB22C',
+                  borderRadius: 18,
+                  fontWeight: 700,
+                  fontSize: 16,
+                  padding: '8px 22px',
+                  cursor: 'pointer',
+                  outline: 'none',
+                  transition: 'background 0.18s, color 0.18s, border 0.18s',
+                }}
+              >
+                {b}
+              </button>
             ))}
           </div>
-          <div style={{ fontWeight: 700, fontSize: 15, color: '#888', marginTop: 24, marginBottom: 4, letterSpacing: 1 }}>OTHER RECOMMENDED METHODS</div>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-            {brew.recommended.map((m, i) => (
-              <span key={i} style={{ color: i === 0 ? '#a3c8d6' : '#181818', fontWeight: i === 0 ? 700 : 400, fontSize: 18, textDecoration: i === 0 ? 'underline' : 'none', cursor: 'pointer', marginRight: 8 }}>{m}</span>
-            ))}
-          </div>
-        </>
-      ) : (
-        <div style={{ color: '#888' }}>No brew details available.</div>
+        )}
+        {/* Brew details */}
+        {brew ? (
+          <>
+            <div style={{ color: '#FFB22C', fontWeight: 700, fontSize: 18, letterSpacing: 1, marginBottom: 8 }}>{brew.displayName}</div>
+            <div style={{ fontSize: 36, fontWeight: 400, marginBottom: 18, color: '#f7f7f7' }}>
+              How to <span style={{ fontStyle: 'italic' }}>Brew</span>
+            </div>
+            <div>
+              {brew.params.map((p, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', marginBottom: 12, gap: 10 }}>
+                  {brewIcons[i]}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ fontWeight: 500, fontSize: 18, color: "#FFB22C" }}>{p.value}</span>
+                    <span style={{ color: '#f7f7f7', fontWeight: 400, fontSize: 16 }}>/</span>
+                    <span style={{ color: '#f7f7f7', fontWeight: 400, fontSize: 16 }}>{p.label}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div style={{ color: '#888' }}>No brew details available.</div>
+        )}
+      </div>
+      {/* Brew image (from brew.json) */}
+      {brew && brew.image && (
+        <img
+          src={brew.image}
+          alt={brew.displayName + ' Brew'}
+          style={{ width: '40%', height: 'auto', borderRadius: 12, objectFit: 'cover', boxShadow: '0 2px 16px rgba(0,0,0,0.08)' }}
+        />
       )}
     </div>
   );
@@ -264,7 +270,7 @@ const ProductDetail = () => {
         {/* Left: Product Images */}
         <div style={{ flex: 1, minWidth: 320, maxWidth: 420, position: 'relative' }}>
           <div style={{ background: "#F7F7F7", borderRadius: 8, boxShadow: "0 2px 16px rgba(0,0,0,0.06)", textAlign: "center", minHeight: 420, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <img src={product.images?.[mainImgIdx]} alt={product.title} style={{ width: "100%", maxHeight: 420, objectFit: "cover", borderRadius: 8, transition: '0.2s' }} />
+            <img src={product.images?.[mainImgIdx]} alt={product.title} style={{ width: "100%", objectFit: "cover", borderRadius: 8, transition: '0.2s' }} />
           </div>
           {/* Thumbnails if multiple images */}
           {product.images?.length > 1 && (
@@ -512,7 +518,7 @@ const ProductDetail = () => {
                 {(product.tastingNotes || '').toUpperCase() || 'TASTING NOTES'}
               </div>
             </div>
-          {/* Brew Section (conditional) */}
+          {/* Brew Section (conditional, with image beside) */}
           {product.showBrewSection && (
             <BrewSection
               brewList={product.brew ? (Array.isArray(product.brew) ? product.brew : [product.brew]) : []}
