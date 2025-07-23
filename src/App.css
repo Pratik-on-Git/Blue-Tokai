@@ -31,6 +31,27 @@ h1{
   letter-spacing: -4px;
 }
 
+/* Hide main vertical scrollbar for the whole webpage */
+html, body {
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbars for main containers except filters/sidebar */
+.container {
+  scrollbar-width: none;
+}
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Do NOT hide scrollbars for filters/sidebar. Assuming sidebar or filters have a class like .filters-sidebar or .filters, so do NOT apply the above to those. */
+
+
 /* Sticky Header */
 .sticky-header {
   position: fixed;
@@ -63,9 +84,9 @@ h1{
 
 .sticky-header .header-content:first-child {
   justify-content: flex-start;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 1.5px;
-  color: #fff;
+  color: #FFB22C;
 }
 .sticky-header .header-content:last-child {
   justify-content: flex-end;
@@ -194,6 +215,7 @@ section.info{
 .header-row h1{
   font-weight: 700;
   font-size: 120px;
+  color: #FFB22C;
 }
 
 .header-row h2{
@@ -224,14 +246,16 @@ section.info{
 .mid-row h2{
   text-transform: uppercase;
   font-weight: 300;
-  line-height: 96%;
-  font-size: 15px;
+  line-height: 105%;
+  font-size: 18px;
   padding: 0rem 0rem 0rem 2rem;
 }
 
 .mid-row-big{
-line-height: 105%;
+  line-height: 105%;
   font-size: 25px;
+  font-weight: 600;
+  color: #FFB22C;
 }
 
 .header-info{
@@ -648,6 +672,7 @@ pointer-events: none;
   transition: background 0.18s, color 0.18s;
 }
 .header-content .nav-btn:last-child:hover, .header-content .nav-btn:last-child:focus {
-  background: #422600;
-  color: #fff;
+  background: #FFB22C;
+  color: #000;
 }
+

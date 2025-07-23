@@ -36,7 +36,7 @@ const Header = () => {
         <button className="nav-btn"><span className="blend-text">HOME</span></button>
         <button className="nav-btn"><span className="blend-text">ABOUT US</span></button>
         <button className="nav-btn"><span className="blend-text">SHOP</span></button>
-        <button className="nav-btn"><span className="blend-text">FRESH STOCKS</span></button>
+        <button className="nav-btn"><span className="blend-text">EQUIPMENTS</span></button>
         <button className="nav-btn"><span className="blend-text">CONTACT</span></button>
         <button className="nav-btn">
           <span className="blend-text">
@@ -44,7 +44,7 @@ const Header = () => {
               <circle cx="12" cy="8" r="4" />
               <path d="M4 20c0-2.5 3.5-4 8-4s8 1.5 8 4" />
             </svg>
-            SIGNUP/LOGIN
+            LOGIN
           </span>
         </button>
       </div>

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -6,6 +7,8 @@ import Lenis from "lenis";
 gsap.registerPlugin(ScrollTrigger);
 
 const AnimationController = () => {
+  const location = useLocation();
+
   useEffect(() => {
     // Set initial state for .hero, .hero-background-video, and .hero-logo
     gsap.set(".hero", { opacity: 0, y: 100, willChange: "opacity, transform" });
@@ -221,7 +224,7 @@ const AnimationController = () => {
       lenis.destroy();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, []);
+  }, [location.pathname]);
 
   return null;
 };

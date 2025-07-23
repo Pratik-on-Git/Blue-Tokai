@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Footer from '../components/common/footer';
 
 const badgeStyle = {
   display: "inline-block",
@@ -530,4 +531,6 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail; 
+const ProductDetailWithFooter = (props) => <><ProductDetail {...props} /><Footer /></>;
+
+export default ProductDetailWithFooter; 

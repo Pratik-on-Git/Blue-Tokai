@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const VISIBLE_COUNT = 4;
 
@@ -9,6 +13,8 @@ const NewArrivals = () => {
   const [slideIndex, setSlideIndex] = useState(0); // for animation
   const [animating, setAnimating] = useState(false);
   const carouselRef = useRef(null);
+  const writeupRef = useRef(null);
+  const cardsRef = useRef([]);
   const touchStartX = useRef(null);
   const navigate = useNavigate();
 
@@ -29,6 +35,47 @@ const NewArrivals = () => {
   useEffect(() => {
     setSlideIndex(startIdx);
   }, [products.length]);
+
+  // Fade in writeup
+  useEffect(() => {
+    if (!writeupRef.current) return;
+    gsap.fromTo(
+      writeupRef.current.children,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: writeupRef.current,
+          start: "top 85%",
+        }
+      }
+    );
+  }, []);
+
+  // Fade in cards (fix: always trim refs to match products)
+  useEffect(() => {
+    cardsRef.current = cardsRef.current.slice(0, products.length);
+    if (!cardsRef.current.length) return;
+    gsap.fromTo(
+      cardsRef.current,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.13,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: carouselRef.current,
+          start: "top 90%",
+        }
+      }
+    );
+  }, [products, slideIndex]);
 
   const handleSlide = (newIdx) => {
     if (animating) return;
@@ -72,7 +119,7 @@ const NewArrivals = () => {
     <div style={{background:'#fff',color:'#000',padding:'0',minHeight:'100vh',display:'flex',flexDirection:'column',justifyContent:'flex-start'}}>
       <div style={{display:'flex',flexDirection:'row',alignItems:'flex-start',gap:'2vw',width:'100%',padding:'0em 0em 0em 3em'}}>
         <div style={{minWidth:'320px',maxWidth:'340px',paddingTop:'0.5vw'}}>
-          <div style={{fontSize:'3vw',fontWeight:600,lineHeight:'1.1',marginBottom:'0.5vw'}}>
+          <div ref={writeupRef} style={{fontSize:'3vw',fontWeight:600,lineHeight:'1.1',marginBottom:'0.5vw'}}>
             <span style={{display:'block'}}>/ NEW</span>
             <span style={{display:'block'}}>ARRIVALS</span>
           </div>
@@ -110,7 +157,22 @@ const NewArrivals = () => {
             }}
           >
             {products.map((product, i) => (
-              <div key={i} style={{background:'#fff',borderRadius:'0.5vw',overflow:'hidden',width:`${100/products.length}%`,minWidth:'220px',maxWidth:'340px',display:'flex',flexDirection:'column',justifyContent:'flex-end',marginRight:'2vw'}}>
+              <div
+                key={i}
+                ref={el => cardsRef.current[i] = el}
+                style={{
+                  background:'#fff',
+                  borderRadius:'0.5vw',
+                  overflow:'hidden',
+                  width:`${100/products.length}%`,
+                  minWidth:'220px',
+                  maxWidth:'340px',
+                  display:'flex',
+                  flexDirection:'column',
+                  justifyContent:'flex-end',
+                  marginRight:'2vw'
+                }}
+              >
                 <img src={product.images[0]} alt={product.title} style={{width:'100%',height:'18vw',objectFit:'cover',minHeight:'180px'}} />
                 <div style={{padding:'1vw 1vw 0.5vw 1vw',fontSize:'1.1vw',fontWeight:600}}>{product.title}</div>
                 <div style={{padding:'0 1vw 0.5vw 1vw',fontSize:'0.95vw',opacity:0.85}}>{product.description}</div>

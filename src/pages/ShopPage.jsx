@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useLocation } from 'react-router-dom';
 import Card from "../components/common/Card";
 import Filters from "../components/common/Filters";
 import Banner from "../components/common/Banner";
@@ -82,6 +83,7 @@ const featureList = [
 ];
 
 const ShopPage = () => {
+  const location = useLocation();
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedFilters, setSelectedFilters] = useState({
@@ -94,6 +96,15 @@ const ShopPage = () => {
   const [page, setPage] = useState(1);
   const perPage = 12;
   const sidebarRef = useRef(null);
+
+  // Read category from query param and set filter on mount or when location.search changes
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const category = params.get('category');
+    if (category && FILTERS["Category"].includes(category)) {
+      setSelectedFilters(f => ({ ...f, "Category": [category] }));
+    }
+  }, [location.search]);
 
   useEffect(() => {
     setLoading(true);
