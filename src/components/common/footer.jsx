@@ -51,7 +51,7 @@ const Footer = () => (
         justifyContent: "space-between",
         alignItems: "center",
         margin: "0 auto",
-        padding: "0 2rem",
+        padding: "0 3rem",
       }}
     >
       {/* Left: Logo & Info */}
@@ -147,22 +147,36 @@ const Footer = () => (
             ))}
           </ul>
         </div>
-        {/* About Us */}
+        {/* Pages */}
         <div>
-          <div style={{ fontWeight: 700, marginBottom: 12, color: "#FFB22C" }}>ABOUT US</div>
+          <div style={{ fontWeight: 700, marginBottom: 12, color: "#FFB22C" }}>PAGES</div>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {footerLinks.aboutUs.map((item) => (
-              <li key={item} style={{ marginBottom: 8 }}><a href="#" style={{ color: "#f7f7f7", textDecoration: "none" }}>{item}</a></li>
-            ))}
+            <li style={{ marginBottom: 8 }}><Link to="/" style={{ color: "#f7f7f7", textDecoration: "none" }}>Home</Link></li>
+            <li style={{ marginBottom: 8 }}><Link to="/about" style={{ color: "#f7f7f7", textDecoration: "none" }}>About Us</Link></li>
+            <li style={{ marginBottom: 8 }}><Link to="/shop" style={{ color: "#f7f7f7", textDecoration: "none" }}>Shop</Link></li>
+            <li style={{ marginBottom: 8 }}><Link to="/equipments" style={{ color: "#f7f7f7", textDecoration: "none" }}>Equipments</Link></li>
+            <li style={{ marginBottom: 8 }}><Link to="/contact" style={{ color: "#f7f7f7", textDecoration: "none" }}>Contact</Link></li>
           </ul>
         </div>
         {/* Visit Us */}
         <div>
-          <div style={{ fontWeight: 700, marginBottom: 12 }}>VISIT US</div>
+          <div style={{ fontWeight: 700, marginBottom: 12, color: "#FFB22C" }}>VISIT US</div>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {footerLinks.visitUs.map((item) => (
-              <li key={item} style={{ marginBottom: 8 }}><a href="#" style={{ color: "#111", textDecoration: "none", fontWeight: item === "OUR FARMS" || item === "LEARN" || item === "BLOG" ? 700 : 400 }}>{item}</a></li>
-            ))}
+            <li style={{ marginBottom: 8 }}>
+              <a href="https://www.facebook.com/bluetokaicoffee/" target="_blank" rel="noopener noreferrer" style={{ color: "#1877f2", textDecoration: "none", display: 'flex', alignItems: 'center', gap: 8 }}>
+                Facebook
+              </a>
+            </li>
+            <li style={{ marginBottom: 8 }}>
+              <a href="https://www.instagram.com/bluetokaicoffee" target="_blank" rel="noopener noreferrer" style={{ color: "#e1306c", textDecoration: "none", display: 'flex', alignItems: 'center', gap: 8 }}>
+                Instagram
+              </a>
+            </li>
+            <li style={{ marginBottom: 8 }}>
+              <a href="https://x.com/bluetokaicoffee" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", textDecoration: "none", display: 'flex', alignItems: 'center', gap: 8 }}>
+                X
+              </a>
+            </li>
           </ul>
         </div>
       </div>

@@ -133,6 +133,27 @@ const BrewSection = ({ brewList, brewData }) => {
   );
 };
 
+function getPriceBySize(product, selectedSize) {
+  const basePrice = product.price;
+  const category = product.category;
+  if (category === "Cold Brew Coffee Cans") {
+    if (selectedSize === "220ml") return basePrice;
+    if (selectedSize === "440ml") return basePrice * 2;
+  } else if (category === "Capsules") {
+    if (selectedSize === "10 Capsules") return basePrice;
+    if (selectedSize === "20 Capsules") return basePrice * 2;
+    if (selectedSize === "30 Capsules") return basePrice * 3;
+  } else if (category === "Easy Pour") {
+    if (selectedSize === "5 Sachets") return basePrice;
+    if (selectedSize === "10 Sachets") return basePrice * 2;
+  } else if (category === "Single Origin & Blends") {
+    if (selectedSize === "250g") return basePrice;
+    if (selectedSize === "500g") return basePrice * 2;
+    if (selectedSize === "1kg") return basePrice * 4;
+  }
+  return basePrice;
+}
+
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -265,6 +286,9 @@ const ProductDetail = () => {
     return stars;
   };
 
+  // Calculate dynamic price
+  const price = product ? getPriceBySize(product, selectedSize) : 0;
+
   return (
     
       <div style={{ maxWidth: "85%", margin: "0 auto", padding: "17vh 0px 0 0px", display: "flex", gap: "5rem 10rem", alignItems: 'center', flexWrap: 'wrap' }}>
@@ -293,7 +317,7 @@ const ProductDetail = () => {
           <div style={{ fontSize: 14, color: "#FFB22C", fontWeight: 700, letterSpacing: 1, marginBottom: 8, textTransform: "uppercase" }}>{product.category}</div>
           <h1 style={{ fontSize: 38, color: "#F7F7F7", fontWeight: 500, margin: 0, letterSpacing: "normal"}}>{product.title}</h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: 36 }}>
-            <div style={{ fontSize: 30, fontWeight: 400, color: '#F7F7F7', letterSpacing: 0.5 }}>₹{product.price}</div>
+            <div style={{ fontSize: 30, fontWeight: 400, color: '#F7F7F7', letterSpacing: 0.5 }}>₹{price}</div>
           </div>
           {/* Rating under price */}
           {product.rating && (
