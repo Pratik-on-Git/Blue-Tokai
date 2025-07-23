@@ -116,7 +116,7 @@ const NewArrivals = () => {
   const translateX = -(slideIndex * (100 / products.length));
 
   return (
-    <div style={{background:'#fff',color:'#000',padding:'0',minHeight:'100vh',display:'flex',flexDirection:'column',justifyContent:'flex-start'}}>
+    <div style={{background:'#f7f7f7',color:'#000',padding:'0',minHeight:'80vh',display:'flex',flexDirection:'column',justifyContent:'flex-start'}}>
       <div style={{display:'flex',flexDirection:'row',alignItems:'flex-start',gap:'2vw',width:'100%',padding:'0em 0em 0em 3em'}}>
         <div style={{minWidth:'320px',maxWidth:'340px',paddingTop:'0.5vw'}}>
           <div ref={writeupRef} style={{fontSize:'3vw',fontWeight:600,lineHeight:'1.1',marginBottom:'0.5vw'}}>
@@ -161,7 +161,7 @@ const NewArrivals = () => {
                 key={i}
                 ref={el => cardsRef.current[i] = el}
                 style={{
-                  background:'#fff',
+                  background:'#f7f7f7',
                   borderRadius:'0.5vw',
                   overflow:'hidden',
                   width:`${100/products.length}%`,
@@ -181,7 +181,7 @@ const NewArrivals = () => {
                   <div style={{fontSize:'0.95vw',color:'#ffd700',fontWeight:500}}>&#9733; {product.rating}</div>
                 </div>
                 <button 
-                  style={{margin:'0 1vw 1vw 1vw',padding:'0.5em 1.2em',background:'#000',color:'#FFF',border:'none',borderRadius:'4px',fontWeight:600,cursor:'pointer'}}
+                  style={{margin:'0 1vw 1vw 1vw',padding:'0.5em 1.2em',background:'#000',color:'#f7f7f7',border:'none',borderRadius:'4px',fontWeight:600,cursor:'pointer'}}
                   onClick={() => navigate(`/product/${product.id}`)}
                 >VIEW PRODUCT</button>
               </div>
@@ -189,8 +189,8 @@ const NewArrivals = () => {
           </div>
         </div>
       </div>
-      <div style={{display:'flex',alignItems:'center',marginTop:'2vw',marginLeft:'25rem'}}>
-        <a href="/shop" style={{color:'#000',fontSize:'1vw',textDecoration:'none',borderBottom:'1.5px solid #fff',paddingBottom:'0.2vw',letterSpacing:'0.05em',fontWeight:500,opacity:0.85}}>VIEW ALL PRODUCTS</a>
+      <div style={{display:'flex',alignItems:'center',marginTop:'4vw',marginLeft:'25rem'}}>
+        <a href="/shop" style={{color:'#000',fontSize:'1vw',textDecoration:'none',borderBottom:'1.5px solid #f7f7f7',paddingBottom:'0.2vw',letterSpacing:'0.05em',fontWeight:500,opacity:0.85}}>VIEW ALL PRODUCTS</a>
         <div style={{flex:'1',height:'1px',background:'#333',marginLeft:'2vw',marginRight:'2vw'}}></div>
       </div>
     </div>

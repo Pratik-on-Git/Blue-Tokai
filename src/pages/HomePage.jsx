@@ -11,6 +11,7 @@ import InfiniteImageScroller from '../components/InfiniteImageScroller';
 import NewArrivals from '../components/NewArrivals';
 import Footer from '../components/common/footer';
 import aboutUsLogo from '../assets/img/about-us-svgrepo-com.svg';
+import SpecialCollections from '../components/common/SpecialCollections';
 
 const heroVideo = "https://videos.pexels.com/video-files/4081317/4081317-uhd_2560_1440_24fps.mp4";
 
@@ -26,8 +27,8 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", overflow: 'hidden' }}>
-      <div style={{ flex: 1, overflow: 'auto' }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <div style={{ flex: 1 }}>
         <div className="container">
           <section className="hero">
             <video
@@ -106,7 +107,7 @@ const HomePage = () => {
                     autoPlay
                     loop
                     playsInline
-                    style={{ width: '210px', height: '300px', objectFit: 'cover', borderRadius: 4, boxShadow: '0 2px 12px rgba(0,0,0,0.10)', background: '#fff', transition: 'transform 0.18s, box-shadow 0.18s', border: 'none' }}
+                    style={{ width: '210px', height: '300px', objectFit: 'cover', borderRadius: 4, boxShadow: '0 2px 12px rgba(0,0,0,0.10)', background: '#f7f7f7', transition: 'transform 0.18s, box-shadow 0.18s', border: 'none' }}
                   />
                   <div className="mid-row-img-caption">portable drip bags</div>
                 </div>
@@ -133,10 +134,12 @@ const HomePage = () => {
           
           <section className="website-content">
             <NewArrivals />
+            <SpecialCollections />
+            <Footer />
           </section>
         </div>
       </div>
-      <Footer />
+      
     </div>
   );
 };
