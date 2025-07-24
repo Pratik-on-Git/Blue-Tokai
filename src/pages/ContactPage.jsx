@@ -1,6 +1,7 @@
 import React from "react";
 import contactImg from '../assets/img/img-1.jpg';
 import Footer from '../components/common/footer';
+import { Link } from 'react-router-dom';
 
 const ContactPage = () => (
   <div className="contact-root">
@@ -17,7 +18,9 @@ const ContactPage = () => (
             Have coffee questions, feedback for us, or thoughts to share? We're here for you!
             </div>
           </div>
-          <div className="contact-label">CONTACT /</div>
+          <div className="contact-label">
+            <Link to="/" className="contact-home-btn">Home</Link>
+          </div>
         </div>
         {/* Right */}
         <div className="contact-right">
@@ -48,7 +51,7 @@ const ContactPage = () => (
                   <label htmlFor="message">Message</label>
                   <textarea id="message" name="message" placeholder="Your Message" rows={4} required></textarea>
                 </div>
-                <button type="submit" className="form-submit">Send Message</button>
+                <button type="submit" className="form-submit">SEND MESSAGE</button>
               </form>
             </div>
             <div className="contact-img-wrap">
@@ -116,11 +119,27 @@ const ContactPage = () => (
         letter-spacing: 0.01em;
       }
       .contact-label {
-        font-size: 1.1rem;
-        color: #fff;
         margin-top: 2vw;
-        letter-spacing: 0.04em;
+        font-size: 1.1rem;
+        font-weight: 500;
         text-transform: uppercase;
+        color: #ffb22c;
+      }
+      .contact-home-btn {
+        display: inline-block;
+        background: #ffb22c;
+        color: #000;
+        padding: 0.5em 1.3em;
+        border-radius: 4px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: background 0.18s, color 0.18s;
+        margin-top: 0.5em;
+      }
+      .contact-home-btn:hover {
+        background: #fff;
+        color: #222;
       }
       .contact-right {
         display: flex;
@@ -382,4 +401,4 @@ const ContactPage = () => (
   </div>
 );
 
-export default ContactPage;
+export default ContactPage; 

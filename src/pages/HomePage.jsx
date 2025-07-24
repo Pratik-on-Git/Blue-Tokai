@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import gsap from "gsap";
 import "../App.css";
 import logo from "../assets/img/logo.png";
 import img1 from '../assets/img/img-1.jpg';
@@ -15,6 +16,8 @@ import SpecialCollections from '../components/common/SpecialCollections';
 
 const heroVideo = "https://videos.pexels.com/video-files/4081317/4081317-uhd_2560_1440_24fps.mp4";
 
+const TRAIL_COUNT = 5;
+
 const scrollerItems = [
   { type: 'img', src: img1, alt: '' },
   { type: 'video', src: img2mp4 },
@@ -26,6 +29,10 @@ const HomePage = () => {
   const videoRef = useRef(null);
   const navigate = useNavigate();
   const footerRef = useRef(null);
+  const [trailImages, setTrailImages] = useState([]);
+  const [allProductImages, setAllProductImages] = useState([]);
+  const trailRefs = useRef([]);
+  const heroRef = useRef(null);
 
   // Clamp scroll so user cannot scroll past the bottom of the footer
   useEffect(() => {
@@ -76,12 +83,113 @@ const HomePage = () => {
     }, 200);
   };
 
+  // Fetch product images from products.json
+  useEffect(() => {
+    fetch("/products.json")
+      .then(res => res.json())
+      .then(data => {
+        const allImages = data.flatMap(prod => prod.images);
+        setAllProductImages(allImages);
+        setTrailImages(Array.from({ length: TRAIL_COUNT }, () =>
+          allImages[Math.floor(Math.random() * allImages.length)]
+        ));
+      });
+  }, []);
+
+  // Mouse trailing effect
+  useEffect(() => {
+    if (!heroRef.current || allProductImages.length === 0) return;
+    let mouse = { x: 0, y: 0 };
+    let last = Array.from({ length: TRAIL_COUNT }, () => ({ x: 0, y: 0 }));
+    let active = false;
+
+    const onMove = e => {
+      const rect = heroRef.current.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    };
+    const onEnter = () => {
+      active = true;
+      // Pick 5 new random images on each enter
+      setTrailImages(Array.from({ length: TRAIL_COUNT }, () =>
+        allProductImages[Math.floor(Math.random() * allProductImages.length)]
+      ));
+      // Start trail at cursor
+      for (let i = 0; i < TRAIL_COUNT; i++) {
+        last[i].x = mouse.x;
+        last[i].y = mouse.y;
+      }
+      for (let i = 0; i < TRAIL_COUNT; i++) {
+        if (trailRefs.current[i]) {
+          gsap.set(trailRefs.current[i], {
+            x: mouse.x,
+            y: mouse.y,
+            scale: 1 - i * 0.13,
+            opacity: 1 - i * 0.18,
+            zIndex: TRAIL_COUNT - i
+          });
+        }
+      }
+    };
+    const onLeave = () => {
+      active = false;
+      for (let i = 0; i < TRAIL_COUNT; i++) {
+        if (trailRefs.current[i]) {
+          gsap.to(trailRefs.current[i], { opacity: 0, duration: 0.4, scale: 0.7 });
+        }
+      }
+    };
+    heroRef.current.addEventListener("mousemove", onMove);
+    heroRef.current.addEventListener("mouseenter", onEnter);
+    heroRef.current.addEventListener("mouseleave", onLeave);
+
+    // GSAP ticker for trailing
+    const ticker = () => {
+      if (!active) return;
+      last[0].x += (mouse.x - last[0].x) * 0.18;
+      last[0].y += (mouse.y - last[0].y) * 0.18;
+      for (let i = 1; i < TRAIL_COUNT; i++) {
+        last[i].x += (last[i - 1].x - last[i].x) * 0.18;
+        last[i].y += (last[i - 1].y - last[i].y) * 0.18;
+      }
+      for (let i = 0; i < TRAIL_COUNT; i++) {
+        if (trailRefs.current[i]) {
+          gsap.set(trailRefs.current[i], {
+            x: last[i].x,
+            y: last[i].y,
+            scale: 1 - i * 0.13,
+            opacity: 1 - i * 0.18,
+            zIndex: TRAIL_COUNT - i
+          });
+        }
+      }
+    };
+    gsap.ticker.add(ticker);
+    return () => {
+      heroRef.current.removeEventListener("mousemove", onMove);
+      heroRef.current.removeEventListener("mouseenter", onEnter);
+      heroRef.current.removeEventListener("mouseleave", onLeave);
+      gsap.ticker.remove(ticker);
+    };
+  }, [allProductImages]);
+
+  // Change each trailing image every 2 seconds
+  useEffect(() => {
+    if (!allProductImages.length) return;
+    const interval = setInterval(() => {
+      setTrailImages(prev => prev.map(() =>
+        allProductImages[Math.floor(Math.random() * allProductImages.length)]
+      ));
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [allProductImages]);
+
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
       {/* Main content grows, footer stays at bottom */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
         <div className="container" style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0, overflow: "hidden" }}>
-          <section className="hero">
+          <section className="hero" ref={heroRef} style={{ position: 'relative', overflow: 'hidden' }}>
             <video
               ref={videoRef}
               className="hero-background-video"
@@ -92,6 +200,30 @@ const HomePage = () => {
               playsInline
             />
             <img src={logo} alt="Blue Tokai Logo" className="hero-logo" />
+            {/* Trailing images */}
+            {trailImages.map((img, i) => (
+              <img
+                key={i}
+                ref={el => (trailRefs.current[i] = el)}
+                src={img}
+                alt=""
+                className="hero-trail-img"
+                style={{
+                  position: "absolute",
+                  width: "120px",
+                  height: "120px",
+                  objectFit: "cover",
+                  
+                  pointerEvents: "none",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.13)",
+                  willChange: "transform, opacity",
+                  left: 0,
+                  top: 0,
+                  opacity: 0,
+                  zIndex: 10
+                }}
+              />
+            ))}
             {/* Centered production company mark at the bottom */}
             <div className="production-company-mark">
               <div className="vertical-lines">
@@ -191,6 +323,11 @@ const HomePage = () => {
           </section>
         </div>
       </div>
+      <style>{`
+        .hero-trail-img {
+          transition: box-shadow 0.2s;
+        }
+      `}</style>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import AboutSlider from '../components/common/AboutSlider';
 import AboutMore from '../components/common/AboutMore';
+import Testimonials from '../components/common/Testimonials';
 
 const slides = [
   {
@@ -45,6 +46,8 @@ const AboutPage = () => {
     <>
       <AboutSlider slides={slides} />
       <AboutMore />
+      <Testimonials />
+      <Footer />
       <style>{`
       * {
         margin: 0;
@@ -183,8 +186,6 @@ const AboutPage = () => {
         }
       }
     `}</style>
-    {/* Footer Section */}
-    <Footer />
   </>
 );
 };
