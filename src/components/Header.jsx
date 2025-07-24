@@ -1,16 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../App.css";
 import LoginModal from "./common/LoginModal";
+import { useNavigate } from "react-router-dom";
 
 const navItems = [
-  { label: "HOME" },
-  { label: "ABOUT US" },
-  { label: "SHOP" },
-  { label: "EQUIPMENTS" },
-  { label: "CONTACT" },
+  { label: "HOME", path: "/" },
+  { label: "ABOUT US", path: "/about" },
+  { label: "SHOP", path: "/shop" },
+  { label: "EQUIPMENTS", path: "/equipments" },
+  { label: "CONTACT", path: "/contact" },
 ];
 
 const Header = () => {
+  const navigate = useNavigate();
   const [show, setShow] = useState(true);
   const [showLogin, setShowLogin] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -73,7 +75,7 @@ const Header = () => {
         </div>
         <div className="header-content desktop-nav">
           {navItems.map(item => (
-            <button className="nav-btn" key={item.label}><span className="blend-text">{item.label}</span></button>
+            <button className="nav-btn" key={item.label} onClick={() => navigate(item.path)}><span className="blend-text">{item.label}</span></button>
           ))}
           <button className="nav-btn" onClick={() => setShowLogin(true)}>
             <span className="blend-text">
@@ -92,7 +94,7 @@ const Header = () => {
               <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">&times;</button>
               <nav className="mobile-menu-nav">
                 {navItems.map(item => (
-                  <button className="nav-btn mobile-nav-btn" key={item.label} onClick={() => setMobileMenuOpen(false)}>
+                  <button className="nav-btn mobile-nav-btn" key={item.label} onClick={() => { setMobileMenuOpen(false); navigate(item.path); }}>
                     <span className="blend-text">{item.label}</span>
                   </button>
                 ))}
