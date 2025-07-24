@@ -258,7 +258,7 @@ const SpecialCollections = ({ onImagesLoaded }) => {
               src={displayedImg}
               alt="Main"
               style={{
-                objectFit: "contain",
+                objectFit: "cover",
                 borderRadius: 8,
                 boxShadow: "0 2px 24px rgba(0,0,0,0.18)"
               }}
