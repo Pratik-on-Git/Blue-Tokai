@@ -37,6 +37,7 @@ const Card = ({
 
   return (
     <div
+      className="shop-card"
       style={{
         background: "#000",
         borderRadius: 6,
@@ -51,6 +52,32 @@ const Card = ({
         position: "relative"
       }}
     >
+      <style>{`
+        .shop-card {
+          transition: transform 0.28s cubic-bezier(.4,1.6,.6,1), box-shadow 0.28s cubic-bezier(.4,1.6,.6,1);
+        }
+        .shop-card:hover {
+          transform: translateY(-8px) scale(1.035);
+          box-shadow: 0 12px 32px 0 rgba(0,0,0,0.18), 0 2px 8px 0 rgba(255,255,255,0.04);
+          z-index: 2;
+        }
+        .shop-card:hover img {
+          filter: brightness(1.08) grayscale(0.05) contrast(1.08);
+          transform: scale(1.06);
+          transition: filter 0.28s, transform 0.28s;
+        }
+        .shop-card img {
+          transition: filter 0.28s, transform 0.28s;
+        }
+        .shop-card button {
+          transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+        }
+        .shop-card:hover button {
+          background: #FFB22C;
+          color: #000;
+          box-shadow: 0 2px 8px rgba(255,178,44,0.18);
+        }
+      `}</style>
       {/* Image with overlays */}
       <div
         style={{ position: "relative", width: "100%", height: 280, overflow: "hidden" }}
