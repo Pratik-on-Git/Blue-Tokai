@@ -179,12 +179,12 @@ const AboutPageAnimations = () => {
               headerWords,
               {
                 y: "0%",
-                duration: 1,
+                duration: 0.2,
                 ease: "power4.out",
                 stagger: 0.1,
                 force3d: true,
               },
-              0.75
+              0.2
             );
             const tagsLines = newSlide.querySelectorAll(
               ".slide-tags .line"

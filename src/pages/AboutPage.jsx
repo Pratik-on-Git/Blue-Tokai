@@ -11,32 +11,32 @@ const slides = [
     slideDescription:
       "Our journey is a tale of passion for coffee, and at the heart of it all lie our core values: transparency, traceability, and uncompromising quality. Step by step, we embark on this with the coffee producers, each one meticulously tending to the plants with care and expertise. Through the laborious yet rewarding process of harvesting, processing, and roasting, the coffee transforms, evolving into the delightful brew you savour",
     slideUrl: "/shop",
-    slideTags: ["Beliefs", "Roasteries", "Farms", "Coffee"],
+    slideTags: ["Beliefs"],
     slideImg: "https://images.unsplash.com/photo-1556742526-795a8eac090e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    slideTitle: "The story behind every cup",
+    slideTitle: "Ease of recycling",
     slideDescription:
-      "Our mission since we started has stayed simple: introduce our customers to the estates we directly buy our great tasting coffee from, roast the beans with care, and make high quality coffee more accessible through our cafes and our website. The coffee we roast is the coffee we like to drink, and we hope you like it too. ",
+      "Our new packaging uses low-density polyethylene, which can be downcycled (recycled into lower-quality products) in a few simple steps. ",
     slideUrl: "/shop",
-    slideTags: ["Cyberpunk", "Experimental", "3D Layers", "Concept Design"],
-    slideImg: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    slideTags: ["Roasteries"],
+    slideImg: "https://plus.unsplash.com/premium_photo-1681122469506-ef93ed9e77dd?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    slideTitle: "The story behind every cup",
+    slideTitle: "Blue Tokai and MuscleBlaze came together",
     slideDescription:
-      "Our mission since we started has stayed simple: introduce our customers to the estates we directly buy our great tasting coffee from, roast the beans with care, and make high quality coffee more accessible through our cafes and our website. The coffee we roast is the coffee we like to drink, and we hope you like it too. ",
+      "Scientifically designed with Enhanced Absorption Formula (EAF®), it helps maximise the bioavailability of protein for Indian gym-goers and athletes. Each serving carries 25 grams of protein and the taste of India's most-loved coffee. A satiating mix of perfectly roasted coffee, premium chocolate, fruits, nuts, seeds, and probiotics, this is a nutritious meal with 18 grams of protein in each serving.",
     slideUrl: "/shop",
-    slideTags: ["Surreal", "Lightplay", "Immersive", "Visual Narrative"],
-    slideImg: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    slideTags: ["Farms"],
+    slideImg: "https://bluetokaicoffee.com/cdn/shop/files/Mask_group_7_e54b86d2-38f2-4863-bcf1-8cf973d7c1a7_1370x.png?v=1710844607",
   },
   {
-    slideTitle: "The story behind every cup",
+    slideTitle: "Partnerships",
     slideDescription:
-      "Our mission since we started has stayed simple: introduce our customers to the estates we directly buy our great tasting coffee from, roast the beans with care, and make high quality coffee more accessible through our cafes and our website. The coffee we roast is the coffee we like to drink, and we hope you like it too. ",
+      "At Blue Tokai Coffee Roasters, partnerships are an extension of our aim of making great quality coffee accessible and exploring endless possibilities of specialty coffee with unique form factors, new products and meaningful collaborations. Our partnerships with like-minded brands bring together our love for coffee, appreciation for culture and ideas of building unparalleled experiences for our community. ",
     slideUrl: "/shop",
-    slideTags: ["Surreal", "Lightplay", "Immersive", "Visual Narrative"],
-    slideImg: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    slideTags: ["Coffee"],
+    slideImg: "https://bluetokaicoffee.com/cdn/shop/files/Group_94_1370x.png?v=1710843638",
   }
 ];
 
@@ -80,7 +80,7 @@ const AboutPage = () => {
       .slider {
         position: relative;
         width: 100vw;
-        height: 92vh;
+        height: 100vh;
         background-color: #000;
         overflow: hidden;
       }
@@ -89,7 +89,7 @@ const AboutPage = () => {
         top: 0;
         left: 0;
         width: 100vw;
-        height: 92vh;
+        height: 100vh;
       }
       .slide {
         will-change: transform;

@@ -61,13 +61,13 @@ const AboutSlider = ({ slides }) => {
   const slide = slides[current];
 
   return (
-    <div className="slider" style={{ position: "relative", width: "100vw", height: "90vh", background: "#000", overflow: "hidden" }}>
+    <div className="slider" style={{ position: "relative", width: "100vw", height: "100vh", background: "#000", overflow: "hidden" }}>
       <div
         className="slide"
         ref={slideRef}
-        style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "90vh" }}
+        style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh" }}
       >
-        <div className="slide-img" style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "90vh" }}>
+        <div className="slide-img" style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh" }}>
           {slide.slideVideo ? (
             <video src={slide.slideVideo} autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           ) : (
@@ -82,14 +82,43 @@ const AboutSlider = ({ slides }) => {
             <p>{slide.slideDescription}</p>
           </div>
           <div className="slide-link">
-            <a href={slide.slideUrl}>View Project</a>
+            <a href={slide.slideUrl}>View Products</a>
           </div>
         </div>
         <div className="slide-info">
           <div className="slide-tags">
             <p>Tags</p>
             {slide.slideTags.map((tag, i) => (
-              <p key={i}>{tag}</p>
+              <p
+                key={i}
+                style={tag === "Beliefs" || tag === "Roasteries" || tag === "Farms" ? { cursor: "pointer", textDecoration: "underline" } : {}}
+                onClick={
+                  tag === "Beliefs"
+                    ? () => {
+                        const el = document.getElementById("about-beliefs-section");
+                        if (el) {
+                          el.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                      }
+                    : tag === "Roasteries"
+                    ? () => {
+                        const el = document.getElementById("about-roasteries-section");
+                        if (el) {
+                          el.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                      }
+                    : tag === "Farms"
+                    ? () => {
+                        const el = document.getElementById("about-farms-section");
+                        if (el) {
+                          el.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                      }
+                    : undefined
+                }
+              >
+                {tag}
+              </p>
             ))}
           </div>
           <div className="slide-index-wrapper">
@@ -133,7 +162,7 @@ const AboutSlider = ({ slides }) => {
         @media (max-width: 900px) {
           .slider-arrow-up {
             left: 50%;
-            bottom: 3.5rem;
+            bottom: 3rem !important;
             transform: translateX(-50%);
           }
           .slider-arrow-down {
