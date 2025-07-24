@@ -2,9 +2,19 @@ import React, { useEffect, useRef, useState } from "react";
 import "../App.css";
 import LoginModal from "./common/LoginModal";
 
+const navItems = [
+  { label: "HOME" },
+  { label: "ABOUT US" },
+  { label: "SHOP" },
+  { label: "EQUIPMENTS" },
+  { label: "CONTACT" },
+];
+
 const Header = () => {
   const [show, setShow] = useState(true);
   const [showLogin, setShowLogin] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
   const lastScrollY = useRef(window.scrollY);
   const ticking = useRef(false);
 
@@ -29,18 +39,42 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Handle menu mount/unmount for animation
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      setMobileMenuVisible(true);
+    } else {
+      // Wait for animation before unmount
+      const timeout = setTimeout(() => setMobileMenuVisible(false), 350);
+      return () => clearTimeout(timeout);
+    }
+  }, [mobileMenuOpen]);
+
   return (
     <>
       <header className={`sticky-header header-slide ${show ? "header-show" : "header-hide"}`}>
-        <div className="header-content">
-          <span className="blend-text">BLUE TOKAI COFFEE ROASTERIES</span>
+        <div className="header-content" style={{ display: 'flex', alignItems: 'center' }}>
+          {/* Mobile menu bar button (hamburger) */}
+          <button
+            className="mobile-menu-btn"
+            aria-label="Open menu"
+            onClick={() => setMobileMenuOpen(true)}
+            style={{ marginRight: 12, display: 'none' }}
+          >
+            <span style={{ display: 'inline-block', width: 24, height: 24 }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </span>
+          </button>
+          <span className="blend-text" style={{ marginLeft: 8 }}>BLUE TOKAI COFFEE ROASTERIES</span>
         </div>
-        <div className="header-content">
-          <button className="nav-btn"><span className="blend-text">HOME</span></button>
-          <button className="nav-btn"><span className="blend-text">ABOUT US</span></button>
-          <button className="nav-btn"><span className="blend-text">SHOP</span></button>
-          <button className="nav-btn"><span className="blend-text">EQUIPMENTS</span></button>
-          <button className="nav-btn"><span className="blend-text">CONTACT</span></button>
+        <div className="header-content desktop-nav">
+          {navItems.map(item => (
+            <button className="nav-btn" key={item.label}><span className="blend-text">{item.label}</span></button>
+          ))}
           <button className="nav-btn" onClick={() => setShowLogin(true)}>
             <span className="blend-text">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'middle',marginRight:'0.4em'}}>
@@ -51,8 +85,101 @@ const Header = () => {
             </span>
           </button>
         </div>
+        {/* Mobile menu drawer with animation */}
+        {mobileMenuVisible && (
+          <div className={`mobile-menu-overlay${mobileMenuOpen ? ' open' : ''}`} onClick={() => setMobileMenuOpen(false)}>
+            <div className={`mobile-menu-drawer${mobileMenuOpen ? ' open' : ''}`} onClick={e => e.stopPropagation()}>
+              <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">&times;</button>
+              <nav className="mobile-menu-nav">
+                {navItems.map(item => (
+                  <button className="nav-btn mobile-nav-btn" key={item.label} onClick={() => setMobileMenuOpen(false)}>
+                    <span className="blend-text">{item.label}</span>
+                  </button>
+                ))}
+                <button className="nav-btn mobile-nav-btn" onClick={() => { setShowLogin(true); setMobileMenuOpen(false); }}>
+                  <span className="blend-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'middle',marginRight:'0.4em'}}>
+                      <circle cx="12" cy="8" r="4" />
+                      <path d="M4 20c0-2.5 3.5-4 8-4s8 1.5 8 4" />
+                    </svg>
+                    LOGIN
+                  </span>
+                </button>
+              </nav>
+            </div>
+          </div>
+        )}
       </header>
       <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
+      {/* Breadcrumb CSS and Mobile Menu CSS */}
+      <style>{`
+        /* Hide desktop nav on mobile */
+        @media (max-width: 900px) {
+          .desktop-nav { display: none !important; }
+          .mobile-menu-btn { display: inline-flex !important; background: none; border: none; cursor: pointer; align-items: center; }
+        }
+        /* Mobile menu overlay and drawer */
+        .mobile-menu-overlay {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0,0,0,0.32);
+          z-index: 9999;
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .mobile-menu-overlay.open {
+          opacity: 1;
+          pointer-events: auto;
+        }
+        .mobile-menu-drawer {
+          background: #181818;
+          color: #fff;
+          min-width: 220px;
+          max-width: 80vw;
+          min-height: 100vh;
+          box-shadow: 2px 0 16px rgba(0,0,0,0.18);
+          padding: 2.2em 1.2em 1.2em 1.2em;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          transform: translateX(-100%);
+          opacity: 0.7;
+          transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .mobile-menu-drawer.open {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        .mobile-menu-close {
+          position: absolute;
+          top: 0.7em;
+          right: 1em;
+          background: none;
+          border: none;
+          color: #fff;
+          font-size: 2.2em;
+          cursor: pointer;
+        }
+        .mobile-menu-nav {
+          display: flex;
+          flex-direction: column;
+          gap: 1.2em;
+          margin-top: 2.5em;
+        }
+        .mobile-nav-btn {
+          background: none;
+          border: none;
+          color: #fff;
+          font-size: 1.1em;
+          text-align: left;
+          padding: 0.7em 0;
+          cursor: pointer;
+        }
+      `}</style>
     </>
   );
 };
