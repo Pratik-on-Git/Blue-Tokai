@@ -9,7 +9,7 @@ const getRandomProducts = (products, count = 4) => {
   return shuffled.slice(0, count);
 };
 
-const SpecialCollections = () => {
+const SpecialCollections = ({ onImagesLoaded }) => {
   const [selected, setSelected] = useState(0);
   const [collections, setCollections] = useState([]);
   const [displayedImg, setDisplayedImg] = useState(null);
@@ -133,6 +133,18 @@ const SpecialCollections = () => {
       }
     });
   }, [selected, collections]);
+
+  // Track image load state
+  const [imagesLoaded, setImagesLoaded] = useState(0);
+  const totalImages = collections.length;
+
+  useEffect(() => {
+    if (imagesLoaded === totalImages && totalImages > 0) {
+      if (typeof onImagesLoaded === 'function') {
+        onImagesLoaded();
+      }
+    }
+  }, [imagesLoaded, totalImages, onImagesLoaded]);
 
   if (!collections.length) return null;
 

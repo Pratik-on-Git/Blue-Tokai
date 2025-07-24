@@ -26,6 +26,16 @@ const HomePage = () => {
   const videoRef = useRef(null);
   const navigate = useNavigate();
 
+  // Callback to refresh scroll after SpecialCollections images load
+  const handleSpecialCollectionsImagesLoaded = () => {
+    if (window.ScrollTrigger && window.ScrollTrigger.refresh) {
+      window.ScrollTrigger.refresh(true);
+    }
+    if (window._lenis && window._lenis.start) {
+      window._lenis.start();
+    }
+  };
+
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <div style={{ flex: 1 }}>
@@ -134,7 +144,8 @@ const HomePage = () => {
           
           <section className="website-content">
             <NewArrivals />
-            <SpecialCollections />
+            {/* Special Collections Section */}
+            <SpecialCollections onImagesLoaded={handleSpecialCollectionsImagesLoaded} />
             <Footer />
           </section>
         </div>
