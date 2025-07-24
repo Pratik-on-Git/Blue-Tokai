@@ -38,8 +38,9 @@ const HomePage = () => {
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      <div style={{ flex: 1 }}>
-        <div className="container">
+      {/* Main content grows, footer stays at bottom */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <div className="container" style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
           <section className="hero">
             <video
               ref={videoRef}
@@ -91,7 +92,6 @@ const HomePage = () => {
                     marginLeft: 32,
                     zIndex: 1000,
                     fontFamily: 'DM Sans, sans-serif',
-                    
                   }}
                 >
                   <img src={aboutUsLogo} alt="About Us" style={{ width: 20, height: 20, display: 'inline-block', marginRight: 6 }} />
@@ -141,16 +141,16 @@ const HomePage = () => {
               <div className="revealer-4"></div>
             </div>
           </section>
-          
-          <section className="website-content">
+          {/* Main content area grows, footer stays at bottom */}
+          <section className="website-content" style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
             <NewArrivals />
             {/* Special Collections Section */}
             <SpecialCollections onImagesLoaded={handleSpecialCollectionsImagesLoaded} />
+            {/* Footer is always last and visible */}
             <Footer />
           </section>
         </div>
       </div>
-      
     </div>
   );
 };
