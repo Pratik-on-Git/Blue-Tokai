@@ -102,7 +102,6 @@ const AboutSlider = ({ slides }) => {
       <button
         className="slider-arrow slider-arrow-up"
         aria-label="Previous Slide"
-        style={{ position: "absolute", left: "50%", bottom: "3.5rem", transform: "translateX(-50%)", zIndex: 10, background: "rgba(0,0,0,0.6)", color: "#fff", border: "none", borderRadius: "50%", width: "2rem", height: "2rem", fontSize: "1rem", cursor: "pointer", outline: "none" }}
         onClick={() => handleSlide("up")}
         disabled={animating}
       >
@@ -111,12 +110,55 @@ const AboutSlider = ({ slides }) => {
       <button
         className="slider-arrow slider-arrow-down"
         aria-label="Next Slide"
-        style={{ position: "absolute", left: "50%", bottom: "1rem", transform: "translateX(-50%)", zIndex: 10, background: "rgba(0,0,0,0.6)", color: "#fff", border: "none", borderRadius: "50%", width: "2rem", height: "2rem", fontSize: "1rem", cursor: "pointer", outline: "none" }}
         onClick={() => handleSlide("down")}
         disabled={animating}
       >
         ˅
       </button>
+      <style>{`
+        .slider-arrow {
+          background: rgba(0,0,0,0.6);
+          color: #fff;
+          border: none;
+          border-radius: 50%;
+          width: 2rem;
+          height: 2rem;
+          font-size: 1rem;
+          cursor: pointer;
+          outline: none;
+          position: absolute;
+          z-index: 10;
+          transition: background 0.18s;
+        }
+        @media (max-width: 900px) {
+          .slider-arrow-up {
+            left: 50%;
+            bottom: 3.5rem;
+            transform: translateX(-50%);
+          }
+          .slider-arrow-down {
+            left: 50%;
+            bottom: 1rem;
+            transform: translateX(-50%);
+          }
+        }
+        @media (min-width: 901px) {
+          .slider-arrow-up {
+            right: 2vw;
+            top: 50%;
+            left: unset;
+            bottom: unset;
+            transform: translateY(-120%);
+          }
+          .slider-arrow-down {
+            right: 2vw;
+            top: 50%;
+            left: unset;
+            bottom: unset;
+            transform: translateY(20%);
+          }
+        }
+      `}</style>
     </div>
   );
 };
