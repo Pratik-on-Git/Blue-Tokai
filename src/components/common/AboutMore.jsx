@@ -1,7 +1,7 @@
 import React from "react";
 
 const AboutMore = () => (
-  <section className="about-more-root">
+  <section className="about-more-root" style={{ zIndex: "1000" }}>
     <h3 className="about-more-title" style={{ textAlign: "center", color: "white", marginTop: "1.2rem", textTransform: "uppercase", fontSize: "1.2rem", fontWeight: "300", letterSpacing: "0.1em", }}>
       Scroll Here
     </h3>
