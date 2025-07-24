@@ -91,6 +91,14 @@ const AppRouter = () => {
   const handleLoaderFinish = () => {
     localStorage.setItem("hasVisited", "true");
     setShowLoader(false);
+    setTimeout(() => {
+      if (window.ScrollTrigger && window.ScrollTrigger.refresh) {
+        window.ScrollTrigger.refresh(true);
+      }
+      if (window._lenis && window._lenis.start) {
+        window._lenis.start();
+      }
+    }, 120);
   };
 
   useEffect(() => {

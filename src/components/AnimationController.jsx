@@ -135,6 +135,9 @@ const AnimationController = () => {
       smoothTouch: true,
       lerp: 0.04, // Smoother
     });
+    // Expose for global refresh
+    window.ScrollTrigger = ScrollTrigger;
+    window._lenis = lenis;
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
