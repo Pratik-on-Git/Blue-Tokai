@@ -208,168 +208,211 @@ const LoginModal = ({ open, onClose }) => {
   if (!visible) return null;
 
   return (
-    <div ref={overlayRef} style={overlayStyle} onClick={onClose}>
-      <div ref={boxRef} style={modalStyle} onClick={e => e.stopPropagation()}>
-        {/* Left */}
-        <div ref={leftSectionRef} style={leftStyle}>
-          <div style={{ fontSize: 32, fontWeight: 600, lineHeight: 1.18, marginBottom: 12 }}>
-            Hey!<br />Sipping Coffee <br />Makes Me Feel Like<br />I’m winning at life.
+    <>
+      <style>{`
+        @media (max-width: 600px) {
+          .login-modal-overlay {
+            align-items: flex-start !important;
+            padding: 0 !important;
+          }
+          .login-modal-box {
+            top: 35px !important;
+            flex-direction: column !important;
+            min-width: 100vw !important;
+            max-width: 100vw !important;
+            min-height: unset !important;
+            width: 80vw !important;
+            height: 90vh !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+          }
+          .login-modal-left {
+            display: none !important;
+          }
+          .login-modal-coffee-img {
+            display: none !important;
+          }
+          .login-modal-right {
+            width: 100vw !important;
+            padding: 1.2rem 1.2rem 1.2rem 1.2rem !important;
+            min-width: 0 !important;
+            border-radius: 0 !important;
+          }
+          .login-modal-close {
+            top: 5px !important;
+            right: 10px !important;
+            font-size: 1.6rem !important;
+          }
+          .login-modal-form input, .login-modal-form button {
+            font-size: 0.9rem !important;
+            padding: 6px 6px !important;
+          }
+        }
+      `}</style>
+      <div ref={overlayRef} style={overlayStyle} className="login-modal-overlay" onClick={onClose}>
+        <div ref={boxRef} style={modalStyle} className="login-modal-box" onClick={e => e.stopPropagation()}>
+          {/* Left */}
+          <div ref={leftSectionRef} style={leftStyle} className="login-modal-left">
+            <div style={{ fontSize: 32, fontWeight: 600, lineHeight: 1.18, marginBottom: 12 }}>
+              Hey!<br />Sipping Coffee <br />Makes Me Feel Like<br />I’m winning at life.
+            </div>
+            <div style={{ fontSize: 38, fontWeight: 600, lineHeight: 1.18, marginBottom: 12, color: "#000", zIndex: "1" }}>
+              What About You?
+            </div>
+            <div style={blurStyle}></div>
           </div>
-          <div style={{ fontSize: 38, fontWeight: 600, lineHeight: 1.18, marginBottom: 12, color: "#000", zIndex: "1" }}>
-            What About You?
-          </div>
-          <div style={blurStyle}></div>
-        </div>
-        {/* Show random coffee image when left is out (signup mode) */}
-        {mode === "signup" && randomCoffeeImg && (
-          <div
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              height: "100%",
-              background: "#111",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              zIndex: 1,
-              pointerEvents: "none",
-              overflow: "hidden",
-            }}
-          >
-            <img
-              src={randomCoffeeImg}
-              alt="Coffee"
+          {/* Show random coffee image when left is out (signup mode) */}
+          {mode === "signup" && randomCoffeeImg && (
+            <div
+              className="login-modal-coffee-img"
               style={{
-                width: "24vw",
-                height: "100vh",
-                objectFit: "cover",
-                boxShadow: "0 2px 24px rgba(0,0,0,0.18)",
+                position: "absolute",
+                left: 0,
+                top: 0,
+                height: "100%",
+                background: "#111",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 1,
+                pointerEvents: "none",
+                overflow: "hidden",
               }}
-            />
-          </div>
-        )}
-        {/* Right */}
-        <div ref={rightSectionRef} style={rightStyle}>
-          <button style={closeStyle} onClick={onClose} aria-label="Close">&times;</button>
-          <div style={{ marginBottom: 18 }}>
-            <img src={logo} alt="Logo" style={{ width: 60, height: 60, borderRadius: "50%", objectFit: "cover", margin: "0 auto 10px auto", display: "block", boxShadow: "0 2px 8px rgba(0,0,0,0.10)", background: "#000"}} />
-          </div>
-          <div ref={formRef}>
-            {mode === "login" ? (
-              <>
-                <div style={{ fontSize: 30, fontWeight: 700, marginBottom: 6, color: "#000" }}>Let's Get Started</div>
-                <div style={{ color: "#888", fontSize: 16, marginBottom: 18 }}>Welcome to Blue Tokai Coffee Roasters</div>
-                <div style={{ width: "100%", borderBottom: "1.5px solid #eee", margin: "18px 0 10px 0" }}></div>
-                <div style={{ width: "100%", textAlign: "left", fontWeight: 500, color: "#888", fontSize: 15, marginTop: 8 }}>Your Email</div>
-                <input
-                  type="email"
-                  placeholder="hi@bluetokai.in"
-                  value={loginEmail}
-                  onChange={e => setLoginEmail(e.target.value)}
-                  style={{
-                    ...inputStyle,
-                    border: isLoginEmailBlank ? "1.5px solid #ddd" : isLoginEmailValid ? "1.5px solid #ffb22c" : "1.5px solid #e74c3c"
-                  }}
-                />
-                <div style={{ width: "100%", textAlign: "left", fontWeight: 500, color: "#888", fontSize: 15, marginTop: 8 }}>Password</div>
-                <input
-                  type="password"
-                  placeholder="**********"
-                  value={loginPassword}
-                  onChange={e => setLoginPassword(e.target.value)}
-                  style={{
-                    ...inputStyle,
-                    border: isLoginPasswordBlank ? "1.5px solid #ddd" : "1.5px solid #ffb22c"
-                  }}
-                />
-                <button style={buttonStyle}>Login</button>
-                <div style={{ marginTop: 18, fontSize: 15, color: "#888" }}>
-                  Don't have an account?{" "}
-                  <span
-                    style={{ color: "#ff7a00", cursor: "pointer", fontWeight: 600 }}
-                    onClick={() => {
-                      const randomImg = coffeeImages[Math.floor(Math.random() * coffeeImages.length)];
-                      setRandomCoffeeImg(randomImg);
-                      gsap.to(formRef.current, {
-                        opacity: 0,
-                        y: -40,
-                        duration: 0.3,
-                        ease: "power2.in",
-                        onComplete: () => setMode("signup"),
-                      });
+            >
+              <img
+                src={randomCoffeeImg}
+                alt="Coffee"
+                style={{
+                  width: "24vw",
+                  height: "100vh",
+                  objectFit: "cover",
+                  boxShadow: "0 2px 24px rgba(0,0,0,0.18)",
+                }}
+              />
+            </div>
+          )}
+          {/* Right */}
+          <div ref={rightSectionRef} style={rightStyle} className="login-modal-right">
+            <button style={closeStyle} className="login-modal-close" onClick={onClose} aria-label="Close">&times;</button>
+            <div style={{ marginBottom: 18 }}>
+              <img src={logo} alt="Logo" style={{ width: 60, height: 60, borderRadius: "50%", objectFit: "cover", margin: "0 auto 10px auto", display: "block", boxShadow: "0 2px 8px rgba(0,0,0,0.10)", background: "#000"}} />
+            </div>
+            <div ref={formRef} className="login-modal-form">
+              {mode === "login" ? (
+                <>
+                  <div style={{ fontSize: 30, fontWeight: 700, marginBottom: 6, color: "#000" }}>Let's Get Started</div>
+                  <div style={{ color: "#888", fontSize: 16, marginBottom: 18 }}>Welcome to Blue Tokai Coffee Roasters</div>
+                  <div style={{ width: "100%", borderBottom: "1.5px solid #eee", margin: "18px 0 10px 0" }}></div>
+                  <div style={{ width: "100%", textAlign: "left", fontWeight: 500, color: "#888", fontSize: 15, marginTop: 8 }}>Your Email</div>
+                  <input
+                    type="email"
+                    placeholder="hi@bluetokai.in"
+                    value={loginEmail}
+                    onChange={e => setLoginEmail(e.target.value)}
+                    style={{
+                      ...inputStyle,
+                      border: isLoginEmailBlank ? "1.5px solid #ddd" : isLoginEmailValid ? "1.5px solid #ffb22c" : "1.5px solid #e74c3c"
                     }}
-                  >
-                    Sign Up
-                  </span>
-                </div>
-              </>
-            ) : (
-              <>
-                <div style={{ fontSize: 30, fontWeight: 700, marginBottom: 2, color: "#000" }}>Create Account</div>
-                <div style={{ color: "#888", fontSize: 16, marginBottom: 10 }}>Join Blue Tokai Coffee Roasters</div>
-                <div style={{ width: "100%", borderBottom: "1.5px solid #eee", margin: "10px 0 10px 0", }}></div>
-                <div style={{ width: "100%", textAlign: "left", fontWeight: 500, color: "#888", fontSize: 15, marginTop: 4,  }}>Your Email</div>
-                <input
-                  type="email"
-                  placeholder="hi@bluetokai.in"
-                  value={signupEmail}
-                  onChange={e => setSignupEmail(e.target.value)}
-                  style={{
-                    ...inputStyle,
-                    padding: "6px 16px",
-                    border: isEmailBlank ? "1.5px solid #ddd" : isEmailValid ? "1.5px solid #ffb22c" : "1.5px solid #e74c3c"
-                  }}
-                />
-                <div style={{ width: "100%", textAlign: "left", fontWeight: 500, color: "#888", fontSize: 15, marginTop: 4,  }}>Create Password</div>
-                <input
-                  type="password"
-                  placeholder="**********"
-                  value={signupPassword}
-                  onChange={e => setSignupPassword(e.target.value)}
-                  style={{
-                    ...inputStyle,
-                    border: isPasswordBlank ? "1.5px solid #ddd" : "1.5px solid #ffb22c",
-                    padding: "6px 16px"
-                  }}
-                />
-                <div style={{ width: "100%", textAlign: "left", fontWeight: 500, color: "#888", fontSize: 15, marginTop: 4,  }}>Confirm Password</div>
-                <input
-                  type="password"
-                  placeholder="**********"
-                  value={signupConfirm}
-                  onChange={e => setSignupConfirm(e.target.value)}
-                  style={{
-                    ...inputStyle,
-                    border: isConfirmBlank ? "1.5px solid #ddd" : isConfirmValid ? "1.5px solid #ffb22c" : isConfirmInvalid ? "1.5px solid #e74c3c" : "1.5px solid #ddd",
-                    padding: "6px 16px"
-                  }}
-                />
-                <button style={buttonStyle}>Sign Up</button>
-                <div style={{ marginTop: 18, fontSize: 15, color: "#888" }}>
-                  Already have an account?{" "}
-                  <span
-                    style={{ color: "#ff7a00", cursor: "pointer", fontWeight: 600 }}
-                    onClick={() => {
-                      setRandomCoffeeImg(null);
-                      gsap.to(formRef.current, {
-                        opacity: 0,
-                        y: -40,
-                        duration: 0.3,
-                        ease: "power2.in",
-                        onComplete: () => setMode("login"),
-                      });
+                  />
+                  <div style={{ width: "100%", textAlign: "left", fontWeight: 500, color: "#888", fontSize: 15, marginTop: 8 }}>Password</div>
+                  <input
+                    type="password"
+                    placeholder="**********"
+                    value={loginPassword}
+                    onChange={e => setLoginPassword(e.target.value)}
+                    style={{
+                      ...inputStyle,
+                      border: isLoginPasswordBlank ? "1.5px solid #ddd" : "1.5px solid #ffb22c"
                     }}
-                  >
-                    Login
-                  </span>
-                </div>
-              </>
-            )}
+                  />
+                  <button style={buttonStyle}>Login</button>
+                  <div style={{ marginTop: 18, fontSize: 15, color: "#888" }}>
+                    Don't have an account?{" "}
+                    <span
+                      style={{ color: "#ff7a00", cursor: "pointer", fontWeight: 600 }}
+                      onClick={() => {
+                        const randomImg = coffeeImages[Math.floor(Math.random() * coffeeImages.length)];
+                        setRandomCoffeeImg(randomImg);
+                        gsap.to(formRef.current, {
+                          opacity: 0,
+                          y: -40,
+                          duration: 0.3,
+                          ease: "power2.in",
+                          onComplete: () => setMode("signup"),
+                        });
+                      }}
+                    >
+                      Sign Up
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div style={{ fontSize: 30, fontWeight: 700, marginBottom: 2, color: "#000" }}>Create Account</div>
+                  <div style={{ color: "#888", fontSize: 16, marginBottom: 10 }}>Join Blue Tokai Coffee Roasters</div>
+                  <div style={{ width: "100%", borderBottom: "1.5px solid #eee", margin: "10px 0 10px 0", }}></div>
+                  <div style={{ width: "100%", textAlign: "left", fontWeight: 500, color: "#888", fontSize: 15, marginTop: 4,  }}>Your Email</div>
+                  <input
+                    type="email"
+                    placeholder="hi@bluetokai.in"
+                    value={signupEmail}
+                    onChange={e => setSignupEmail(e.target.value)}
+                    style={{
+                      ...inputStyle,
+                      padding: "6px 16px",
+                      border: isEmailBlank ? "1.5px solid #ddd" : isEmailValid ? "1.5px solid #ffb22c" : "1.5px solid #e74c3c"
+                    }}
+                  />
+                  <div style={{ width: "100%", textAlign: "left", fontWeight: 500, color: "#888", fontSize: 15, marginTop: 4,  }}>Create Password</div>
+                  <input
+                    type="password"
+                    placeholder="**********"
+                    value={signupPassword}
+                    onChange={e => setSignupPassword(e.target.value)}
+                    style={{
+                      ...inputStyle,
+                      border: isPasswordBlank ? "1.5px solid #ddd" : "1.5px solid #ffb22c",
+                      padding: "6px 16px"
+                    }}
+                  />
+                  <div style={{ width: "100%", textAlign: "left", fontWeight: 500, color: "#888", fontSize: 15, marginTop: 4,  }}>Confirm Password</div>
+                  <input
+                    type="password"
+                    placeholder="**********"
+                    value={signupConfirm}
+                    onChange={e => setSignupConfirm(e.target.value)}
+                    style={{
+                      ...inputStyle,
+                      border: isConfirmBlank ? "1.5px solid #ddd" : isConfirmValid ? "1.5px solid #ffb22c" : isConfirmInvalid ? "1.5px solid #e74c3c" : "1.5px solid #ddd",
+                      padding: "6px 16px"
+                    }}
+                  />
+                  <button style={buttonStyle}>Sign Up</button>
+                  <div style={{ marginTop: 18, fontSize: 15, color: "#888" }}>
+                    Already have an account?{" "}
+                    <span
+                      style={{ color: "#ff7a00", cursor: "pointer", fontWeight: 600 }}
+                      onClick={() => {
+                        setRandomCoffeeImg(null);
+                        gsap.to(formRef.current, {
+                          opacity: 0,
+                          y: -40,
+                          duration: 0.3,
+                          ease: "power2.in",
+                          onComplete: () => setMode("login"),
+                        });
+                      }}
+                    >
+                      Login
+                    </span>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
