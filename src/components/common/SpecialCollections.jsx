@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-const getRandomProducts = (products, count = 4) => {
+const getRandomProducts = (products, count = 3) => {
   const shuffled = [...products].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 };
@@ -25,7 +25,7 @@ const SpecialCollections = ({ onImagesLoaded }) => {
     fetch('/products.json')
       .then(res => res.json())
       .then(products => {
-        const randomProducts = getRandomProducts(products, 4).map(p => ({
+        const randomProducts = getRandomProducts(products, 3).map(p => ({
           id: p.id,
           name: p.title,
           subtitle: '',
@@ -151,12 +151,13 @@ const SpecialCollections = ({ onImagesLoaded }) => {
   return (
     <div style={{
       width: "100%",
-      minHeight: "100vh",
+      height: "60vh",
       background: "#f7f7f7",
       color: "#000",
+      overflow: "auto",
+      padding: "2vw 3em 2vw 3em",
       display: "flex",
       flexDirection: "row",
-      marginTop: "3rem",
       paddingBottom: "3rem",
       position: "relative"
     }}>
@@ -198,20 +199,18 @@ const SpecialCollections = ({ onImagesLoaded }) => {
       <div
         ref={leftRef}
         style={{
-          padding: "3vw 2vw 3vw 3em",
-          width: "50%",
+          flex: 1,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "space-evenly",
-          willChange: "transform",
+          alignItems: "flex-start",
           minWidth: 0,
-          overflow: "visible",
+          overflow: "hidden",
         }}>
-        <div style={{ fontSize: '3vw', fontWeight: 600, marginBottom: '0.5vw', lineHeight: 1.1 }}>
+        <div style={{ fontSize: '2.2vw', fontWeight: 600, marginBottom: '0.5vw', lineHeight: 1.1 }}>
           <span style={{ color: "#FFB22C", fontWeight: 700 }}>/</span> BEST<br />COLLECTIONS <span style={{ fontSize: 18, fontWeight: 600, opacity: 0.7, marginBottom: 8 }}>({collections.length})</span>
         </div>
-        <div style={{ margin: "2.5vw 0 0 0", position: "relative" }}>
+        <div style={{ margin: "1.5vw 0 0 0", position: "relative", overflowY: "auto", maxHeight: "calc(60vh - 5vw)", width: "100%" }}>
           {collections.map((col, i) => (
             <div
               key={col.name + i}
@@ -222,19 +221,19 @@ const SpecialCollections = ({ onImagesLoaded }) => {
                 alignItems: "center",
                 borderBottom: "1px solid #333",
                 textTransform: "uppercase",
-                padding: "1.5vw 0",
+                padding: "1.2vw 0",
                 fontWeight: i === selected ? 700 : 400,
                 color: i === selected ? "#FFB22C" : "#000",
                 cursor: "pointer",
                 position: "relative",
-                fontSize: 24,
+                fontSize: 20,
                 background: i === selected ? "rgba(255,255,255,0.01)" : "transparent"
               }}
               onMouseEnter={() => setSelected(i)}
               onClick={() => navigate(`/product/${col.id}`)}
             >
               <span style={{ flex: 1 }}>{col.name}</span>
-              <span style={{ fontSize: 22, fontWeight: 300, marginLeft: 12, opacity: 0.7 }}>&#8594;</span>
+              <span style={{ fontSize: 20, fontWeight: 300, marginLeft: 12, opacity: 0.7 }}>&#8594;</span>
             </div>
           ))}
         </div>
@@ -243,26 +242,23 @@ const SpecialCollections = ({ onImagesLoaded }) => {
       <div
         ref={rightRef}
         style={{
-          width: "47%",
+          flex: 1,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#222",
           borderRadius: "8px",
-          willChange: "transform",
           minWidth: 0,
-          overflow: "visible",
+          overflow: "hidden",
+          padding: "2vw",
         }}>
-        <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#222", borderRadius: 8, minHeight: 320 }}>
+        <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#222", borderRadius: 8, minHeight: 200 }}>
           {displayedImg ? (
             <img
               ref={rightImgRef}
               src={displayedImg}
               alt="Main"
               style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "cover",
+                objectFit: "contain",
                 borderRadius: 8,
                 boxShadow: "0 2px 24px rgba(0,0,0,0.18)"
               }}
@@ -270,6 +266,29 @@ const SpecialCollections = ({ onImagesLoaded }) => {
           ) : null}
         </div>
       </div>
+      {/* Responsive tweaks */}
+      <style>{`
+        @media (max-width: 900px) {
+          .img-wrapper { display: none !important; }
+        }
+        @media (max-width: 700px) {
+          .img-wrapper { display: none !important; }
+          div[ref="leftRef"], div[ref="rightRef"] {
+            flex: 1 1 100%;
+            width: 100% !important;
+            padding: 2vw 0 !important;
+          }
+          div[ref="rightRef"] {
+            margin-top: 2vw;
+          }
+          div[ref="leftRef"] {
+            margin-bottom: 2vw;
+          }
+          div[ref="leftRef"], div[ref="rightRef"] {
+            min-width: 0 !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
