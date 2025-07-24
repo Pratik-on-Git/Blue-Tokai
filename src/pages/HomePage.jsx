@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import logo from "../assets/img/logo.png";
@@ -25,8 +25,34 @@ const scrollerItems = [
 const HomePage = () => {
   const videoRef = useRef(null);
   const navigate = useNavigate();
+  const footerRef = useRef(null);
 
-  // Callback to refresh scroll after SpecialCollections images load
+  // Clamp scroll so user cannot scroll past the bottom of the footer
+  useEffect(() => {
+    function clampScroll() {
+      if (!footerRef.current) return;
+      const footerRect = footerRef.current.getBoundingClientRect();
+      const footerBottom = footerRect.bottom + window.scrollY;
+      const maxScroll = footerBottom - window.innerHeight;
+      if (window.scrollY > maxScroll) {
+        if (window._lenis && window._lenis.scrollTo) {
+          window._lenis.scrollTo(maxScroll, { immediate: true });
+        } else {
+          window.scrollTo({ top: maxScroll, behavior: 'auto' });
+        }
+      }
+    }
+    window.addEventListener('scroll', clampScroll);
+    window.addEventListener('resize', clampScroll);
+    // Clamp on mount
+    setTimeout(clampScroll, 200);
+    return () => {
+      window.removeEventListener('scroll', clampScroll);
+      window.removeEventListener('resize', clampScroll);
+    };
+  }, []);
+
+  // Also clamp after SpecialCollections images load
   const handleSpecialCollectionsImagesLoaded = () => {
     if (window.ScrollTrigger && window.ScrollTrigger.refresh) {
       window.ScrollTrigger.refresh(true);
@@ -34,13 +60,27 @@ const HomePage = () => {
     if (window._lenis && window._lenis.start) {
       window._lenis.start();
     }
+    // Clamp scroll after images load
+    setTimeout(() => {
+      if (!footerRef.current) return;
+      const footerRect = footerRef.current.getBoundingClientRect();
+      const footerBottom = footerRect.bottom + window.scrollY;
+      const maxScroll = footerBottom - window.innerHeight;
+      if (window.scrollY > maxScroll) {
+        if (window._lenis && window._lenis.scrollTo) {
+          window._lenis.scrollTo(maxScroll, { immediate: true });
+        } else {
+          window.scrollTo({ top: maxScroll, behavior: 'auto' });
+        }
+      }
+    }, 200);
   };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
       {/* Main content grows, footer stays at bottom */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        <div className="container" style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+        <div className="container" style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0, overflow: "hidden" }}>
           <section className="hero">
             <video
               ref={videoRef}
@@ -62,7 +102,7 @@ const HomePage = () => {
             </div>
           </section>
 
-          <section className="info">
+          <section className="info" style={{ margin: 0, padding: 0 }}>
             <div className="header-rows">
               <div className="header-row"><h1>fresh single estate</h1></div>
               <div className="header-row"><h2>100% Arabica coffee beans</h2></div>
@@ -123,7 +163,7 @@ const HomePage = () => {
                 </div>
               </div>
             </section>
-          <section className="header-info">
+          <section className="header-info" style={{ margin: 0, padding: 0 }}>
             <p>
             Our journey is a tale of passion for coffee, and at the heart of it all lie our core values:
             transparency, traceability, and uncompromising quality.
@@ -131,9 +171,9 @@ const HomePage = () => {
             <InfiniteImageScroller items={scrollerItems} speed={22} />
           </section>
 
-          <section className="whitespace"></section>
+          <section className="whitespace" style={{ margin: 0, padding: 0 }}></section>
 
-          <section className="pinned">
+          <section className="pinned" style={{ margin: 0, padding: 0 }}>
             <div className="revealer">
               <div className="revealer-1"></div>
               <div className="revealer-2"></div>
@@ -142,12 +182,12 @@ const HomePage = () => {
             </div>
           </section>
           {/* Main content area grows, footer stays at bottom */}
-          <section className="website-content" style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
+          <section className="website-content" style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0, margin: 0, padding: 0 }}>
             <NewArrivals />
             {/* Special Collections Section */}
             <SpecialCollections onImagesLoaded={handleSpecialCollectionsImagesLoaded} />
             {/* Footer is always last and visible */}
-            <Footer />
+            <Footer ref={footerRef} />
           </section>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 
@@ -29,8 +29,9 @@ const footerLinks = {
   ],
 };
 
-const Footer = () => (
+const Footer = forwardRef((props, ref) => (
   <footer
+    ref={ref}
     style={{
       borderTop: "1px solid #232323",
       width: "100%",
@@ -182,6 +183,6 @@ const Footer = () => (
       </div>
     </div> 
   </footer>
-);
+));
 
 export default Footer;
