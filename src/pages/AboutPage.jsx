@@ -321,6 +321,16 @@ const AboutPage = () => {
       {/* Slider Section */}
       <div className="slider">
         {/* Slides will be rendered dynamically by JS */}
+        <button className="slider-arrow slider-arrow-up" aria-label="Previous Slide">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 15 12 9 18 15"/>
+          </svg>
+        </button>
+        <button className="slider-arrow slider-arrow-down" aria-label="Next Slide">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
       </div>
       <AboutPageAnimations />
       <AboutMore />
@@ -359,7 +369,7 @@ const AboutPage = () => {
       .slider {
         position: relative;
         width: 100vw;
-        height: 100svh;
+        height: 92vh;
         background-color: #000;
         overflow: hidden;
       }
@@ -368,7 +378,7 @@ const AboutPage = () => {
         top: 0;
         left: 0;
         width: 100vw;
-        height: 100svh;
+        height: 92vh;
       }
       .slide {
         will-change: transform;
@@ -421,6 +431,26 @@ const AboutPage = () => {
         position: relative;
         display: inline-block;
         will-change: transform;
+      }
+      .slider-arrow {
+        position: absolute;
+        right: 2.5vw;
+        z-index: 10;
+        background: rgba(0,0,0,0.45);
+        border: none;
+        border-radius: 50%;
+        padding: 0.5em;
+        cursor: pointer;
+        transition: background 0.18s;
+      }
+      .slider-arrow-up {
+        bottom: 6.5vw;
+      }
+      .slider-arrow-down {
+        bottom: 2vw;
+      }
+      .slider-arrow:hover {
+        background: rgba(255,255,255,0.18);
       }
       @media (max-width: 1000px) {
         h1 {

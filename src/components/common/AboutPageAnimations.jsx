@@ -10,8 +10,6 @@ import AboutPage from "../../pages/AboutPage.jsx";
 
 const AboutPageAnimations = () => {
   useEffect(() => {
-    // Get slides array from AboutPage.jsx
-    // This assumes slides is exported from AboutPage.jsx
     const slides = AboutPage.slides || window.slides;
     if (!slides || !Array.isArray(slides)) return;
 
@@ -27,10 +25,22 @@ const AboutPageAnimations = () => {
       slide.className = "slide";
       const slideImg = document.createElement("div");
       slideImg.className = "slide-img";
-      const img = document.createElement("img");
-      img.src = slideData.slideImg;
-      img.alt = "";
-      slideImg.appendChild(img);
+      if (slideData.slideVideo) {
+        const video = document.createElement("video");
+        video.src = slideData.slideVideo;
+        video.autoplay = true;
+        video.loop = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.style.width = "100%";
+        video.style.height = "100%";
+        slideImg.appendChild(video);
+      } else {
+        const img = document.createElement("img");
+        img.src = slideData.slideImg;
+        img.alt = "";
+        slideImg.appendChild(img);
+      }
 
       const slideHeader = document.createElement("div");
       slideHeader.className = "slide-header";
@@ -238,52 +248,27 @@ const AboutPageAnimations = () => {
         });
       }, 750);
     }
-    function handleScroll(direction) {
-      const now = Date.now();
-      if (isAnimating || !scrollAllowed) return;
-      if (now - lastScrollTime < 1000) return;
-      lastScrollTime = now;
-      animateSlide(direction);
+
+    // Remove wheel/touch navigation for slider
+    // window.addEventListener('wheel', ...)
+    // window.addEventListener('touchstart', ...)
+    // window.addEventListener('touchmove', ...)
+    // window.addEventListener('touchend', ...)
+
+    // On mount, replace the static slide with the first dynamic slide
+    const slider = document.querySelector('.slider');
+    if (slider) {
+      slider.innerHTML = '';
+      const firstSlide = createSlide(currentSlide);
+      slider.appendChild(firstSlide);
+      splitText(firstSlide);
     }
-    window.addEventListener(
-      "wheel",
-      (e) => {
-        e.preventDefault();
-        const direction = e.deltaY > 0 ? "down" : "up";
-        handleScroll(direction);
-      },
-      {
-        passive: false,
-      }
-    );
-    let touchStartY = 0;
-    let isTouchActive = false;
-    window.addEventListener(
-      "touchstart",
-      (e) => {
-        touchStartY = e.touches[0].clientY;
-        isTouchActive = true;
-      },
-      { passive: false }
-    );
-    window.addEventListener(
-      "touchmove",
-      (e) => {
-        e.preventDefault();
-        if (!isTouchActive || isAnimating || !scrollAllowed) return;
-        const touchCurrentY = e.touches[0].clientY;
-        const difference = touchStartY - touchCurrentY;
-        if (Math.abs(difference) > 50) {
-          isTouchActive = false;
-          const direction = difference > 0 ? "down" : "up";
-          handleScroll(direction);
-        }
-      },
-      { passive: false }
-    );
-    window.addEventListener("touchend", () => {
-      isTouchActive = false;
-    });
+
+    // Cleanup: remove arrows on unmount
+    return () => {
+      const slider = document.querySelector('.slider');
+      // No arrows to clean up
+    };
   }, []);
   return null;
 };
