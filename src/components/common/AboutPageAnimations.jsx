@@ -249,12 +249,6 @@ const AboutPageAnimations = () => {
       }, 750);
     }
 
-    // Remove wheel/touch navigation for slider
-    // window.addEventListener('wheel', ...)
-    // window.addEventListener('touchstart', ...)
-    // window.addEventListener('touchmove', ...)
-    // window.addEventListener('touchend', ...)
-
     // On mount, replace the static slide with the first dynamic slide
     const slider = document.querySelector('.slider');
     if (slider) {
@@ -264,11 +258,10 @@ const AboutPageAnimations = () => {
       splitText(firstSlide);
     }
 
-    // Cleanup: remove arrows on unmount
-    return () => {
-      const slider = document.querySelector('.slider');
-      // No arrows to clean up
-    };
+    // No scroll/touch event listeners for slider. Page scrolls normally.
+
+    // Cleanup: nothing needed
+    return () => {};
   }, []);
   return null;
 };
