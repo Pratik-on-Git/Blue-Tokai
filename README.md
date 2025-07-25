@@ -25,19 +25,17 @@ This project also features:
 
 ---
 
-## ✨ Preview Screens
+## ✨ Main Pages
 
 ### 🏠 Home Page
 
-![Home Page](./homepage.png)
+### 🆎 About Us Page
 
 ### 🛍️ Shop Page
 
-![Shop Page](./shop.png)
-
 ### 🔐 Login Page
 
-![Login Page](./login.png)
+### 📞 Contact Page
 
 ---
 
