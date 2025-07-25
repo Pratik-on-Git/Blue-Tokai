@@ -307,7 +307,7 @@ const HomePage = () => {
                     playsInline
                     style={{ width: '210px', height: '300px', objectFit: 'cover', borderRadius: 4, boxShadow: '0 2px 12px rgba(0,0,0,0.10)', background: '#f7f7f7', transition: 'transform 0.18s, box-shadow 0.18s', border: 'none' }}
                   />
-                  <div className="mid-row-img-caption">portable drip bags</div>
+                  <div className="mid-row-img-caption a1">portable drip bags</div>
                 </div>
               </div>
             </section>
