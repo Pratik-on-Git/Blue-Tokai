@@ -772,11 +772,12 @@ pointer-events: none;
   .header-row h2{
     font-size: 3rem;
   }
-
-  .mid-row h2{
+   
+  .mid-row h2 {
     font-size: 1rem;
-    line-height: 115%;
-  }
+    line-height: 140%;
+    padding: 0rem 0rem 0rem 1rem;
+}
 
   .sticky-header .header-content:first-child{
     letter-spacing: 1px;
@@ -811,9 +812,6 @@ pointer-events: none;
     font-size: 1.5rem;
   }
 
-  section.whitespace{
-    display: none;
-  }
 }
 
 /* NewArrivals mobile responsive styles */

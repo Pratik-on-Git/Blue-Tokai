@@ -28,6 +28,32 @@ const scrollerItems = [
 const HomePage = () => {
   const websiteContentRef = useRef(null);
 
+  // Fade-in effect for .website-content as it scrolls up
+  useEffect(() => {
+    if (!websiteContentRef.current) return;
+    let ctx;
+    import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+      gsap.registerPlugin(ScrollTrigger);
+      ctx = gsap.context(() => {
+        gsap.set(websiteContentRef.current, { opacity: 0 });
+        gsap.to(websiteContentRef.current, {
+          opacity: 1,
+          duration: 1.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: websiteContentRef.current,
+            start: 'top 85%',
+            end: 'top 30%',
+            scrub: true,
+            toggleActions: 'play none none reverse',
+          },
+        });
+      }, websiteContentRef);
+    });
+    return () => {
+      if (ctx) ctx.revert();
+    };
+  }, []);
   useEffect(() => {
     if (window.innerWidth > 600) return; // Only on mobile
     if (!websiteContentRef.current) return;
@@ -79,37 +105,31 @@ const HomePage = () => {
       }
     }
 
-    // Block scroll after footer (special offers) on mobile
-    // Block scroll after special offers writeup on mobile
-    function blockScrollAfterSpecialOffers() {
-      if (window.innerWidth > 600) {
-        document.body.style.overflow = '';
-        return;
-      }
+    // Mobile: Clamp after special offers section, but do NOT set overflow:hidden
+    function clampScrollAfterSpecialOffers() {
+      if (window.innerWidth > 600) return;
       if (!specialOffersRef.current) return;
       const offersRect = specialOffersRef.current.getBoundingClientRect();
-      // If the bottom of the special offers writeup is above the viewport bottom, block scroll
-      if (offersRect.bottom < window.innerHeight) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
+      const offersBottom = offersRect.bottom + window.scrollY;
+      const clampPoint = offersBottom - window.innerHeight;
+      if (window.scrollY > clampPoint) {
+        window.scrollTo({ top: clampPoint, behavior: 'auto' });
       }
     }
 
     window.addEventListener('scroll', clampScroll);
     window.addEventListener('resize', clampScroll);
-    window.addEventListener('scroll', blockScrollAfterSpecialOffers);
-    window.addEventListener('resize', blockScrollAfterSpecialOffers);
+    window.addEventListener('scroll', clampScrollAfterSpecialOffers);
+    window.addEventListener('resize', clampScrollAfterSpecialOffers);
     setTimeout(() => {
       clampScroll();
-      blockScrollAfterSpecialOffers();
+      clampScrollAfterSpecialOffers();
     }, 200);
     return () => {
       window.removeEventListener('scroll', clampScroll);
       window.removeEventListener('resize', clampScroll);
-      window.removeEventListener('scroll', blockScrollAfterSpecialOffers);
-      window.removeEventListener('resize', blockScrollAfterSpecialOffers);
-      document.body.style.overflow = '';
+      window.removeEventListener('scroll', clampScrollAfterSpecialOffers);
+      window.removeEventListener('resize', clampScrollAfterSpecialOffers);
     };
   }, []);
 
