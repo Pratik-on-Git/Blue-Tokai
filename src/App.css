@@ -751,6 +751,10 @@ pointer-events: none;
     overflow-x: hidden;
   }
 
+  .header-row{
+    padding: 0 1em;
+  }
+  
   .header-row h1{
     font-size: 3rem;
     letter-spacing: 0;
