@@ -162,7 +162,7 @@ const Footer = forwardRef((props, ref) => (
           </ul>
         </div>
         {/* Visit Us */}
-        <div>
+        <div className="footer-visit-us">
           <div style={{ fontWeight: 700, marginBottom: 12, color: "#FFB22C" }}>VISIT US</div>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             <li style={{ marginBottom: 8 }}>

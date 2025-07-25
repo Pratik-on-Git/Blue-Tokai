@@ -816,6 +816,10 @@ pointer-events: none;
     font-size: 1.5rem;
   }
 
+  .footer-visit-us {
+    display: none !important;
+  }
+
 }
 
 /* NewArrivals mobile responsive styles */
