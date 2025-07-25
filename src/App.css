@@ -779,6 +779,10 @@ pointer-events: none;
     padding: 0rem 0rem 0rem 1rem;
 }
 
+.learn-more-btn{
+  margin-left: 20px !important;
+}
+
   .sticky-header .header-content:first-child{
     letter-spacing: 1px;
   }
@@ -789,8 +793,8 @@ pointer-events: none;
   }
 
   .mid-row-img-boxes img{
-    width: 140px;
-    height: 180px;
+    width: 150px;
+    height: 200px;
   }
 
   .mid-row-img-caption{
@@ -824,6 +828,9 @@ pointer-events: none;
     padding: 0 1em 0 1em !important;
     gap: 1em !important;
   }
+  .footer-visit-us {
+    display: none !important;
+  }
   .new-arrivals-writeup {
     font-size: 1.5rem !important;
   }
@@ -854,7 +861,7 @@ pointer-events: none;
     border-radius: 10px !important;
   }
   .new-arrivals-card img {
-    height: 34vw !important;
+    height: 50vw !important;
     min-height: 120px !important;
     border-radius: 8px 8px 0 0 !important;
   }
