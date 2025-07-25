@@ -66,6 +66,84 @@ const AboutMore = () => {
     }
     refreshSpacing();
     ScrollTrigger.addEventListener("revert", refreshSpacing);
+
+    // --- MICRO GSAP ANIMATIONS ---
+    // Animate each section's image, heading, lead, and blocks on scroll
+    gsap.utils.toArray('.about-more-modern-section').forEach((section, idx) => {
+      const img = section.querySelector('.about-more-modern-img');
+      const heading = section.querySelector('.about-more-modern-heading');
+      const leads = section.querySelectorAll('.about-more-modern-lead');
+      const blocks = section.querySelectorAll('.about-more-modern-block');
+
+      if (img) {
+        gsap.fromTo(img, {
+          opacity: 0,
+          scale: 0.92
+        }, {
+          opacity: 1,
+          scale: 1,
+          duration: 1.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+      }
+      if (heading) {
+        gsap.fromTo(heading, {
+          x: -32,
+          opacity: 0
+        }, {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'back.out(1.4)',
+          scrollTrigger: {
+            trigger: heading,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+      }
+      if (leads.length > 0) {
+        gsap.fromTo(leads, {
+          y: 24,
+          opacity: 0
+        }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.13,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+      }
+      if (blocks.length > 0) {
+        gsap.fromTo(blocks, {
+          y: 32,
+          opacity: 0
+        }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.18,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+      }
+    });
+    // --- END MICRO ANIMATIONS ---
+
     // Only pin the first three cards
     cards.slice(0, 3).forEach((card, index) => {
       if (!card) return;
@@ -82,8 +160,8 @@ const AboutMore = () => {
       });
     });
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       ScrollTrigger.removeEventListener("revert", refreshSpacing);
+      ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
   return (
