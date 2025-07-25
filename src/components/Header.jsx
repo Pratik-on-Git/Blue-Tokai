@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import "../App.css";
 import LoginModal from "./common/LoginModal";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../store';
 
 const navItems = [
   { label: "HOME", path: "/" },
@@ -19,6 +21,10 @@ const Header = () => {
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
   const lastScrollY = useRef(window.scrollY);
   const ticking = useRef(false);
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const user = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
+  const [showDashboard, setShowDashboard] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,13 +83,19 @@ const Header = () => {
           {navItems.map(item => (
             <button className="nav-btn" key={item.label} onClick={() => navigate(item.path)}><span className="blend-text">{item.label}</span></button>
           ))}
-          <button className="nav-btn" onClick={() => setShowLogin(true)}>
+          <button className="nav-btn" onClick={() => {
+            if (isAuthenticated) {
+              setShowDashboard(true);
+            } else {
+              setShowLogin(true);
+            }
+          }}>
             <span className="blend-text">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'middle',marginRight:'0.4em'}}>
                 <circle cx="12" cy="8" r="4" />
                 <path d="M4 20c0-2.5 3.5-4 8-4s8 1.5 8 4" />
               </svg>
-              LOGIN
+              {isAuthenticated ? 'DASHBOARD' : 'LOGIN'}
             </span>
           </button>
         </div>
@@ -98,13 +110,20 @@ const Header = () => {
                     <span className="blend-text">{item.label}</span>
                   </button>
                 ))}
-                <button className="nav-btn mobile-nav-btn" onClick={() => { setShowLogin(true); setMobileMenuOpen(false); }}>
+                <button className="nav-btn mobile-nav-btn" onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (isAuthenticated) {
+                    setShowDashboard(true);
+                  } else {
+                    setShowLogin(true);
+                  }
+                }}>
                   <span className="blend-text">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'middle',marginRight:'0.4em'}}>
                       <circle cx="12" cy="8" r="4" />
                       <path d="M4 20c0-2.5 3.5-4 8-4s8 1.5 8 4" />
                     </svg>
-                    LOGIN
+                    {isAuthenticated ? 'DASHBOARD' : 'LOGIN'}
                   </span>
                 </button>
               </nav>
@@ -112,6 +131,37 @@ const Header = () => {
           </div>
         )}
       </header>
+      {/* Dashboard Modal */}
+      {showDashboard && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(0,0,0,0.32)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }} onClick={() => setShowDashboard(false)}>
+          <div style={{
+            background: '#fff',
+            borderRadius: 12,
+            boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
+            padding: '2.5em 3em',
+            minWidth: 320,
+            minHeight: 180,
+            position: 'relative',
+            textAlign: 'center',
+          }} onClick={e => e.stopPropagation()}>
+            <button style={{ position: 'absolute', top: 12, right: 18, background: 'none', border: 'none', fontSize: 22, color: '#888', cursor: 'pointer' }} onClick={() => setShowDashboard(false)}>&times;</button>
+            <div style={{ fontSize: 26, fontWeight: 700, marginBottom: 12 }}>Welcome, {user?.name || 'User'}!</div>
+            <div style={{ fontSize: 18, color: '#555', marginBottom: 24 }}>{user?.email}</div>
+            <button style={{ padding: '12px 32px', background: '#ff7a00', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 18, cursor: 'pointer' }} onClick={() => { dispatch(logout()); setShowDashboard(false); }}>Logout</button>
+          </div>
+        </div>
+      )}
       <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
       {/* Breadcrumb CSS and Mobile Menu CSS */}
       <style>{`

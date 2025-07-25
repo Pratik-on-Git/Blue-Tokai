@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import logo from "../../assets/img/logo.png";
+import { useDispatch, useSelector } from 'react-redux';
+import { login, signup, hideSuccess } from '../../store';
 
 const overlayStyle = {
   position: "fixed",
@@ -122,6 +124,8 @@ const LoginModal = ({ open, onClose }) => {
   const [signupConfirm, setSignupConfirm] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const dispatch = useDispatch();
+  const { showSuccess } = useSelector(state => state.auth);
 
   // Validation logic
   const isEmailValid = signupEmail.includes("@") && signupEmail.includes(".com");
@@ -207,6 +211,27 @@ const LoginModal = ({ open, onClose }) => {
 
   if (!visible) return null;
 
+  // Dummy login handler
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!isLoginEmailValid || isLoginEmailBlank || isLoginPasswordBlank) return;
+    dispatch(login({ email: loginEmail, name: 'Coffee Lover' }));
+    setTimeout(() => {
+      dispatch(hideSuccess());
+      onClose();
+    }, 1200);
+  };
+  // Dummy signup handler
+  const handleSignup = (e) => {
+    e.preventDefault();
+    if (!isEmailValid || isEmailBlank || isPasswordBlank || !isConfirmValid) return;
+    dispatch(signup({ email: signupEmail, name: 'New Coffee Fan' }));
+    setTimeout(() => {
+      dispatch(hideSuccess());
+      onClose();
+    }, 1200);
+  };
+
   return (
     <>
       <style>{`
@@ -249,6 +274,26 @@ const LoginModal = ({ open, onClose }) => {
           }
         }
       `}</style>
+      {showSuccess && (
+        <div style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          background: '#fff',
+          color: '#181818',
+          borderRadius: 12,
+          boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
+          padding: '2.5em 3em',
+          zIndex: 3000,
+          fontSize: 22,
+          fontWeight: 700,
+          textAlign: 'center',
+          letterSpacing: 1.2,
+        }}>
+          You're successfully {mode === 'login' ? 'logged in' : 'signed up'}!
+        </div>
+      )}
       <div ref={overlayRef} style={overlayStyle} className="login-modal-overlay" onClick={onClose}>
         <div ref={boxRef} style={modalStyle} className="login-modal-box" onClick={e => e.stopPropagation()}>
           {/* Left */}
@@ -325,7 +370,7 @@ const LoginModal = ({ open, onClose }) => {
                       border: isLoginPasswordBlank ? "1.5px solid #ddd" : "1.5px solid #ffb22c"
                     }}
                   />
-                  <button style={buttonStyle}>Login</button>
+                  <button style={buttonStyle} onClick={handleLogin}>Login</button>
                   <div style={{ marginTop: 18, fontSize: 15, color: "#888" }}>
                     Don't have an account?{" "}
                     <span
@@ -387,7 +432,7 @@ const LoginModal = ({ open, onClose }) => {
                       padding: "6px 16px"
                     }}
                   />
-                  <button style={buttonStyle}>Sign Up</button>
+                  <button style={buttonStyle} onClick={handleSignup}>Sign Up</button>
                   <div style={{ marginTop: 18, fontSize: 15, color: "#888" }}>
                     Already have an account?{" "}
                     <span
