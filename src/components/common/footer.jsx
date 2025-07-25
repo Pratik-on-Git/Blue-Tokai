@@ -226,10 +226,14 @@ const Footer = forwardRef((props, ref) => (
           margin-bottom: 10px !important;
         }
         .footer-main input {
+          width: 90% !important;
           font-size: 14px !important;
           padding: 10px 10px !important;
         }
         .footer-main button {
+          width: 90% !important;
+          font-weight: 700 !important;
+          font-family: 'DM Sans', sans-serif !important;
           font-size: 15px !important;
           padding: 10px 0 !important;
         }
