@@ -126,7 +126,7 @@ const Footer = forwardRef((props, ref) => (
           </button>
         </div>
         {/* Special Offers Text */}
-        <div className="footer-special" style={{ textAlign: "left", maxWidth: 420 }} ref={props.specialOffersRef}>
+        <div style={{ textAlign: "left", maxWidth: 420 }} ref={props.specialOffersRef}>
           <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 4, color: "#FFB22C" }}>
             SPECIAL OFFERS, BREWING TIPS & RECIPES!
           </div>
@@ -138,7 +138,7 @@ const Footer = forwardRef((props, ref) => (
       </div>
 
       {/* Right: Links */}
-      <div className="footer-links" style={{ display: "flex", flex: 2, minWidth: 400, justifyContent: "space-between", gap: 40 }}>
+      <div style={{ display: "flex", flex: 2, minWidth: 400, justifyContent: "space-between", gap: 40 }}>
         {/* Shop Online */}
         <div>
           <div style={{ fontWeight: 700, marginBottom: 12, color: "#FFB22C" }}>SHOP ONLINE</div>
@@ -162,7 +162,7 @@ const Footer = forwardRef((props, ref) => (
           </ul>
         </div>
         {/* Visit Us */}
-        <div className="footer-visit-us">
+        <div>
           <div style={{ fontWeight: 700, marginBottom: 12, color: "#FFB22C" }}>VISIT US</div>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             <li style={{ marginBottom: 8 }}>
@@ -184,17 +184,6 @@ const Footer = forwardRef((props, ref) => (
         </div>
       </div>
     </div> 
-    <div style={{
-      marginTop: 28,
-      textAlign: 'center',
-      fontSize: 14,
-      color: '#aaa',
-      letterSpacing: 0.2,
-      fontFamily: 'DM Sans, sans-serif',
-      opacity: 0.85
-    }}>
-      Concept by Pratik (<a href="https://instagram.com/neelscript" target="_blank" rel="noopener noreferrer" style={{ color: '#ffb22c', textDecoration: 'none', fontWeight: 500 }}>@neelscript</a>)
-    </div>
     <style>{`
       @media (max-width: 900px) {
         .footer-main {
@@ -233,20 +222,15 @@ const Footer = forwardRef((props, ref) => (
           gap: 20px !important;
           padding: 0 1vw !important;
         }
-        .footer-main > .footer-links {
+        .footer-main > div {
           margin-bottom: 10px !important;
-          width: 75% !important;
         }
         .footer-main input {
-          width: 90% !important;
           font-size: 14px !important;
           padding: 10px 10px !important;
         }
         .footer-main button {
-        width: 90% !important;
-          font-size: 16px !important;
-          font-weight: 700 !important;
-          font-family: 'DM Sans', sans-serif !important;
+          font-size: 15px !important;
           padding: 10px 0 !important;
         }
         .footer-main img {
@@ -254,14 +238,7 @@ const Footer = forwardRef((props, ref) => (
         }
         .footer-main .footer-special {
           font-size: 15px !important;
-          width: 350px !important;
         }
-
-        .footer-links {
-          flex-direction: row !important;
-          width: 75% !important;
-        }
-
         .footer-main .footer-copyright {
           font-size: 12px !important;
         }

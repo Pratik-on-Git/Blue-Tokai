@@ -828,9 +828,6 @@ pointer-events: none;
     padding: 0 1em 0 1em !important;
     gap: 1em !important;
   }
-  .footer-visit-us {
-    display: none !important;
-  }
   .new-arrivals-writeup {
     font-size: 1.5rem !important;
   }
