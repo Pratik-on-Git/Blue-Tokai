@@ -751,7 +751,7 @@ pointer-events: none;
 
 @media (max-width: 600px){
   body{
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   .header-row{
