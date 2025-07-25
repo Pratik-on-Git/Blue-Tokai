@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../App.css";
 import LoginModal from "./common/LoginModal";
+import SearchContainer from "./common/SearchContainer";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store';
@@ -61,7 +62,7 @@ const Header = () => {
   return (
     <>
       <header className={`sticky-header header-slide ${show ? "header-show" : "header-hide"}`}>
-        <div className="header-content" style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="header-content" style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
           {/* Mobile menu bar button (hamburger) */}
           <button
             className="mobile-menu-btn"
@@ -77,7 +78,8 @@ const Header = () => {
               </svg>
             </span>
           </button>
-          <span className="blend-text" style={{ marginLeft: 8 }}>BLUE TOKAI COFFEE ROASTERIES</span>
+          <span className="blend-text" style={{ marginLeft: 8, marginRight: 16 }}>BLUE TOKAI COFFEE ROASTERIES</span>
+          
         </div>
         <div className="header-content desktop-nav">
           {navItems.map(item => (
@@ -104,7 +106,8 @@ const Header = () => {
           <div className={`mobile-menu-overlay${mobileMenuOpen ? ' open' : ''}`} onClick={() => setMobileMenuOpen(false)}>
             <div className={`mobile-menu-drawer${mobileMenuOpen ? ' open' : ''}`} onClick={e => e.stopPropagation()}>
               <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">&times;</button>
-              <nav className="mobile-menu-nav">
+              
+                <nav className="mobile-menu-nav">
                 {navItems.map(item => (
                   <button className="nav-btn mobile-nav-btn" key={item.label} onClick={() => { setMobileMenuOpen(false); navigate(item.path); }}>
                     <span className="blend-text">{item.label}</span>
@@ -166,8 +169,10 @@ const Header = () => {
       {/* Breadcrumb CSS and Mobile Menu CSS */}
       <style>{`
         /* Hide desktop nav on mobile */
+
         @media (max-width: 900px) {
           .desktop-nav { display: none !important; }
+          .header-content { gap: 0px !important; }
           .mobile-menu-btn { display: inline-flex !important; background: none; border: none; cursor: pointer; align-items: center; }
         }
         /* Mobile menu overlay and drawer */
