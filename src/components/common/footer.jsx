@@ -253,11 +253,7 @@ const Footer = forwardRef((props, ref) => (
         .footer-main ul li {
           font-size: 14px !important;
         }
-
-        .footer-links {
-          flex-direction: row !important;
-          justify-content: space-evenly !important;
-        }
+          
       }
     `}</style>
     {/* Concept credit at the very end */}
