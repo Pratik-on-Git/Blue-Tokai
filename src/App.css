@@ -742,13 +742,16 @@ pointer-events: none;
   box-shadow: 0 6px 18px rgba(0,0,0,0.16);
 }
 
+.whitespace{
+  height: 60px;
+}
 .website-content h1{
   font-size: 1rem;
 }
 
 @media (max-width: 600px){
-  #root{
-    
+  body{
+    overflow: hidden;
   }
 
   .header-row{
@@ -803,12 +806,15 @@ pointer-events: none;
   }
 
   section.whitespace{
-    height: 53vh;
+    display: none;
   }
 }
 
 /* NewArrivals mobile responsive styles */
 @media (max-width: 600px) {
+  .new-arrivals{
+    justify-content: center !important;
+  }
   .new-arrivals-section {
     flex-direction: column !important;
     padding: 0 1em 0 1em !important;
@@ -877,6 +883,15 @@ pointer-events: none;
     margin: 2em auto 0 auto !important;
     display: block !important;
     text-align: center !important;
+  }
+
+  .revealer{
+    height: 60px !important;
+    width: 60px !important;
+
+  }
+  .special-collections {
+    display: none !important;
   }
 }
 

@@ -149,7 +149,7 @@ const SpecialCollections = ({ onImagesLoaded }) => {
   if (!collections.length) return null;
 
   return (
-    <div style={{
+    <div className="special-collections" style={{
       width: "100%",
       height: "60vh",
       background: "#f7f7f7",

@@ -26,6 +26,34 @@ const scrollerItems = [
 ];
 
 const HomePage = () => {
+  const websiteContentRef = useRef(null);
+
+  useEffect(() => {
+    if (window.innerWidth > 600) return; // Only on mobile
+    if (!websiteContentRef.current) return;
+    let ctx;
+    import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+      gsap.registerPlugin(ScrollTrigger);
+      ctx = gsap.context(() => {
+        gsap.set(websiteContentRef.current, { opacity: 0 });
+        gsap.to(websiteContentRef.current, {
+          opacity: 1,
+          duration: 1.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: websiteContentRef.current,
+            start: 'top 50%',
+            toggleActions: 'play none none reverse',
+            once: false,
+          },
+        });
+      }, websiteContentRef);
+    });
+    return () => {
+      if (ctx) ctx.revert();
+    };
+  }, []);
+
   const videoRef = useRef(null);
   const navigate = useNavigate();
   const footerRef = useRef(null);
@@ -67,7 +95,7 @@ const HomePage = () => {
     if (window._lenis && window._lenis.start) {
       window._lenis.start();
     }
-    // Clamp scroll after images load
+    // Clamp scroll after images load (all viewports)
     setTimeout(() => {
       if (!footerRef.current) return;
       const footerRect = footerRef.current.getBoundingClientRect();

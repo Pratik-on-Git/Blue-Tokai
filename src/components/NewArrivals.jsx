@@ -116,7 +116,7 @@ const NewArrivals = () => {
   const translateX = -(slideIndex * (100 / products.length));
 
   return (
-    <div style={{background:'#f7f7f7',color:'#000',padding:'0',minHeight:'80vh',display:'flex',flexDirection:'column',justifyContent:'flex-start'}}>
+    <div className="new-arrivals" style={{background:'#f7f7f7',color:'#000',padding:'0',minHeight:'80vh',display:'flex',flexDirection:'column',justifyContent:'flex-start'}}>
       <div className="new-arrivals-section"style={{display:'flex',flexDirection:'row',alignItems:'flex-start',gap:'2vw',width:'100%',padding:'0em 0em 0em 3em'}}>
         <div style={{minWidth:'320px',maxWidth:'340px',paddingTop:'0.5vw'}}>
           <div ref={writeupRef} style={{fontSize:'3vw',fontWeight:600,lineHeight:'1.1',marginBottom:'0.5vw'}}>
