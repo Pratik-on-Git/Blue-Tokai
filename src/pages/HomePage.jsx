@@ -57,6 +57,7 @@ const HomePage = () => {
   const videoRef = useRef(null);
   const navigate = useNavigate();
   const footerRef = useRef(null);
+  const specialOffersRef = useRef(null);
   const [trailImages, setTrailImages] = useState([]);
   const [allProductImages, setAllProductImages] = useState([]);
   const trailRefs = useRef([]);
@@ -77,13 +78,38 @@ const HomePage = () => {
         }
       }
     }
+
+    // Block scroll after footer (special offers) on mobile
+    // Block scroll after special offers writeup on mobile
+    function blockScrollAfterSpecialOffers() {
+      if (window.innerWidth > 600) {
+        document.body.style.overflow = '';
+        return;
+      }
+      if (!specialOffersRef.current) return;
+      const offersRect = specialOffersRef.current.getBoundingClientRect();
+      // If the bottom of the special offers writeup is above the viewport bottom, block scroll
+      if (offersRect.bottom < window.innerHeight) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+
     window.addEventListener('scroll', clampScroll);
     window.addEventListener('resize', clampScroll);
-    // Clamp on mount
-    setTimeout(clampScroll, 200);
+    window.addEventListener('scroll', blockScrollAfterSpecialOffers);
+    window.addEventListener('resize', blockScrollAfterSpecialOffers);
+    setTimeout(() => {
+      clampScroll();
+      blockScrollAfterSpecialOffers();
+    }, 200);
     return () => {
       window.removeEventListener('scroll', clampScroll);
       window.removeEventListener('resize', clampScroll);
+      window.removeEventListener('scroll', blockScrollAfterSpecialOffers);
+      window.removeEventListener('resize', blockScrollAfterSpecialOffers);
+      document.body.style.overflow = '';
     };
   }, []);
 
@@ -363,7 +389,7 @@ const HomePage = () => {
             {/* Special Collections Section */}
             <SpecialCollections onImagesLoaded={handleSpecialCollectionsImagesLoaded} />
             {/* Footer is always last and visible */}
-            <Footer ref={footerRef} />
+            <Footer ref={footerRef} specialOffersRef={specialOffersRef} />
           </section>
         </div>
       </div>

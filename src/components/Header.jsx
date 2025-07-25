@@ -10,7 +10,6 @@ const navItems = [
   { label: "HOME", path: "/" },
   { label: "ABOUT US", path: "/about" },
   { label: "SHOP", path: "/shop" },
-  { label: "EQUIPMENTS", path: "/equipments" },
   { label: "CONTACT", path: "/contact" },
 ];
 

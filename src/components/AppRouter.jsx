@@ -11,7 +11,6 @@ import AboutPage from '../pages/AboutPage';
 import ShopPage from '../pages/ShopPage';
 import ContactPage from '../pages/ContactPage';
 import ProductDetail from '../pages/ProductDetail';
-import EquipmentsPage from '../pages/EquipmentsPage';
 
 function ScrollRestorer() {
   const location = useLocation();
@@ -106,7 +105,7 @@ const AppRouter = () => {
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/equipments" element={<EquipmentsPage />} />
+
             {/* Optionally add a fallback route here */}
           </Routes>
           <audio ref={audioRef} src={jazzCafeMusic} loop />

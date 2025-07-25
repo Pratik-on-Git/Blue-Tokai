@@ -126,7 +126,7 @@ const Footer = forwardRef((props, ref) => (
           </button>
         </div>
         {/* Special Offers Text */}
-        <div style={{ textAlign: "left", maxWidth: 420 }}>
+        <div style={{ textAlign: "left", maxWidth: 420 }} ref={props.specialOffersRef}>
           <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 4, color: "#FFB22C" }}>
             SPECIAL OFFERS, BREWING TIPS & RECIPES!
           </div>
