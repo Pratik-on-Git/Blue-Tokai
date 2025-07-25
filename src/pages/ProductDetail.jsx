@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Footer from '../components/common/footer';
 import CheckTheseOut from '../components/common/checkThisOut.jsx';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitType from "split-type";
+gsap.registerPlugin(ScrollTrigger);
 
 const badgeStyle = {
   display: "inline-block",
@@ -185,6 +189,16 @@ const ProductDetail = () => {
     borderColor: active ? '#854836' : '#f7f7f7',
   });
 
+  // Animation refs
+  const titleRef = React.useRef();
+  const categoryRef = React.useRef();
+  const priceRef = React.useRef();
+  const badgesRef = React.useRef();
+  const descRef = React.useRef();
+  const factsRef = React.useRef();
+  const metersRef = React.useRef();
+  const notesRef = React.useRef();
+
   useEffect(() => {
     setLoading(true);
     fetch("/products.json")
@@ -213,6 +227,162 @@ const ProductDetail = () => {
       .then((res) => res.json())
       .then((data) => setBrewData(data));
   }, [id]);
+
+  useEffect(() => {
+    if (!product || loading) return;
+    // SplitType for text blocks
+    const splitTitle = new SplitType(titleRef.current, { types: 'words, chars' });
+    const splitCategory = new SplitType(categoryRef.current, { types: 'words, chars' });
+    const splitDesc = new SplitType(descRef.current, { types: 'words, chars' });
+
+    // Animate title (staggered chars, pop in, rotate, scroll-triggered)
+    gsap.from(splitTitle.chars, {
+      scrollTrigger: {
+        trigger: titleRef.current,
+        start: 'top 90%',
+        toggleActions: 'play none none reverse',
+      },
+      opacity: 0,
+      y: 40,
+      scale: 0.8,
+      rotate: 8,
+      stagger: 0.03,
+      duration: 0.7,
+      ease: 'back.out(1.7)',
+      delay: 0.1
+    });
+    // Animate category (slide in, staggered, slight skew, scroll-triggered)
+    gsap.from(splitCategory.words, {
+      scrollTrigger: {
+        trigger: categoryRef.current,
+        start: 'top 92%',
+        toggleActions: 'play none none reverse',
+      },
+      opacity: 0,
+      x: -40,
+      skewX: 12,
+      stagger: 0.08,
+      duration: 0.5,
+      ease: 'power2.out',
+      delay: 0.2
+    });
+    // Animate price (fade/slide up, scale bounce, scroll-triggered)
+    gsap.from(priceRef.current, {
+      scrollTrigger: {
+        trigger: priceRef.current,
+        start: 'top 95%',
+        toggleActions: 'play none none reverse',
+      },
+      opacity: 0,
+      y: 30,
+      scale: 0.7,
+      duration: 0.6,
+      ease: 'back.out(2)',
+      delay: 0.3
+    });
+    // Animate badges (fade in, staggered, rotate, scroll-triggered)
+    if (badgesRef.current) {
+      const badgeEls = badgesRef.current.querySelectorAll('span');
+      gsap.from(badgeEls, {
+        scrollTrigger: {
+          trigger: badgesRef.current,
+          start: 'top 95%',
+          toggleActions: 'play none none reverse',
+        },
+        opacity: 0,
+        y: 20,
+        rotate: 12,
+        scale: 0.9,
+        stagger: 0.07,
+        duration: 0.5,
+        ease: 'power2.out',
+        delay: 0.4
+      });
+    }
+    // Animate description (split, fade in, staggered, slight scale, scroll-triggered)
+    gsap.from(splitDesc.words, {
+      scrollTrigger: {
+        trigger: descRef.current,
+        start: 'top 95%',
+        toggleActions: 'play none none reverse',
+      },
+      opacity: 0,
+      y: 24,
+      scale: 0.95,
+      skewY: 6,
+      stagger: 0.06,
+      duration: 0.5,
+      ease: 'power2.out',
+      delay: 0.5
+    });
+    // Animate meters (scale/rotate pop, micro bounce, scroll-triggered)
+    if (metersRef.current) {
+      const meterEls = metersRef.current.querySelectorAll('svg');
+      gsap.from(meterEls, {
+        scrollTrigger: {
+          trigger: metersRef.current,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse',
+        },
+        scale: 0.7,
+        rotate: 30,
+        opacity: 0,
+        transformOrigin: '50% 50%',
+        stagger: 0.1,
+        duration: 0.7,
+        ease: 'back.out(1.7)',
+        delay: 0.6
+      });
+    }
+    // Animate facts (scroll-based, fade in left/right, micro slide, scroll-triggered)
+    if (factsRef.current) {
+      const factCols = factsRef.current.querySelectorAll('div[style*="flex-direction: column"]');
+      factCols.forEach((col, i) => {
+        gsap.from(col.children, {
+          scrollTrigger: {
+            trigger: col,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+          opacity: 0,
+          x: i === 0 ? -40 : 40,
+          scale: 0.97,
+          skewX: i === 0 ? -8 : 8,
+          stagger: 0.12,
+          duration: 0.5,
+          ease: 'power2.out',
+          delay: 0.1 * i
+        });
+      });
+    }
+    // Animate notes (scroll-based, pop in, rotate, micro scale, scroll-triggered)
+    if (notesRef.current) {
+      const notes = notesRef.current.querySelectorAll('div');
+      gsap.from(notes, {
+        scrollTrigger: {
+          trigger: notesRef.current,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse',
+        },
+        opacity: 0,
+        y: 40,
+        scale: 0.85,
+        rotate: 6,
+        stagger: 0.15,
+        duration: 0.7,
+        ease: 'back.out(1.7)',
+        delay: 0.2
+      });
+    }
+    // Cleanup on unmount or id change
+    return () => {
+      splitTitle.revert();
+      splitCategory.revert();
+      splitDesc.revert();
+      gsap.killTweensOf('*');
+      if (window.ScrollTrigger) window.ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  }, [product, loading, id]);
 
   if (loading) return (
     <div style={{ background: '#000', minHeight: '100vh', color: '#fff', fontFamily: 'DM Sans, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -315,10 +485,33 @@ const ProductDetail = () => {
         </div>
         {/* Right: Product Details */}
         <div style={{ flex: 2, minWidth: 320, background: '#000', borderRadius: 8, position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: '#181818' }}>
-          <div style={{ fontSize: 14, color: "#FFB22C", fontWeight: 700, letterSpacing: 1, marginBottom: 8, textTransform: "uppercase" }}>{product.category}</div>
-          <h1 style={{ fontSize: 38, color: "#F7F7F7", fontWeight: 500, margin: 0, letterSpacing: "normal"}}>{product.title}</h1>
+          {/* Back Button */}
+          <button
+            onClick={() => navigate(-1)}
+            style={{
+              alignSelf: 'flex-start',
+              margin: '16px 0 12px 0',
+              background: 'none',
+              border: 'none',
+              color: '#FFB22C',
+              fontSize: 16,
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              padding: 0,
+              outline: 'none',
+              transition: 'color 0.18s',
+            }}
+            aria-label="Go back"
+          >
+            <span style={{ fontSize: 18, marginRight: 4 }}>{"\u003C"}</span> Back
+          </button>
+          <div ref={categoryRef} className="pd-category" style={{ fontSize: 14, color: "#FFB22C", fontWeight: 700, letterSpacing: 1, marginBottom: 8, textTransform: "uppercase" }}>{product.category}</div>
+          <h1 ref={titleRef} className="pd-title" style={{ fontSize: 38, color: "#F7F7F7", fontWeight: 500, margin: 0, letterSpacing: "normal"}}>{product.title}</h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: 36 }}>
-            <div style={{ fontSize: 30, fontWeight: 400, color: '#F7F7F7', letterSpacing: 0.5 }}>₹{price}</div>
+            <div ref={priceRef} className="pd-price" style={{ fontSize: 30, fontWeight: 400, color: '#F7F7F7', letterSpacing: 0.5 }}>₹{price}</div>
           </div>
           {/* Rating under price */}
           {product.rating && (
@@ -327,9 +520,9 @@ const ProductDetail = () => {
               <span style={{ fontWeight: 600, fontSize: 16, color: '#FFD700', marginLeft: 4 }}>{product.rating.toFixed(1)}</span>
             </div>
           )}
-          <div style={{ fontSize: 16, color: "#444", marginBottom: 18, marginTop: 8 }}>{product.description}</div>
+          <div ref={descRef} className="pd-desc" style={{ fontSize: 16, color: "#444", marginBottom: 18, marginTop: 8 }}>{product.description}</div>
           {/* Attribute Badges */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 18 }}>
+          <div ref={badgesRef} className="pd-badges" style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 18 }}>
             {product.preference && (Array.isArray(product.preference) ? product.preference : [product.preference]).map((p, i) => <span key={"pref"+i} style={badgeStyle}>{p}</span>)}
             {product.flavour && (Array.isArray(product.flavour) ? product.flavour : [product.flavour]).map((f, i) => <span key={"flav"+i} style={badgeStyle}>{f}</span>)}
             </div>
@@ -459,7 +652,7 @@ const ProductDetail = () => {
                 <div style={{ fontSize: 18, color: '#f7f7f7', lineHeight: 1.5 }}>{product.details}</div>
               </div>
             )}
-        <div style={{
+        <div ref={factsRef} className="pd-facts" style={{
             borderRadius: 4,
             width: '100%',
             boxShadow: '0 2px 16px rgba(0,0,0,0.04)',
@@ -471,7 +664,7 @@ const ProductDetail = () => {
           }}>
             
             {/* Top: Four circular meters */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 36, background: 'transparent', borderRadius: 12, padding: '32px 0' }}>
+            <div ref={metersRef} className="pd-meters" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 36, background: 'transparent', borderRadius: 12, padding: '32px 0' }}>
               {[
                 { label: 'SWEETNESS', value: product.sweetness || 'Medium' },
                 { label: 'BODY', value: product.body || 'Medium' },
@@ -507,7 +700,7 @@ const ProductDetail = () => {
               })}
             </div>
             {/* Middle: Two-column grid of facts */}
-            <div style={{ display: 'flex', gap: 32, marginBottom: 24 }}>
+            <div style={{ display: 'flex', gap: 32, marginBottom: 48 }}>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 18 }}>
                 <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse', gap: 14 }}>
                   <span style={{ fontWeight: 700, color: '#FFB22C', fontSize: 18 }}>ROAST</span>
@@ -538,7 +731,7 @@ const ProductDetail = () => {
               </div>
             </div>
             {/* Right: Tasting Notes */}
-            <div style={{ textAlign: 'center', marginTop: 24 }}>
+            <div ref={notesRef} className="pd-notes" style={{ textAlign: 'center', marginTop: 24 }}>
             <div style={{ fontWeight: 400, fontSize: 22, color: '#f7f7f7', marginBottom: 8 }}>TASTING NOTES</div>
               <div style={{ fontSize: 32, fontWeight: 700, color: '#FFB22C', letterSpacing: 4, marginBottom: 8 }}>
                 {(product.tastingNotes || '').toUpperCase() || 'TASTING NOTES'}
