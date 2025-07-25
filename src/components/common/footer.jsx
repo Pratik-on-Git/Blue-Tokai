@@ -32,6 +32,7 @@ const footerLinks = {
 const Footer = forwardRef((props, ref) => (
   <footer
     ref={ref}
+    className="footer-root"
     style={{
       borderTop: "1px solid #232323",
       width: "100%",
@@ -46,6 +47,7 @@ const Footer = forwardRef((props, ref) => (
     }}
   >
     <div
+      className="footer-main"
       style={{
         display: "flex",
         flexWrap: "wrap",
@@ -182,6 +184,69 @@ const Footer = forwardRef((props, ref) => (
         </div>
       </div>
     </div> 
+    <style>{`
+      @media (max-width: 900px) {
+        .footer-main {
+          flex-direction: column !important;
+          align-items: center !important;
+          padding: 0 2vw !important;
+          gap: 32px !important;
+        }
+        .footer-root {
+          padding: 2rem 0 1.5rem 0 !important;
+        }
+        .footer-main > div {
+          min-width: 0 !important;
+          width: 100% !important;
+          margin-bottom: 18px !important;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .footer-main > div > div, .footer-main ul {
+          align-items: center !important;
+          text-align: center !important;
+        }
+        .footer-main input, .footer-main button {
+          font-size: 16px !important;
+        }
+        .footer-main ul {
+          padding-left: 0 !important;
+        }
+      }
+      @media (max-width: 600px) {
+        .footer-root {
+          padding: 1.2rem 0 1rem 0 !important;
+        }
+        .footer-main {
+          gap: 20px !important;
+          padding: 0 1vw !important;
+        }
+        .footer-main > div {
+          margin-bottom: 10px !important;
+        }
+        .footer-main input {
+          font-size: 14px !important;
+          padding: 10px 10px !important;
+        }
+        .footer-main button {
+          font-size: 15px !important;
+          padding: 10px 0 !important;
+        }
+        .footer-main img {
+          width: 90px !important;
+        }
+        .footer-main .footer-special {
+          font-size: 15px !important;
+        }
+        .footer-main .footer-copyright {
+          font-size: 12px !important;
+        }
+        .footer-main ul li {
+          font-size: 14px !important;
+        }
+      }
+    `}</style>
   </footer>
 ));
 

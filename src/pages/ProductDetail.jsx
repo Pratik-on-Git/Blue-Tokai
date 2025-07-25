@@ -75,8 +75,8 @@ const BrewSection = ({ brewList, brewData }) => {
   const activeBrew = selectedBrew;
   const brew = brewData.find(b => b.method.toLowerCase() === (activeBrew || '').toLowerCase());
   return (
-    <div style={{ paddingTop: '10vh', display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: 32, height: '80vh',  }}>
-      <div style={{ background: 'transparent', borderRadius: 8, padding: '36px 32px', color: '#181818', fontFamily: 'DM Sans, sans-serif', Width: '50%', flex: '1 1 0%' }}>
+    <div className="brew-section-root" style={{ paddingTop: '10vh', display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: 32, height: '80vh', flexWrap: 'nowrap' }}>
+      <div style={{ background: 'transparent', borderRadius: 8, padding: '36px 32px', color: '#181818', fontFamily: 'DM Sans, sans-serif', width: '50%', flex: '1 1 0%' }}>
         {/* Brew method buttons */}
         {brewList.length > 1 && (
           <div style={{ display: 'flex', gap: 12, marginBottom: 18 }}>
@@ -131,9 +131,52 @@ const BrewSection = ({ brewList, brewData }) => {
         <img
           src={brew.image}
           alt={brew.displayName + ' Brew'}
+          className="brew-section-image"
           style={{ width: '40%', height: 'auto', borderRadius: 12, objectFit: 'cover', boxShadow: '0 2px 16px rgba(0,0,0,0.08)' }}
         />
       )}
+      <style>{`
+        @media (max-width: 900px) {
+          .brew-section-root {
+            flex-direction: column !important;
+            height: auto !important;
+            gap: 24px !important;
+            align-items: stretch !important;
+            padding-top: 4vh !important;
+          }
+          .brew-section-root > div {
+            width: 100% !important;
+            padding: 18px 2vw !important;
+            min-width: 0 !important;
+          }
+            
+          .brew-section-root > div > div > button{
+            font-size: 10px !important;
+          }
+          .brew-section-image {
+            width: 100% !important;
+            max-width: 480px !important;
+            margin: 0 auto 0 auto !important;
+            display: block;
+            height: auto !important;
+            border-radius: 14px !important;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08) !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .brew-section-root {
+            padding-top: 1vh !important;
+            gap: 16px !important;
+          }
+          .brew-section-root > div {
+            padding: 12px 0vw !important;
+          }
+          .brew-section-image {
+            max-width: 98vw !important;
+            border-radius: 10px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
@@ -461,8 +504,8 @@ const ProductDetail = () => {
   const price = product ? getPriceBySize(product, selectedSize) : 0;
 
   return (
-    
-      <div style={{ maxWidth: "85%", margin: "0 auto", padding: "17vh 0px 0 0px", display: "flex", gap: "5rem 10rem", alignItems: 'center', flexWrap: 'wrap' }}>
+    <>
+      <div className="product-root" style={{ maxWidth: "85%", margin: "0 auto", padding: "17vh 0px 0 0px", display: "flex", gap: "5rem 10rem", alignItems: 'center', flexWrap: 'wrap' }}>
         {/* Left: Product Images */}
         <div style={{ flex: 1, minWidth: 320, maxWidth: 420, position: 'relative' }}>
           <div style={{ background: "#F7F7F7", borderRadius: 8, boxShadow: "0 2px 16px rgba(0,0,0,0.06)", textAlign: "center", minHeight: 420, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -552,8 +595,8 @@ const ProductDetail = () => {
               )}
             </div>
           </div>
-          {/* Quantity, Add to Cart, Buy Now Row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 28, marginTop: 8 }}>
+          {/* Quantity & Add to Cart Row */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 10, marginTop: 8 }}>
             {/* Quantity Selector */}
             <div style={{
               display: 'flex',
@@ -624,26 +667,31 @@ const ProductDetail = () => {
             >
               Add To Cart
             </button>
-            {/* Buy Now Button */}
-            <button
-              style={{
-                background: '#FFB22C',
-                color: '#000',
-                border: 'none',
-                borderRadius: 8,
-                fontWeight: 700,
-                fontSize: 17,
-                padding: '12px 36px',
-                cursor: 'pointer',
-                letterSpacing: 0.2,
-                fontFamily: 'DM Sans, sans-serif',
-                boxShadow: 'none',
-                textTransform: 'none'
-              }}
-            >
-              Buy Now
-            </button>
           </div>
+          {/* Buy Now Button - full width, below */}
+          <button
+            className="buy-now-btn"
+            style={{
+              background: '#FFB22C',
+              color: '#000',
+              border: 'none',
+              borderRadius: 8,
+              fontWeight: 700,
+              fontSize: 17,
+              padding: '16px 36px',
+              cursor: 'pointer',
+              letterSpacing: 0.2,
+              fontFamily: 'DM Sans, sans-serif',
+              boxShadow: 'none',
+              textTransform: 'none',
+              width: '41.5%',
+              margin: '10px 0 28px 0',
+              display: 'block'
+            }}
+          >
+            Buy Now
+          </button>
+
         </div>
         {/* Description section above circular meters */}
         {product.details && (
@@ -700,7 +748,7 @@ const ProductDetail = () => {
               })}
             </div>
             {/* Middle: Two-column grid of facts */}
-            <div style={{ display: 'flex', gap: 32, marginBottom: 48 }}>
+            <div className="pd-facts" style={{ display: 'flex', gap: 32, marginBottom: 48 }}>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 18 }}>
                 <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse', gap: 14 }}>
                   <span style={{ fontWeight: 700, color: '#FFB22C', fontSize: 18 }}>ROAST</span>
@@ -746,6 +794,60 @@ const ProductDetail = () => {
           )}
           </div>
       </div>
+      <style>{`
+      @media (max-width: 600px) {
+        .product-root {
+          flex-direction: column !important;
+          gap: 1.5rem !important;
+          padding: 12vh 0 0 0 !important;
+          max-width: 90vw !important;
+        }
+        .product-root > div {
+          max-width: 100vw !important;
+          min-width: 0 !important;
+          padding: 0 4vw !important;
+        }
+        .product-root img, .product-root svg {
+          max-width: 100% !important;
+          height: auto !important;
+        }
+        .product-root button {
+          font-size: 18px !important;
+          padding: 13px 18px !important;
+        }
+        .pd-title {
+          font-size: 32px !important;
+        }
+        .pd-price {
+          font-size: 24px !important;
+        }
+        .pd-desc, .pd-badges, .pd-facts, .pd-meters, .pd-notes {
+          font-size: 15px !important;
+          padding: 0 !important;
+        }
+          .buy-now-btn{
+          font-size: 15px !important;
+          width: 90% !important;
+          }
+        .pd-meters {
+          flex-direction: column !important;
+          gap: 18px !important;
+          align-items: center !important;
+        }
+        .pd-facts {
+          flex-direction: column !important;
+          
+        }
+        .pd-notes {
+          margin-top: 18px !important;
+        }
+        .product-root .pd-badges span {
+          font-size: 12px !important;
+          padding: 3px 8px !important;
+        }
+      }
+      `}</style>
+    </>
   );
 };
 
@@ -756,3 +858,54 @@ const ProductDetailWithFooter = (props) => <>
 </>;
 
 export default ProductDetailWithFooter; 
+
+// Mobile responsive CSS for ProductDetail
+<style>{`
+@media (max-width: 600px) {
+  .product-root {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    padding: 7vh 0 0 0 !important;
+    max-width: 100vw !important;
+  }
+  .product-root > div {
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    padding: 0 4vw !important;
+  }
+  .product-root img, .product-root svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  .product-root button {
+    font-size: 15px !important;
+    padding: 10px 18px !important;
+  }
+  .pd-title {
+    font-size: 26px !important;
+  }
+  .pd-price {
+    font-size: 22px !important;
+  }
+  .pd-desc, .pd-badges, .pd-facts, .pd-meters, .pd-notes {
+    font-size: 15px !important;
+    padding: 0 !important;
+  }
+  .pd-meters {
+    flex-direction: column !important;
+    gap: 18px !important;
+    align-items: center !important;
+  }
+  .pd-facts {
+    flex-direction: column !important;
+    gap: 18px !important;
+  }
+  .pd-notes {
+    margin-top: 18px !important;
+  }
+  .product-root .pd-badges span {
+    font-size: 12px !important;
+    padding: 3px 8px !important;
+  }
+}
+`}</style>
