@@ -2,9 +2,12 @@ import React from "react";
 import contactImg from '../assets/img/img-1.jpg';
 import Footer from '../components/common/footer';
 import { Link } from 'react-router-dom';
+import useGsapContactPage from '../components/common/useGsapContactPage';
 
-const ContactPage = () => (
-  <div className="contact-root">
+const ContactPage = () => {
+  useGsapContactPage();
+  return (
+    <div className="contact-root">
     <div className="contact-main">
       <div className="contact-grid">
         {/* Left */}
@@ -385,8 +388,8 @@ const ContactPage = () => (
         
         .contact-img{
         position: absolute;
-        top: 35%;
-        right: 40px;
+        top: -20%;
+        right: 125px;
         width: 35%;
         height: 30%;
         object-fit: cover;
@@ -399,6 +402,7 @@ const ContactPage = () => (
     {/* Footer Section */}
     <Footer />
   </div>
-);
+  );
+}
 
-export default ContactPage; 
+export default ContactPage;

@@ -81,6 +81,31 @@ const AboutMore = () => {
         invalidateOnRefresh: true
       });
     });
+    // --- GSAP Animations for about-more-modern-card writeups ---
+    const modernCards = document.querySelectorAll('.about-more-modern-section.about-more-card .about-more-modern-content');
+    modernCards.forEach((content, i) => {
+      const heading = content.querySelector('.about-more-modern-heading');
+      const leads = content.querySelectorAll('.about-more-modern-lead');
+      const blocks = content.querySelectorAll('.about-more-modern-block p');
+      gsap.set([heading, ...leads, ...blocks], { opacity: 0, y: 40, skewY: 6, scale: 0.98 });
+      gsap.to([heading, ...leads, ...blocks], {
+        opacity: 1,
+        y: 0,
+        skewY: 0,
+        scale: 1,
+        duration: 0.7,
+        stagger: 0.13,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: content,
+          start: "top 80%",
+          end: "top 50%",
+          toggleActions: "play none none reverse",
+        },
+        clearProps: "all"
+      });
+    });
+    // --- END GSAP Animations ---
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       ScrollTrigger.removeEventListener("revert", refreshSpacing);

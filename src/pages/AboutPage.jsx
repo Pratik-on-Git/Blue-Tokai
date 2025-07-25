@@ -29,7 +29,7 @@ const slides = [
       "Scientifically designed with Enhanced Absorption Formula (EAF®), it helps maximise the bioavailability of protein for Indian gym-goers and athletes. Each serving carries 25 grams of protein and the taste of India's most-loved coffee. A satiating mix of perfectly roasted coffee, premium chocolate, fruits, nuts, seeds, and probiotics, this is a nutritious meal with 18 grams of protein in each serving.",
     slideUrl: "/shop",
     slideTags: ["Farms"],
-    slideImg: "https://bluetokaicoffee.com/cdn/shop/files/Mask_group_7_e54b86d2-38f2-4863-bcf1-8cf973d7c1a7_1370x.png?v=1710844607",
+    slideImg: "https://bluetokaicoffee.com/cdn/shop/files/Mask_group_6_400bcbe5-7a5c-4fa4-89a4-ac112843f1fc_1370x.png?v=1710844566",
   },
   {
     slideTitle: "Partnerships",
