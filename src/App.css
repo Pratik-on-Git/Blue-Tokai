@@ -862,7 +862,7 @@ pointer-events: none;
     border-radius: 10px !important;
   }
   .new-arrivals-card img {
-    height: 80vh !important;
+    height: 60vw !important;
     min-height: 120px !important;
     border-radius: 8px 8px 0 0 !important;
   }
