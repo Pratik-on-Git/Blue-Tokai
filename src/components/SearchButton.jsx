@@ -107,7 +107,7 @@ const SearchButton = () => {
                   position: "absolute",
                   right: isMobile ? 0 : 36,
                   left: isMobile ? 0 : "auto",
-                  bottom: isMobile ? 100 : 102, // 56+button+gap
+                  bottom: isMobile ? 110 : 102, // 56+button+gap
                   width: isMobile ? "100vw" : 400,
                   maxWidth: isMobile ? "100vw" : "96vw",
                   zIndex: 3002,
