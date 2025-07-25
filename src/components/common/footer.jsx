@@ -138,7 +138,7 @@ const Footer = forwardRef((props, ref) => (
       </div>
 
       {/* Right: Links */}
-      <div style={{ display: "flex", flex: 2, minWidth: 400, justifyContent: "space-between", gap: 40 }}>
+      <div className="footer-links" style={{ display: "flex", flex: 2, minWidth: 400, justifyContent: "space-between", gap: 40 }}>
         {/* Shop Online */}
         <div>
           <div style={{ fontWeight: 700, marginBottom: 12, color: "#FFB22C" }}>SHOP ONLINE</div>
@@ -252,6 +252,11 @@ const Footer = forwardRef((props, ref) => (
         }
         .footer-main ul li {
           font-size: 14px !important;
+        }
+
+        .footer-links {
+          flex-direction: row !important;
+          justify-content: space-evenly !important;
         }
       }
     `}</style>
