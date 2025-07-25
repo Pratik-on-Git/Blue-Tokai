@@ -255,6 +255,23 @@ const Footer = forwardRef((props, ref) => (
         }
       }
     `}</style>
+    {/* Concept credit at the very end */}
+    <div style={{
+      width: '100%',
+      textAlign: 'center',
+      marginTop: 30,
+      fontSize: 13,
+      color: '#aaa',
+      letterSpacing: 0.5,
+      fontFamily: 'DM Sans, sans-serif',
+      opacity: 0.85
+    }}>
+     Concept By Pratik (
+      <a href="https://instagram.com/neelscript" target="_blank" rel="noopener noreferrer" style={{ color: '#ffb22c', textDecoration: 'none', fontWeight: 600 }}>
+        @neelscript
+      </a>
+      )
+    </div>
   </footer>
 ));
 
