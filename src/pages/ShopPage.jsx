@@ -94,8 +94,17 @@ const ShopPage = () => {
   });
   const [sort, setSort] = useState("featured");
   const [page, setPage] = useState(1);
-  const perPage = 12;
+  const [perPage, setPerPage] = useState(window.innerWidth <= 900 ? 6 : 12);
+  useEffect(() => {
+    const handleResize = () => {
+      setPerPage(window.innerWidth <= 900 ? 6 : 12);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const sidebarRef = useRef(null);
+  const [showFiltersModal, setShowFiltersModal] = useState(false);
+  const [filtersModalVisible, setFiltersModalVisible] = useState(false); // for fade-out
 
   // Read category from query param and set filter on mount or when location.search changes
   useEffect(() => {
@@ -149,14 +158,47 @@ const ShopPage = () => {
     return () => el.removeEventListener("wheel", handleSidebarWheel);
   }, [handleSidebarWheel]);
 
+  // Handle modal open/close with fade
+  const openFiltersModal = () => {
+    setShowFiltersModal(true);
+    setTimeout(() => setFiltersModalVisible(true), 10); // allow mount before fade in
+  };
+  const closeFiltersModal = () => {
+    setFiltersModalVisible(false);
+    setTimeout(() => setShowFiltersModal(false), 350); // match transition duration
+  };
+
   return (
     <div style={{ background: "#111", minHeight: "100vh", color: "#fff", display: "flex", flexDirection: "column"}}>
+      {/* Responsive styles */}
+      <style>{`
+        @media (max-width: 900px) {
+        
+          .shop-sidebar { display: none !important; }
+          .shop-filters-btn { display: flex !important; padding: 9px 23px !important; font-weight: 500 !important;}
+          .shop-main { padding: 1.2rem 0.5rem 1.2rem 0.5rem !important; }
+          .shop-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1.2rem !important; }
+        }
+        @media (max-width: 600px) {
+          .shop-main { padding: 2.5rem 0rem 2.5rem 0rem !important; }
+          .shop-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        }
+        .filters-modal-fade {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+        .filters-modal-fade.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}</style>
       <Banner
         video="http://cdn.pixabay.com/video/2022/08/05/126803-737028141_large.mp4"
         headline="Carefully sourced from India's finest farms"
         features={featureList}
       />
-      {/* Sorting Filter Dropdown */}
+      {/* Sorting Filter Dropdown + Filters Button */}
       <div style={{ borderBottom: "1.5px solid rgb(35, 35, 35)", fontFamily: "DM Sans", width: "100%", background: "#000", padding: "1rem", display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
         <label htmlFor="sort-select" style={{ marginRight: 8, fontWeight: 500, fontSize: 15 }}>Sort by:</label>
         <select
@@ -180,18 +222,39 @@ const ShopPage = () => {
             <option key={opt.value} value={opt.value}>{opt.label}</option>
           ))}
         </select>
+        {/* Filters button for mobile/tablet, now beside Sort By */}
+        <button
+          className="shop-filters-btn"
+          style={{ display: "none", marginLeft: 12, background: "#222", color: "#fff", border: "none", borderRadius: 8, padding: "10px 22px", fontWeight: 700, fontSize: 16, boxShadow: "0 2px 8px rgba(0,0,0,0.13)", cursor: "pointer" }}
+          onClick={openFiltersModal}
+        >
+          Filters
+        </button>
       </div>
+      {/* Filters Modal for mobile/tablet */}
+      {showFiltersModal && (
+        <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", background: "rgba(0,0,0,0.55)", zIndex: 10000, display: "flex", alignItems: "flex-start", justifyContent: "center" }} onClick={closeFiltersModal}>
+          <div
+            className={`filters-modal-fade${filtersModalVisible ? ' visible' : ''}`}
+            style={{ background: "#181818", borderRadius: 12, margin: "2.5em 0.5em", padding: "2em 1.2em", minWidth: 260, maxWidth: 340, width: "100vw", boxShadow: "0 4px 24px rgba(0,0,0,0.18)", position: "relative", maxHeight: "90vh", overflowY: "auto" }}
+            onClick={e => e.stopPropagation()}
+          >
+            <button style={{ position: "absolute", top: 12, right: 18, background: "none", border: "none", fontSize: 22, color: "#fff", cursor: "pointer" }} onClick={closeFiltersModal}>&times;</button>
+            <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
+          </div>
+        </div>
+      )}
       <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
-        {/* Sticky, independently scrollable sidebar */}
-        <aside ref={sidebarRef} style={{ width: 260, background: "#000", borderRight: "1.5px solid #232323", position: "sticky", top: 0, height: "calc(100vh - 0px)", maxHeight: "calc(100vh - 0px)", overflowY: "auto", zIndex: 2, overscrollBehavior: "contain", touchAction: "auto" }}>
+        {/* Sidebar: hidden on mobile, visible on desktop */}
+        <aside ref={sidebarRef} className="shop-sidebar" style={{ width: 260, background: "#000", borderRight: "1.5px solid #232323", position: "sticky", top: 0, height: "calc(100vh - 0px)", maxHeight: "calc(100vh - 0px)", overflowY: "auto", zIndex: 2, overscrollBehavior: "contain", touchAction: "auto" }}>
           <div style={{ padding: "2rem 1.4rem" }}>
             <Filters filters={FILTERS} selected={selectedFilters} onChange={setSelectedFilters} />
           </div>
         </aside>
         {/* Main product grid with pagination */}
-        <main style={{ flex: 1, padding: "2.5rem 2.5rem 2.5rem 2rem", background: "#000", minHeight: 0, display: "flex", flexDirection: "column" }}>
+        <main className="shop-main" style={{ flex: 1, padding: "2.5rem 2.5rem 2.5rem 2rem", background: "#000", minHeight: 0, display: "flex", flexDirection: "column" }}>
           {loading ? (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
+            <div className="shop-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
               {Array.from({ length: 12 }).map((_, i) => (
                 <div key={i} style={{ background: "#232326", borderRadius: "0.5vw", minHeight: 320, padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', opacity: 0.5 }}>
                   <div style={{ width: '100%', height: 180, background: '#333', borderRadius: 8, marginBottom: 16 }} />
@@ -203,7 +266,7 @@ const ShopPage = () => {
             </div>
           ) : (
             <>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
+              <div className="shop-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "2.5rem", width: "100%" }}>
                 {productsToShow.map((product, i) => (
                   <Card
                     key={i}

@@ -166,9 +166,11 @@ const HomePage = () => {
     };
     gsap.ticker.add(ticker);
     return () => {
-      heroRef.current.removeEventListener("mousemove", onMove);
-      heroRef.current.removeEventListener("mouseenter", onEnter);
-      heroRef.current.removeEventListener("mouseleave", onLeave);
+      if (heroRef.current) {
+        heroRef.current.removeEventListener("mousemove", onMove);
+        heroRef.current.removeEventListener("mouseenter", onEnter);
+        heroRef.current.removeEventListener("mouseleave", onLeave);
+      }
       gsap.ticker.remove(ticker);
     };
   }, [allProductImages]);

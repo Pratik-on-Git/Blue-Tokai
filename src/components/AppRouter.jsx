@@ -52,24 +52,6 @@ const NAV_MAP = {
   "CONTACT": "/contact"
 };
 
-function patchHeaderNav(navigate, location) {
-  const header = document.querySelectorAll(".header-content");
-  if (!header.length) return;
-  // Find all nav-btn buttons in all header-content blocks
-  const btns = Array.from(document.querySelectorAll(".header-content .nav-btn"));
-  btns.forEach(btn => {
-    const text = btn.textContent.trim().toUpperCase();
-    const path = NAV_MAP[text];
-    if (path) {
-      btn.onclick = e => {
-        e.preventDefault();
-        if (location.pathname !== path) navigate(path);
-      };
-      btn.style.cursor = "pointer";
-    }
-  });
-}
-
 const AppRouter = () => {
   const [showLoader, setShowLoader] = useState(true);
   const audioRef = useRef(null);
@@ -84,18 +66,12 @@ const AppRouter = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
-  // Patch header nav buttons to navigate, robust to layout changes
+  // Fallback: hide loader after 3s in case onFinish is not called
   useEffect(() => {
-    patchHeaderNav(navigate, location);
-    // Observe header for DOM changes and re-patch if needed
-    const header = document.querySelector(".sticky-header");
-    if (!header) return;
-    const observer = new MutationObserver(() => {
-      patchHeaderNav(navigate, location);
-    });
-    observer.observe(header, { childList: true, subtree: true });
-    return () => observer.disconnect();
-  }, [navigate, location]);
+    if (!showLoader) return;
+    const timeout = setTimeout(() => setShowLoader(false), 3000);
+    return () => clearTimeout(timeout);
+  }, [showLoader]);
 
   const handleLoaderFinish = () => {
     localStorage.setItem("hasVisited", "true");

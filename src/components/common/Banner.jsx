@@ -58,6 +58,37 @@ const Banner = ({ image, video, headline, features }) => {
         color: "#fff"
       }}
     >
+      {/* Responsive styles */}
+      <style>{`
+        @media (max-width: 600px) {
+          .banner-responsive {
+            height: 160px !important;
+            padding: 0.8rem 0.5rem 1.2rem 0.5rem !important;
+            left: -25px;
+            bottom: 4px;
+          }
+          .banner-responsive h1 {
+            font-size: 1.2rem !important;
+            margin-bottom: 10px !important;
+            text-align: center;
+          }
+          .banner-features {
+            flex-direction: column !important;
+            gap: 16px !important;
+          }
+          .banner-feature {
+            flex-direction: row !important;
+            gap: 8px !important;
+            font-size: 0.98rem !important;
+          }
+          .banner-feature img {
+            width: 28px !important;
+            height: 28px !important;
+            margin-bottom: 0 !important;
+            margin-right: 6px !important;
+          }
+        }
+      `}</style>
       {video ? (
         <video
           ref={videoRef}
@@ -90,7 +121,7 @@ const Banner = ({ image, video, headline, features }) => {
           }}
         />
       )}
-      <div style={{ position: "relative", zIndex: 1, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div className="banner-responsive" style={{ position: "relative", zIndex: 1, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <h1
           ref={headlineRef}
           style={{ fontSize: 32, fontWeight: 700, marginBottom: 18, letterSpacing: "0px", textShadow: "0 2px 8px rgba(0,0,0,0.18)" }}
@@ -98,11 +129,12 @@ const Banner = ({ image, video, headline, features }) => {
           {headline}
         </h1>
         {features && (
-          <div style={{ display: "flex", gap: 36, alignItems: "center" }}>
+          <div className="banner-features" style={{ display: "flex", gap: 36, alignItems: "center" }}>
             {features.map((f, i) => (
               <div
                 key={i}
                 ref={el => (featuresRef.current[i] = el)}
+                className="banner-feature"
                 style={{ display: "flex", flexDirection: "column", alignItems: "center", opacity: 0 }}
               >
                 {f.icon && <img src={f.icon} alt="" style={{ width: 38, height: 38, marginBottom: 6 }} />}
