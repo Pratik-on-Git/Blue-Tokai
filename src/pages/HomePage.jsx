@@ -245,6 +245,7 @@ const HomePage = () => {
                 <button
                   type="button"
                   onClick={() => navigate('/about')}
+                  className="learn-more-btn"
                   style={{
                     position: 'relative',
                     display: 'inline-flex',
@@ -264,9 +265,22 @@ const HomePage = () => {
                     marginLeft: 32,
                     zIndex: 1000,
                     fontFamily: 'DM Sans, sans-serif',
+                    transition: 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s, box-shadow 0.3s',
+                    overflow: 'hidden',
                   }}
                 >
-                  <img src={aboutUsLogo} alt="About Us" style={{ width: 20, height: 20, display: 'inline-block', marginRight: 6 }} />
+                  <img
+                    src={aboutUsLogo}
+                    alt="About Us"
+                    className="learn-more-icon"
+                    style={{
+                      width: 20,
+                      height: 20,
+                      display: 'inline-block',
+                      marginRight: 6,
+                      transition: 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                    }}
+                  />
                   Learn More
                 </button>
               </div>
@@ -326,6 +340,43 @@ const HomePage = () => {
       <style>{`
         .hero-trail-img {
           transition: box-shadow 0.2s;
+        }
+        
+        .learn-more-btn {
+          box-shadow: 0 2px 8px rgba(255, 178, 44, 0.2);
+        }
+        
+        .learn-more-btn:hover {
+          transform: translateY(-3px) scale(1.05);
+          background-color: #ffca65 !important;
+          box-shadow: 0 6px 16px rgba(255, 178, 44, 0.4);
+        }
+        
+        .learn-more-btn:active {
+          transform: translateY(1px) scale(0.98);
+          background-color: #e69b1a !important;
+          box-shadow: 0 2px 4px rgba(255, 178, 44, 0.3);
+        }
+        
+        .learn-more-btn:hover .learn-more-icon {
+          transform: rotate(15deg) scale(1.2);
+        }
+        
+        .learn-more-btn::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.2);
+          transform: translateX(-100%);
+          transition: transform 0.6s;
+          pointer-events: none;
+        }
+        
+        .learn-more-btn:hover::after {
+          transform: translateX(100%);
         }
       `}</style>
     </div>
