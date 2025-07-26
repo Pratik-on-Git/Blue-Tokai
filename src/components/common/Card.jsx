@@ -163,7 +163,11 @@ const Card = ({
             ₹{price}
           </div>
           <button
-            onClick={() => navigate(`/product/${id}`)}
+            onClick={() => {
+              setShowNotification(true);
+              setTimeout(() => setShowNotification(false), 2000);
+              navigate(`/product/${id}`);
+            }}
             style={{
               background: "#fff",
               color: "#000",
@@ -182,6 +186,25 @@ const Card = ({
           >
             {buttonText || "BUY NOW"} <span style={{ fontSize: 18, marginLeft: 2 }}>→</span>
           </button>
+          {showNotification && (
+            <div style={{
+              position: "fixed",
+              left: "50%",
+              top: 90,
+              transform: "translateX(-50%)",
+              background: "#222",
+              color: "#fff",
+              padding: "16px 32px",
+              borderRadius: 8,
+              boxShadow: "0 4px 24px rgba(0,0,0,0.18)",
+              fontWeight: 600,
+              fontSize: 16,
+              zIndex: 3000,
+              transition: "opacity 0.3s"
+            }}>
+              Your item is added in the Cart
+            </div>
+          )}
         </div>
       </div>
     </div>
