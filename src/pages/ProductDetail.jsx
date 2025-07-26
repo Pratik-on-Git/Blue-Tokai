@@ -431,13 +431,13 @@ const ProductDetail = () => {
     <div style={{ background: '#000', minHeight: '100vh', color: '#fff', fontFamily: 'DM Sans, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ maxWidth: '85%', width: '100%', margin: '0 auto', padding: '17vh 0px 0 0px', display: 'flex', gap: '10rem', alignItems: 'center', flexWrap: 'wrap' }}>
         {/* Left: Image Skeleton */}
-        <div style={{ flex: 1, minWidth: 320, maxWidth: 420, position: 'relative' }}>
-          <div style={{ background: '#F7F7F7', borderRadius: 8, minHeight: 420, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ flex: 1, Width: 320, maxWidth: 420, position: 'relative' }}>
+          <div className="left-skeleton" style={{ background: '#F7F7F7', borderRadius: 8, minHeight: 420, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
             <div className="skeleton-shimmer" style={{ width: '100%', height: 420, borderRadius: 8, background: 'linear-gradient(90deg, #ececec 25%, #f7f7f7 50%, #ececec 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite linear' }} />
           </div>
         </div>
         {/* Right: Details Skeleton */}
-        <div style={{ flex: 2, minWidth: 320, background: '#000', borderRadius: 8, position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: '#181818', padding: 32 }}>
+        <div style={{ flex: 1, minWidth: 320, background: '#000', borderRadius: 8, position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: '#181818', padding: 32 }}>
           <div style={{ width: 120, height: 18, background: '#222', borderRadius: 6, marginBottom: 18, animation: 'shimmer 1.5s infinite linear', backgroundImage: 'linear-gradient(90deg, #222 25%, #333 50%, #222 75%)', backgroundSize: '200% 100%' }} />
           <div style={{ width: 320, height: 38, background: '#222', borderRadius: 8, marginBottom: 18, animation: 'shimmer 1.5s infinite linear', backgroundImage: 'linear-gradient(90deg, #222 25%, #333 50%, #222 75%)', backgroundSize: '200% 100%' }} />
           <div style={{ width: 120, height: 30, background: '#222', borderRadius: 8, marginBottom: 18, animation: 'shimmer 1.5s infinite linear', backgroundImage: 'linear-gradient(90deg, #222 25%, #333 50%, #222 75%)', backgroundSize: '200% 100%' }} />
@@ -508,7 +508,7 @@ const ProductDetail = () => {
       <div className="product-root" style={{ maxWidth: "85%", margin: "0 auto", padding: "17vh 0px 0 0px", display: "flex", gap: "5rem 10rem", alignItems: 'center', flexWrap: 'wrap' }}>
         {/* Left: Product Images */}
         <div style={{ flex: 1, minWidth: 320, maxWidth: 420, position: 'relative' }}>
-          <div style={{ background: "#F7F7F7", borderRadius: 8, boxShadow: "0 2px 16px rgba(0,0,0,0.06)", textAlign: "center", minHeight: 420, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="left-skeleton" style={{ background: "#F7F7F7", borderRadius: 8, boxShadow: "0 2px 16px rgba(0,0,0,0.06)", textAlign: "center", width: "130%", height: "75vh", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <img src={product.images?.[mainImgIdx]} alt={product.title} style={{ width: "100%", objectFit: "cover", borderRadius: 8, transition: '0.2s' }} />
           </div>
           {/* Thumbnails if multiple images */}
@@ -527,7 +527,7 @@ const ProductDetail = () => {
           )}
         </div>
         {/* Right: Product Details */}
-        <div style={{ flex: 2, minWidth: 320, background: '#000', borderRadius: 8, position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: '#181818' }}>
+        <div style={{ flex: 2, left: "8% ", minWidth: 320, background: '#000', borderRadius: 8, position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: '#181818' }}>
           {/* Back Button */}
           <button
             onClick={() => navigate(-1)}
@@ -781,7 +781,7 @@ const ProductDetail = () => {
             {/* Right: Tasting Notes */}
             <div ref={notesRef} className="pd-notes" style={{ textAlign: 'center', marginTop: 24 }}>
             <div style={{ fontWeight: 400, fontSize: 22, color: '#f7f7f7', marginBottom: 8 }}>TASTING NOTES</div>
-              <div style={{ fontSize: 32, fontWeight: 700, color: '#FFB22C', letterSpacing: 4, marginBottom: 8 }}>
+              <div className="pd-notes" style={{ fontSize: 32, fontWeight: 700, color: '#FFB22C', letterSpacing: 4, marginBottom: 8 }}>
                 {(product.tastingNotes || '').toUpperCase() || 'TASTING NOTES'}
               </div>
             </div>
@@ -806,6 +806,7 @@ const ProductDetail = () => {
           max-width: 100vw !important;
           min-width: 0 !important;
           padding: 0 4vw !important;
+          left: 0 !important;
         }
         .product-root img, .product-root svg {
           max-width: 100% !important;
@@ -820,6 +821,10 @@ const ProductDetail = () => {
         }
         .pd-price {
           font-size: 24px !important;
+        }
+
+        .pd-notes{
+          margin-top: 18px !important;
         }
         .pd-desc, .pd-badges, .pd-facts, .pd-meters, .pd-notes {
           font-size: 15px !important;
@@ -838,13 +843,14 @@ const ProductDetail = () => {
           flex-direction: column !important;
           
         }
-        .pd-notes {
-          margin-top: 18px !important;
-        }
         .product-root .pd-badges span {
           font-size: 12px !important;
           padding: 3px 8px !important;
         }
+          .left-skeleton {
+  height: 100% !important;
+  width:100% !important;
+  }
       }
       `}</style>
     </>
@@ -858,54 +864,3 @@ const ProductDetailWithFooter = (props) => <>
 </>;
 
 export default ProductDetailWithFooter; 
-
-// Mobile responsive CSS for ProductDetail
-<style>{`
-@media (max-width: 600px) {
-  .product-root {
-    flex-direction: column !important;
-    gap: 1.5rem !important;
-    padding: 7vh 0 0 0 !important;
-    max-width: 100vw !important;
-  }
-  .product-root > div {
-    max-width: 100vw !important;
-    min-width: 0 !important;
-    padding: 0 4vw !important;
-  }
-  .product-root img, .product-root svg {
-    max-width: 100% !important;
-    height: auto !important;
-  }
-  .product-root button {
-    font-size: 15px !important;
-    padding: 10px 18px !important;
-  }
-  .pd-title {
-    font-size: 26px !important;
-  }
-  .pd-price {
-    font-size: 22px !important;
-  }
-  .pd-desc, .pd-badges, .pd-facts, .pd-meters, .pd-notes {
-    font-size: 15px !important;
-    padding: 0 !important;
-  }
-  .pd-meters {
-    flex-direction: column !important;
-    gap: 18px !important;
-    align-items: center !important;
-  }
-  .pd-facts {
-    flex-direction: column !important;
-    gap: 18px !important;
-  }
-  .pd-notes {
-    margin-top: 18px !important;
-  }
-  .product-root .pd-badges span {
-    font-size: 12px !important;
-    padding: 3px 8px !important;
-  }
-}
-`}</style>

@@ -105,7 +105,6 @@ const AppRouter = () => {
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/contact" element={<ContactPage />} />
-
             {/* Optionally add a fallback route here */}
           </Routes>
           <audio ref={audioRef} src={jazzCafeMusic} loop />

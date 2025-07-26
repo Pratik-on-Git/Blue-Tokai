@@ -12,18 +12,6 @@
     ]
   },
   {
-    "method": "Easy Pour",
-    "displayName": "EASY POUR",
-    "image": "https://bluetokaicoffee.com/cdn/shop/files/howtobrew_800x.gif?v=1698052900",
-    "params": [
-      { "label": "TEAR", "value": "STEP ONE" },
-      { "label": "ANCHOR", "value": "STEP TWO" },
-      { "label": "POUR", "value": "STEP THREE" },
-      { "label": "STIR", "value": "STEP FOUR" },
-      { "label": "DRINK", "value": "STEP FIVE" }
-    ]
-  },
-  {
     "method": "Aeropress",
     "displayName": "AEROPRESS",
     "image": "https://bluetokaicoffee.com/cdn/shop/files/Aeropress_1_800x.gif?v=1705900336",

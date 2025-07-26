@@ -180,8 +180,8 @@ const ShopPage = () => {
           .shop-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1.2rem !important; }
         }
         @media (max-width: 600px) {
-          .shop-main { padding: 2.5rem 0rem 2.5rem 0rem !important; }
-          .shop-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+          .shop-main { padding: 4rem 0rem 2.5rem 0rem !important; }
+          .shop-grid { grid-template-columns: 1fr !important; gap: 4rem !important; }
         }
         .filters-modal-fade {
           opacity: 0;

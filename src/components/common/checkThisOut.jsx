@@ -121,7 +121,7 @@ const CheckTheseOut = () => {
                       position: 'relative',
                     }}
                   >
-                    <img src={product.images && product.images[0]} alt={product.title} style={{ width: '100%', objectFit: 'cover', height: '160px', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', borderBottom: '1px solid #333', background: '#181818'}} />
+                    <img className="check-these-out-card-img" src={product.images && product.images[0]} alt={product.title} style={{ width: '100%', objectFit: 'cover', height: '160px', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', borderBottom: '1px solid #333', background: '#181818'}} />
                     <div className="check-these-out-title" style={{ padding: '1.1em 1em 0.3em 1em', fontSize: '1.13rem', fontWeight: 600, color: '#FFB22C', lineHeight: 1.2 }}>{product.title}</div>
                     <div className="check-these-out-desc" style={{ padding: '0 1em 0.7em 1em', fontSize: '1rem', color: '#fff', opacity: 0.9 }}>{product.description}</div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.1em', padding: '0 1em 0.7em 1em', width: '100%' }}>
@@ -166,8 +166,23 @@ const CheckTheseOut = () => {
                 align-items: center !important;
               }
               .check-these-out-cards {
+                gap: 4vw !important;
                 justify-content: center !important;
               }
+                .check-these-out-card {
+                      height: 360px; !important;
+                }
+
+                .check-these-out-card-img{
+                  height: 220px !important;
+                }
+                .check-these-out-btn{
+                  margin: 0 1em 1.1em 1em !important;
+                }
+
+                .check-these-out-desc{
+                  padding: 0.7em 1em 0.7em 1em !important;
+                }
             }
           `}</style>
         </div>
