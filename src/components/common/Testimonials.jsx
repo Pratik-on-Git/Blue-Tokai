@@ -121,7 +121,7 @@ const Testimonials = () => {
           position: relative;
           width: 100vw;
           background: transparent;
-          padding: 15vw 0 15vw 0;
+          padding: 0vw 0 17vw 0;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -203,7 +203,7 @@ const Testimonials = () => {
         }
         @media (max-width: 600px) {
           .testimonials-timeline-section {
-            top: 0vh;
+            top: -3vh;
             background: black;
           }
           .testimonials-timeline-card {

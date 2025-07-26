@@ -22,7 +22,7 @@ const aboutSections = [
   {
     title: "Roasteries",
     arrow: true,
-    image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://scontent.fccu17-1.fna.fbcdn.net/v/t1.6435-9/49686306_2073560819395335_2129988438022160384_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=3a1ebe&_nc_ohc=u5o0NyZjb7cQ7kNvwE3V20V&_nc_oc=AdmEOiMP97LnyyyND99JLtyy294gIEG3L2FO5IWtu7EOZwf2yBIZNx5FXPDyO1fEcMI&_nc_zt=23&_nc_ht=scontent.fccu17-1.fna&_nc_gid=Hz_ZuSBslw26hhIva91tog&oh=00_AfT1IQwPRLr2j6EUN_Muahrxx4URhZnQTMnmaG5S3O-zwA&oe=68ABEA3C",
     lead: [
       "When we started roasting in 2013, we had a small 1kg machine that had us roasting for twelve to fourteen hours straight on most nights because of how small it was. Though we have grown, in the size of our roasting machines (we now roast on two 12kg and one 25kg Probat machines), and the team of roasters, we continue to spend as much time, energy and resources on constantly pushing our roasting quality forward."
     ],
@@ -36,7 +36,7 @@ const aboutSections = [
   {
     title: "Farms",
     arrow: true,
-    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://bluetokaicoffee.com/cdn/shop/articles/Ratnagiri2.jpg?v=1631619953&width=1920",
     lead: [
       "When we first started in 2013, we worked with a handful of producers who shared our belief that India was ripe for a specialty coffee revolution. After 11 years, we're glad to have had that belief turn into a blooming industry, with more Indians enjoying homegrown specialty coffee than ever before."
     ],
