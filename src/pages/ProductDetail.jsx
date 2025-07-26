@@ -203,7 +203,6 @@ function getPriceBySize(product, selectedSize) {
 }
 
 const ProductDetail = () => {
-  const [showNotification, setShowNotification] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
@@ -665,33 +664,9 @@ const ProductDetail = () => {
                 textTransform: 'none',
                 marginRight: 8
               }}
-              onClick={() => {
-                setShowNotification(true);
-                setTimeout(() => setShowNotification(false), 2000);
-                // add to cart logic here if needed
-              }}
             >
               Add To Cart
             </button>
-            {showNotification && (
-              <div style={{
-                position: "fixed",
-                left: "50%",
-                top: 80,
-                transform: "translateX(-50%)",
-                background: "#222",
-                color: "#fff",
-                padding: "16px 32px",
-                borderRadius: 8,
-                boxShadow: "0 4px 24px rgba(0,0,0,0.18)",
-                fontWeight: 600,
-                fontSize: 16,
-                zIndex: 3000,
-                transition: "opacity 0.3s"
-              }}>
-                Your item is added in the Cart
-              </div>
-            )}
           </div>
           {/* Buy Now Button - full width, below */}
           <button
