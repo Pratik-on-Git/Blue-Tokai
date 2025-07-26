@@ -12,6 +12,18 @@
     ]
   },
   {
+    "method": "French Press",
+    "displayName": "FRENCH PRESS",
+    "image": "https://bluetokaicoffee.com/cdn/shop/files/frenchpress_800x.gif?v=1705900361",
+    "params": [
+      { "label": "BREW TIME", "value": "4:30 MINS" },
+      { "label": "COFFEE AMOUNT", "value": "20G" },
+      { "label": "WATER VOLUME", "value": "210ML" },
+      { "label": "WATER TEMPERATURE", "value": "95°C" },
+      { "label": "GRIND SIZE", "value": "Very Coarse" }
+    ]
+  },
+  {
     "method": "Aeropress",
     "displayName": "AEROPRESS",
     "image": "https://bluetokaicoffee.com/cdn/shop/files/Aeropress_1_800x.gif?v=1705900336",

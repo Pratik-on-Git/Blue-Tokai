@@ -132,7 +132,7 @@
       "haveIt": "With Milk",
       "processing": "Washed + Natural",
       "variety": "Mixed Varieties",
-      "brew" : ["Pour Over", "Aeropress"],
+      "brew" : ["Pour Over", "Aeropress", "French Press"],
       "showBrewSection": true
     },
     {
@@ -189,7 +189,7 @@
         "processing": "Natural",
         "variety": "Mixed Varieties",
         "showBrewSection": true,
-        "brew" : ["Pour Over"]
+        "brew" : ["Pour Over", "Aeropress", "French Press"]
       },
       {
         "id": "7",
@@ -309,7 +309,9 @@
       {
         "id": "11",
         "images": ["https://bluetokaicoffee.com/cdn/shop/files/1_23.jpg?v=1738648042&width=1800"],
+        "details": "In the spirit of slow travel, welcome to a journey through India's coffee-growing regions, where coffee cherries ripen under the shade of tall trees, centuries-old crafts continue to thrive in skilled hands, and expressions of heritage endure and evolve. For the third destination, we bring you three 75g packs of coffee from Yercaud, a picturesque hill station dotted with streams and valleys, where coffee has been cultivated since 1820.",
         "title": "Origin Unhurried: Yercaud Pack",
+        "size": ["200g", "400g", "600g"],
         "description": "Blue Tokai Specials",
         "price": 750,
         "roast": ["Dark", "Light", "Medium"],
@@ -319,12 +321,16 @@
         "rating": 4.7,
         "tags": ["Fruity & Punchy", "Experimental"],
         "topRated": false,
-        "category": "Value Pack"
+        "category": "Value Pack",
+        "showBrewSection": true,
+        "brew" : ["Pour Over", "Aeropress", "French Press"]
       },
       {
         "id": "12",
         "images": ["https://bluetokaicoffee.com/cdn/shop/files/2.-Classic-Cold-_Double.jpg?v=1723010507&width=1800","https://bluetokaicoffee.com/cdn/shop/files/classi-cold-coffee.jpg?v=1747993563&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.-Classic-Cold-_Double.jpg?v=1723010507&width=1800"],
         "title": "Classic Cold Coffee",
+        "details": "Our Classic Cold Coffee is a delicious blend of coffee and chocolate, perfect for a cold, refreshing drink. It's made with our signature blend of coffee beans, and is sure to satisfy your cravings for a sweet, chocolatey treat.",
+        "size": ["220ml", "440ml"],
         "description": "Blue Tokai Specials",
         "price": 400,
         "roast": ["Medium"],
@@ -339,6 +345,8 @@
         "id": "13",
         "images": ["https://bluetokaicoffee.com/cdn/shop/files/Dhak-blend-coffee-capsules-10.jpg?v=1736747388&width=1800", "https://bluetokaicoffee.com/cdn/shop/files/Dhak-blend-coffee-capsules-pack-30.jpg?v=1736747442&width=1800", "https://bluetokaicoffee.com/cdn/shop/files/Dhak-blend-coffee-capsules-back.jpg?v=1736747662&width=1800"],
         "title": "Dhak Blend",
+        "details": "Aluminium Capsule",
+        "size": ["10 Capsules", "20 Capsules", "30 Capsules"],
         "description": "Aluminium Capsule",
         "price": 450,
         "roast": ["Dark"],
@@ -354,6 +362,8 @@
         "id": "14",
         "images": ["https://bluetokaicoffee.com/cdn/shop/files/1.-Warsanlyngdoh-Coffee-Collective__Front.jpg?v=1751283592&width=1800","https://bluetokaicoffee.com/cdn/shop/files/2.WarsanlyngdohCoffeeCollective__Spider.jpg?v=1751283592&width=1800","https://bluetokaicoffee.com/cdn/shop/files/3.WarsanlyngdohCoffeeCollective__Back.jpg?v=1751283592&width=1800"],
         "title": "Warsanlyngdoh Coffee",
+        "details": "The Warsanlyngdoh Coffee Collective is based in the Khasi Hills of Meghalaya, where coffee grows in a thriving agroforest. Chandragiri and Selection 9 Arabica are cultivated there alongside pineapple, betel leaf, Assam lemon, Khasi mandarin, foxtail orchids, and pitcher plants.",
+        "size": ["250g", "500g"],
         "description": "Blueberry, Black Tea, Khasi Mandarin",
         "price": 750,
         "roast": ["Medium"],
@@ -363,7 +373,8 @@
         "rating": 4.7,
         "tags": [],
         "topRated": false,
-        "category": "Single Origin & Blends"
+        "category": "Single Origin & Blends",
+        "brew": ["Pour Over", "Aeropress", "French Press"]
       },
       {
         "id": "15",
@@ -371,6 +382,7 @@
         "title": "New Brewer's Pack",
         "description": "Blue Tokai Specials",
         "price": 1350,
+        "size": ["250g", "500g"],
         "roast": ["Dark", "Light", "Medium"],
         "preference": ["With or Without Milk"],
         "flavour": ["Bold and Bitter", "Balanced", "Delicate and Complex"],
@@ -378,7 +390,8 @@
         "rating": 4.7,
         "tags": ["New Arrival"],
         "topRated": false,
-        "category": "Value Pack"
+        "category": "Value Pack",
+        "brew": ["Pour Over", "Aeropress", "French Press"]
       },
       {
         "id": "16",
